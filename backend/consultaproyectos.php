@@ -1,2 +1,2 @@
 <?php
-include('conexion/conexion.php');
+include('../conexion/conexion.php');
