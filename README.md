@@ -4,6 +4,35 @@ Plataforma web de gestión comunitaria desarrollada para optimizar la administra
 
 ---
 
+## Estructura del Proyecto
+
+A continuación se detalla la organización general de los directorios y archivos principales del repositorio:
+
+```text
+Plataforma-Postulacion-Proyectos-Concursables-JDV/
+├── app/                  # Contiene la lógica principal de la aplicación (Modelos, Controladores, Recursos de Filament)
+├── bootstrap/            # Archivos de arranque del framework e inicio de la aplicación
+├── config/               # Archivos de configuración general del sistema Laravel
+├── database/             # Migraciones, seeders y fábricas de bases de datos
+├── public/               # Punto de entrada público (assets, imágenes, archivo index.php)
+├── resources/            # Vistas Blade, recursos sin compilar (CSS, JS)
+├── routes/               # Definición de rutas web, API y canales
+├── storage/              # Archivos compilados, registros de logs y almacenamiento local
+├── tests/                # Pruebas automatizadas (Unitarias y de características)
+├── .editorconfig         # Configuración de estilos de código para editores
+├── .env.example          # Plantilla de variables de entorno
+├── .gitattributes        # Atributos específicos para el control de versiones Git
+├── .gitignore            # Archivos y carpetas ignorados por Git
+├── LICENSE               # Términos de la Licencia MIT del proyecto
+├── README.md             # Documentación principal del repositorio
+├── artisan               # Interfaz de línea de comandos de Laravel
+├── composer.json         # Dependencias y configuración de PHP (Composer)
+├── composer.lock         # Versiones exactas instaladas de las dependencias PHP
+├── package.json          # Dependencias de Node.js y scripts de compilación de assets
+├── phpunit.xml           # Configuración para las pruebas con PHPUnit
+└── vite.config.js        # Configuración del empaquetador de assets Vite
+
+```
 
 ## Instrucciones de uso
 
