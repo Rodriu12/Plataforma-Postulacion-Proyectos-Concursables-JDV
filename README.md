@@ -4,7 +4,16 @@ Plataforma web de gestión comunitaria desarrollada para optimizar la administra
 
 ---
 
-##  Tecnologías (Stack Tecnológico)
+
+## Instrucciones de uso
+
+1. Instalar las dependencias de PHP:
+```bash
+composer install
+```
+
+
+##  Tecnologías
 
 El proyecto está construido utilizando el **TALL Stack** y herramientas modernas de desarrollo web:
 
