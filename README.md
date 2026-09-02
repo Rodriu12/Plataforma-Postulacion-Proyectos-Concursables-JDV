@@ -152,6 +152,7 @@ Sigue estos pasos para poner en marcha el entorno de desarrollo en tu computador
 
 ## Licencia
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [](LICENSE) para más detalles.
+
 Copyright (c) 2026 Rodriu12 
 
 ## Autor
