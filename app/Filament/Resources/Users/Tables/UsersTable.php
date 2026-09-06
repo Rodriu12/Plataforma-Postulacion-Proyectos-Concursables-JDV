@@ -17,17 +17,31 @@ class UsersTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label('Email')
                     ->searchable(),
                 TextColumn::make('rut')
+                    ->label('RUT')
                     ->searchable(),
                 TextColumn::make('phone')
+                    ->label('Telefono')
                     ->searchable(),
                 TextColumn::make('role')
-                    ->searchable(),
+                    ->label('Rol')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'admin' => 'blue',
+                        'presidente' => 'danger',
+                        'secretario' => 'warning',
+                        'tesorero'   => 'success',
+                        'director'   => 'info',
+                        'voluntario' => 'primary',
+                        default      => 'gray',
+                    }),
                 IconColumn::make('is_active')
+                    ->label('Activo')
                     ->boolean(),
                 TextColumn::make('email_verified_at')
                     ->dateTime()
