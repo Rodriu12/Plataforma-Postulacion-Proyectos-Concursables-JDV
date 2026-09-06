@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Organizacion extends Model
 {
     use HasFactory;
-
-    // Forzamos el nombre exacto de la tabla en la base de datos
     protected $table = 'organizaciones';
 
     protected $fillable = [
@@ -20,9 +18,12 @@ class Organizacion extends Model
         'fecha_constitucion',
     ];
 
-    // Una Organización tiene muchos Usuarios
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+    public function proyectos(): HasMany
+    {
+        return $this->hasMany(Proyecto::class);
     }
 }
