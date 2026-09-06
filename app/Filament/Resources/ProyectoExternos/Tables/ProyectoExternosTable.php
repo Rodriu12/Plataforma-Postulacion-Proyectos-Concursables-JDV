@@ -53,6 +53,7 @@ class ProyectoExternosTable
                     ->label('Estado')
                     ->options([
                         'abierto' => 'Abierto',
+                        'por_abrir' => 'Por abrir',
                         'cerrado' => 'Cerrado',
                     ]),
             ])
