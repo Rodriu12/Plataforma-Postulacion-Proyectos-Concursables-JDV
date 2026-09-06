@@ -44,9 +44,7 @@ class SincronizarFondosGob extends Command
             @$dom->loadHTML($html);
             $xpath = new \DOMXPath($dom);
 
-            // Buscamos directamente todos los enlaces que llevan a fichas (son DOMElement seguros)
             $elementos = $xpath->query('//a[contains(@href, "/ficha/")]');
-
             $contadorNuevos = 0;
 
             foreach ($elementos as $elemento) {
@@ -59,40 +57,76 @@ class SincronizarFondosGob extends Command
                     continue;
                 }
 
-                // Buscamos si hay un título h3 o h4 dentro de este enlace
-                $titulosNodes = $xpath->query('.//h3 | .//h4', $elemento);
+                $cardText = $elemento->textContent;
+                $lines = array_values(array_filter(array_map('trim', explode("\n", $cardText))));
+
+                // 1. Extraer Institución
+                $institucion = 'Estado de Chile';
+                foreach ($lines as $line) {
+                    $lineUpper = mb_strtoupper($line);
+                    if (
+                        str_contains($lineUpper, 'GOBIERNO REGIONAL') || 
+                        str_contains($lineUpper, 'MINISTERIO') || 
+                        str_contains($lineUpper, 'CORFO') || 
+                        str_contains($lineUpper, 'SERCOTEC') || 
+                        str_contains($lineUpper, 'FOSIS') || 
+                        str_contains($lineUpper, 'SUBSECRETARÍA') ||
+                        str_contains($lineUpper, 'INDAP') ||
+                        str_contains($lineUpper, 'SEREMI') ||
+                        str_contains($lineUpper, 'INSTITUTO NACIONAL')
+                    ) {
+                        if (strlen($line) > 3 && strlen($line) < 100) {
+                            $institucion = $line;
+                            break;
+                        }
+                    }
+                }
+
+                // 2. Extraer Título Real del Fondo
                 $titulo = '';
+                foreach ($lines as $line) {
+                    $lineUpper = mb_strtoupper($line);
+                    
+                    if (
+                        in_array($lineUpper, ['ABIERTO', 'CERRADO', 'NACIONAL', 'REGIONAL', 'INTERNACIONAL']) || 
+                        str_starts_with($lineUpper, 'FIN:') || 
+                        str_starts_with($lineUpper, 'INICIO:') ||
+                        str_contains($lineUpper, 'VER MÁS') ||
+                        $line === $institucion // Corregido aquí (sin la 's' final)
+                    ) {
+                        continue;
+                    }
 
-                if ($titulosNodes->length > 0 && $titulosNodes->item(0) instanceof \DOMElement) {
-                    $titulo = trim($titulosNodes->item(0)->textContent);
-                } else {
-                    // Si no tiene h3/h4 interno, tomamos la primera línea limpia del texto del enlace
-                    $textoLimpio = trim($elemento->textContent);
-                    $lineas = explode("\n", $textoLimpio);
-                    $titulo = trim($lineas[0]);
+                    if (strlen($line) > 15 && $line !== $institucion) {
+                        $titulo = $line;
+                        break;
+                    }
                 }
 
-                // Validamos que el título tenga una longitud lógica
-                if (strlen($titulo) < 5 || strlen($titulo) > 250) {
-                    continue;
+                if (empty($titulo)) {
+                    $titulo = $lines[1] ?? 'Fondo Concursable del Estado';
                 }
 
-                $tituloLower = strtolower($titulo);
-                if (str_contains($tituloLower, 'ver más') || str_contains($tituloLower, 'iniciar sesión')) {
-                    continue;
+                // 3. Extraer Fecha de Cierre
+                $fechaCierre = null;
+                if (preg_match('/(?:Fin|Cierre):\s*([0-9]{2}-[0-9]{2}-[0-9]{4})/i', $cardText, $matchFecha)) {
+                    $partes = explode('-', $matchFecha[1]);
+                    if (count($partes) === 3) {
+                        $fechaCierre = "{$partes[2]}-{$partes[1]}-{$partes[0]}";
+                    }
                 }
 
                 if (!str_starts_with($enlace, 'http')) {
                     $enlace = 'https://fondos.gob.cl' . (str_starts_with($enlace, '/') ? '' : '/') . $enlace;
                 }
 
-                // Guardamos o actualizamos en la base de datos manteniendo el histórico
                 ProyectoExterno::updateOrCreate(
                     ['url_fuente' => $enlace],
                     [
                         'titulo' => $titulo,
-                        'descripcion' => 'Extraído automáticamente desde la portada de fondos.gob.cl',
-                        'institucion' => 'Estado de Chile',
+                        'descripcion' => trim($cardText),
+                        'institucion' => $institucion,
+                        'fecha_cierre' => $fechaCierre,
                         'estado_vigencia' => 'abierto',
                     ]
                 );
@@ -100,7 +134,7 @@ class SincronizarFondosGob extends Command
                 $contadorNuevos++;
             }
 
-            $this->info("¡Sincronización exitosa! Se procesaron y guardaron {$contadorNuevos} fondos.");
+            $this->info("¡Sincronización exitosa! Se procesaron {$contadorNuevos} registros.");
 
         } catch (\Exception $e) {
             $this->error('Error durante el scraping: ' . $e->getMessage());
