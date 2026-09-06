@@ -60,7 +60,17 @@ class SincronizarFondosGob extends Command
                 $cardText = $elemento->textContent;
                 $lines = array_values(array_filter(array_map('trim', explode("\n", $cardText))));
 
-                // 1. Extraer Institución
+                // 1. Detectar Estado de Vigencia automáticamente desde la tarjeta
+                $estadoVigencia = 'abierto'; // por defecto
+                $cardTextUpper = mb_strtoupper($cardText);
+                
+                if (str_contains($cardTextUpper, 'POR ABRIR') || str_contains($cardTextUpper, 'PRÓXIMAMENTE') || str_contains($cardTextUpper, 'PROXIMAMENTE')) {
+                    $estadoVigencia = 'por_abrir';
+                } elseif (str_contains($cardTextUpper, 'CERRADO')) {
+                    $estadoVigencia = 'cerrado';
+                }
+
+                // 2. Extraer Institución
                 $institucion = 'Estado de Chile';
                 foreach ($lines as $line) {
                     $lineUpper = mb_strtoupper($line);
@@ -82,17 +92,17 @@ class SincronizarFondosGob extends Command
                     }
                 }
 
-                // 2. Extraer Título Real del Fondo
+                // 3. Extraer Título Real del Fondo
                 $titulo = '';
                 foreach ($lines as $line) {
                     $lineUpper = mb_strtoupper($line);
                     
                     if (
-                        in_array($lineUpper, ['ABIERTO', 'CERRADO', 'NACIONAL', 'REGIONAL', 'INTERNACIONAL']) || 
+                        in_array($lineUpper, ['ABIERTO', 'CERRADO', 'POR ABRIR', 'PRÓXIMAMENTE', 'NACIONAL', 'REGIONAL', 'INTERNACIONAL']) || 
                         str_starts_with($lineUpper, 'FIN:') || 
                         str_starts_with($lineUpper, 'INICIO:') ||
                         str_contains($lineUpper, 'VER MÁS') ||
-                        $line === $institucion // Corregido aquí (sin la 's' final)
+                        $line === $institucion
                     ) {
                         continue;
                     }
@@ -107,7 +117,7 @@ class SincronizarFondosGob extends Command
                     $titulo = $lines[1] ?? 'Fondo Concursable del Estado';
                 }
 
-                // 3. Extraer Fecha de Cierre
+                // 4. Extraer Fecha de Cierre
                 $fechaCierre = null;
                 if (preg_match('/(?:Fin|Cierre):\s*([0-9]{2}-[0-9]{2}-[0-9]{4})/i', $cardText, $matchFecha)) {
                     $partes = explode('-', $matchFecha[1]);
@@ -127,14 +137,14 @@ class SincronizarFondosGob extends Command
                         'descripcion' => trim($cardText),
                         'institucion' => $institucion,
                         'fecha_cierre' => $fechaCierre,
-                        'estado_vigencia' => 'abierto',
+                        'estado_vigencia' => $estadoVigencia,
                     ]
                 );
 
                 $contadorNuevos++;
             }
 
-            $this->info("¡Sincronización exitosa! Se procesaron {$contadorNuevos} registros.");
+            $this->info("¡Sincronización exitosa! Se procesaron {$contadorNuevos} registros detectando sus estados.");
 
         } catch (\Exception $e) {
             $this->error('Error durante el scraping: ' . $e->getMessage());
