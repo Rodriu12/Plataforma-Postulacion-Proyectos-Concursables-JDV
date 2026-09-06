@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('organizacions', function (Blueprint $table) {
+        Schema::create('organizaciones', function (Blueprint $table) {
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
             $table->string('nombre');
             $table->string('rut_juridico')->unique()->nullable();
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('organizacions');
+        Schema::dropIfExists('organizaciones');
     }
 };
