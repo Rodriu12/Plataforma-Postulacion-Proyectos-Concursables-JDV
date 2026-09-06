@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Users\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
@@ -14,25 +15,46 @@ class UserForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
+                    ->label('Nombre Completo')
+                    ->required()
+                    ->maxLength(255),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label('Correo electrónico o e-mail')
                     ->email()
-                    ->required(),
+                    ->required()
+                    ->maxLength(255),
                 TextInput::make('rut')
-                    ->default(null),
+                    ->label('RUT')
+                    ->required()
+                    ->maxLength(20),
                 TextInput::make('phone')
+                    ->label('Telefono')
                     ->tel()
-                    ->default(null),
-                TextInput::make('role')
+                    ->required()
+                    ->maxLength(20),
+                Select::make('role')
+                    ->label('Seleccione su rol asignado dentro de su organización')
+                    ->options([
+                        'presidente' => 'Presidente/a',
+                        'secretario' => 'Secretario/a',
+                        'tesorero'   => 'Tesorero/a',
+                        'director'   => 'Director/a',
+                        'vecino'     => 'Vecino/a',
+                        'voluntario' => 'Voluntario/a',
+                    ])
                     ->required()
                     ->default('vecino'),
                 Toggle::make('is_active')
-                    ->required(),
+                    ->label('Cuenta Activa')
+                    ->default(true)
+                    ->columnSpanFull(),
                 DateTimePicker::make('email_verified_at'),
                 TextInput::make('password')
+                    ->label('Contraseña')
                     ->password()
-                    ->required(),
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->maxLength(255),
             ]);
     }
 }
