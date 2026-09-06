@@ -32,6 +32,7 @@ class ProyectoExternosTable
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'abierto' => 'success',
+                        'por_abrir' => 'warning',
                         'cerrado' => 'danger',
                         default => 'gray',
                     }),
