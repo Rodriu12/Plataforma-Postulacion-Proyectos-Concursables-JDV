@@ -60,7 +60,6 @@ class SincronizarFondosGob extends Command
                 $cardText = $elemento->textContent;
                 $lines = array_values(array_filter(array_map('trim', explode("\n", $cardText))));
 
-                // 1. Detectar Estado de Vigencia automáticamente desde la tarjeta
                 $estadoVigencia = 'abierto'; // por defecto
                 $cardTextUpper = mb_strtoupper($cardText);
                 
@@ -70,7 +69,6 @@ class SincronizarFondosGob extends Command
                     $estadoVigencia = 'cerrado';
                 }
 
-                // 2. Extraer Institución
                 $institucion = 'Estado de Chile';
                 foreach ($lines as $line) {
                     $lineUpper = mb_strtoupper($line);
@@ -92,7 +90,6 @@ class SincronizarFondosGob extends Command
                     }
                 }
 
-                // 3. Extraer Título Real del Fondo
                 $titulo = '';
                 foreach ($lines as $line) {
                     $lineUpper = mb_strtoupper($line);
