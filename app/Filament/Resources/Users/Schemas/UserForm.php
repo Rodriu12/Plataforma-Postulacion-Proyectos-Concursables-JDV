@@ -26,7 +26,17 @@ class UserForm
                 TextInput::make('rut')
                     ->label('RUT')
                     ->required()
-                    ->maxLength(20),
+                    ->maxLength(12)
+                    ->extraAlpineAttributes(['x-on:input' => <<<'JS'
+                            let raw = $el.value.replace(/[^0-9kK]/g, '');
+                            if (raw.length > 1) {
+                                let cuerpo = raw.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                                let dv = raw.slice(-1).toUpperCase();
+                                $el.value = cuerpo + '-' + dv;
+                            } else {
+                                $el.value = raw.toUpperCase();
+                            }
+                        JS]),
                 TextInput::make('phone')
                     ->label('Telefono')
                     ->tel()
