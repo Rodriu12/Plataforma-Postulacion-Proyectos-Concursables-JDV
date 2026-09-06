@@ -32,6 +32,7 @@ class ProyectoExternoForm
                 ->label('Estado de Vigencia')
                 ->options([
                     'abierto' => 'Abierto',
+                    'por_abrir' => 'Por abrir',
                     'cerrado' => 'Cerrado',
                 ])
                 ->required()
