@@ -30,7 +30,13 @@ class ProyectoExternosTable
                 TextColumn::make('estado_vigencia')
                     ->label('Estado')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'abierto' => 'Abierto',
+                        'por_abrir' => 'Por abrir',
+                        'cerrado' => 'Cerrado',
+                        default => ucfirst($state),
+                    })
+                    ->color(fn(string $state): string => match ($state) {
                         'abierto' => 'success',
                         'por_abrir' => 'warning',
                         'cerrado' => 'danger',
@@ -44,7 +50,7 @@ class ProyectoExternosTable
 
                 TextColumn::make('url_fuente')
                     ->label('Enlace Oficial')
-                    ->url(fn ($record) => $record->url_fuente)
+                    ->url(fn($record) => $record->url_fuente)
                     ->openUrlInNewTab()
                     ->icon('heroicon-o-arrow-top-right-on-square')
                     ->limit(30),
