@@ -7,7 +7,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
-
 class ProyectoForm
 {
     public static function configure(Schema $schema): Schema
@@ -15,35 +14,55 @@ class ProyectoForm
         return $schema
             ->components([
                 Select::make('organizacion_id')
-                    ->relationship('organizacion', 'id')
-                    ->required(),
-                TextInput::make('titulo')
-                    ->required(),
-                Textarea::make('descripcion')
-                    ->default(null)
-                    ->columnSpanFull(),
-                TextInput::make('fuente_financiamiento')
-                    ->default(null),
-                TextInput::make('monto_solicitado')
+                    ->label('Junta de Vecinos')
+                    ->relationship('organizacion', 'nombre')
                     ->required()
-                    ->numeric()
-                    ->default(0),
-                TextInput::make('monto_adjudicado')
-                    ->numeric()
-                    ->default(null),
+                    ->searchable()
+                    ->preload(),
+                    
+                TextInput::make('titulo')
+                    ->label('Título del Proyecto')
+                    ->required()
+                    ->maxLength(255),
+                    
+                Textarea::make('descripcion')
+                    ->label('Descripción y Objetivos')
+                    ->rows(3)
+                    ->columnSpanFull(),
+
+                TextInput::make('fuente_financiamiento')
+                    ->label('Fondo a Postular')
+                    ->placeholder('Ej: FOSIS - Emprendamos Semilla')
+                    ->maxLength(255),
+                    
                 Select::make('estado')
+                    ->label('Estado Actual')
                     ->options([
-            'borrador' => 'Borrador',
-            'en_postulacion' => 'En postulacion',
-            'adjudicado' => 'Adjudicado',
-            'rechazado' => 'Rechazado',
-            'en_ejecucion' => 'En ejecucion',
-            'rendido' => 'Rendido',
-        ])
-                    ->default('borrador')
-                    ->required(),
-                DatePicker::make('fecha_postulacion'),
-                DatePicker::make('fecha_adjudicacion'),
+                        'borrador' => 'Borrador',
+                        'en_postulacion' => 'En Postulación',
+                        'adjudicado' => 'Adjudicado',
+                        'rechazado' => 'Rechazado',
+                        'en_ejecucion' => 'En Ejecución',
+                        'rendido' => 'Rendido',
+                    ])
+                    ->required()
+                    ->default('borrador'),
+                    
+                TextInput::make('monto_solicitado')
+                    ->label('Monto Solicitado')
+                    ->numeric()
+                    ->prefix('$'),
+                    
+                TextInput::make('monto_adjudicado')
+                    ->label('Monto Adjudicado')
+                    ->numeric()
+                    ->prefix('$'),
+                    
+                DatePicker::make('fecha_postulacion')
+                    ->label('Fecha de Postulación'),
+                    
+                DatePicker::make('fecha_adjudicacion')
+                    ->label('Fecha de Adjudicación'),
             ]);
     }
 }
