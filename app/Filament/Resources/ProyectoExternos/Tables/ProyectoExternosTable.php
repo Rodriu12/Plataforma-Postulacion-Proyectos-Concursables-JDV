@@ -85,7 +85,7 @@ class ProyectoExternosTable
                             fn(Builder $query, $value): Builder => $query->whereMonth('fecha_cierre', $value)
                         );
                     })
-                    ->indicator('Mes'),
+                    ->indicator('Mes de cierre'),
             ])
             ->recordActions([
                 ViewAction::make(),
