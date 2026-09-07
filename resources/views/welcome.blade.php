@@ -19,9 +19,11 @@
 <body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen" x-data="{
     agrandar: localStorage.getItem('agrandarTexto') === 'true',
     aplicar() { document.documentElement.style.fontSize = this.agrandar ? '145%' : '100%'; },
-    toggle() { this.agrandar = !this.agrandar;
+    toggle() {
+        this.agrandar = !this.agrandar;
         localStorage.setItem('agrandarTexto', this.agrandar);
-        this.aplicar(); }
+        this.aplicar();
+    }
 }"
     x-init="aplicar()">
     <header class="w-full bg-white shadow-sm py-4 px-6 sm:px-10 flex justify-between items-center">
@@ -54,7 +56,6 @@
             <span x-text="agrandar ? 'Volver a la vista normal' : 'Accesibilidad de lectura'"></span>
         </button>
     </header>
-
     <main class="flex-grow flex flex-col items-center justify-center px-4 py-12 text-center">
         <div class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 max-w-3xl w-full">
             <div class="mb-6 flex justify-center">
@@ -66,12 +67,12 @@
                     </svg>
                 </div>
             </div>
-
             <h1 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">Bienvenido a JuntApp</h1>
             <h2 class="text-xl text-blue-600 font-semibold mb-6">Plataforma de Gestión y Coordinación Comunitaria</h2>
 
             <p class="text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed text-lg">
-                Herramienta digital diseñada para fortalecer el trabajo de las Juntas de Vecinos y Organizaciones Sociales en Yumbel y sus alrededores.
+                Herramienta digital diseñada para fortalecer el trabajo de las Juntas de Vecinos y Organizaciones
+                Sociales en Yumbel y sus alrededores.
                 Nuestro objetivo es optimizar la administración de fondos y agilizar la comunicación,
                 haciendo los procesos más accesibles y transparentes para toda la comunidad local.
             </p>
@@ -85,7 +86,6 @@
         </div>
     </main>
 
-    <!-- Pie de página -->
     <footer class="w-full bg-white border-t border-gray-200 py-6 text-center text-gray-500 text-sm">
         <p>&copy; {{ date('Y') }} JuntApp - Fundación Bio Bío Cultural, Yumbel. Desarrollando soluciones para
             la comunidad.</p>
