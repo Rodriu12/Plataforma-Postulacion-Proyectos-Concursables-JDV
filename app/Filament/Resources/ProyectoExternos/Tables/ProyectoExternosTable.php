@@ -9,7 +9,7 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
-
+use Illuminate\Database\Eloquent\Builder;
 class ProyectoExternosTable
 {
     public static function configure(Table $table): Table
@@ -63,6 +63,29 @@ class ProyectoExternosTable
                         'por_abrir' => 'Por abrir',
                         'cerrado' => 'Cerrado',
                     ]),
+                SelectFilter::make('mes_proyecto')
+                    ->label('Filtrar por Mes')
+                    ->options([
+                        '01' => 'Enero',
+                        '02' => 'Febrero',
+                        '03' => 'Marzo',
+                        '04' => 'Abril',
+                        '05' => 'Mayo',
+                        '06' => 'Junio',
+                        '07' => 'Julio',
+                        '08' => 'Agosto',
+                        '09' => 'Septiembre',
+                        '10' => 'Octubre',
+                        '11' => 'Noviembre',
+                        '12' => 'Diciembre',
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when(
+                            $data['value'],
+                            fn(Builder $query, $value): Builder => $query->whereMonth('fecha_cierre', $value)
+                        );
+                    })
+                    ->indicator('Mes'),
             ])
             ->recordActions([
                 ViewAction::make(),
