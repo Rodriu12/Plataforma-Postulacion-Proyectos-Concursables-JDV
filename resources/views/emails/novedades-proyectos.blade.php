@@ -24,6 +24,11 @@
                 <p style="margin: 0; font-size: 13px; font-weight: bold; color: #1d4ed8;">
                     Cierra el: {{ $proyecto->fecha_cierre ? \Carbon\Carbon::parse($proyecto->fecha_cierre)->format('d/m/Y') : 'Por definir' }}
                 </p>
+                <p style="margin: 0;">
+                    <a href="{{ $proyecto->url }}" target="_blank" style="color: #2563eb; font-size: 13px; font-weight: bold; text-decoration: none;">
+                        Postular
+                    </a>
+                </p>
             </div>
         @endforeach
 
