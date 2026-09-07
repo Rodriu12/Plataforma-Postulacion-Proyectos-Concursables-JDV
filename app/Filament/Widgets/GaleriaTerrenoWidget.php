@@ -3,7 +3,7 @@
 namespace App\Filament\Widgets;
 
 use Filament\Widgets\Widget;
-use App\Models\ProyectoExterno;
+use App\Models\Proyecto;
 class GaleriaTerrenoWidget extends Widget
 {
     protected string $view = 'filament.widgets.galeria-terreno-widget';
@@ -14,7 +14,7 @@ class GaleriaTerrenoWidget extends Widget
     protected function getViewData(): array
     {
         return [
-            'proyectos' => ProyectoExterno::whereNotNull('imagen_terreno')
+            'proyectos' => Proyecto::whereNotNull('imagen_terreno')
                 ->latest()
                 ->take(6)
                 ->get(),
