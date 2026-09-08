@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\Organizacions\Pages;
+namespace App\Filament\Resources\Organizaciones\Pages;
 
-use App\Filament\Resources\Organizacions\OrganizacionResource;
+use App\Filament\Resources\Organizaciones\OrganizacionResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListOrganizacions extends ListRecords
+class ListOrganizacion extends ListRecords
 {
     protected static string $resource = OrganizacionResource::class;
 

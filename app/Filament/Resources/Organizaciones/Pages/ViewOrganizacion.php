@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Organizacions\Pages;
+namespace App\Filament\Resources\Organizaciones\Pages;
 
-use App\Filament\Resources\Organizacions\OrganizacionResource;
+use App\Filament\Resources\Organizaciones\OrganizacionResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 

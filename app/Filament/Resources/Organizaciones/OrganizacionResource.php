@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Organizacions;
+namespace App\Filament\Resources\Organizaciones;
 
-use App\Filament\Resources\Organizacions\Pages\CreateOrganizacion;
-use App\Filament\Resources\Organizacions\Pages\EditOrganizacion;
-use App\Filament\Resources\Organizacions\Pages\ListOrganizacions;
-use App\Filament\Resources\Organizacions\Pages\ViewOrganizacion;
-use App\Filament\Resources\Organizacions\Schemas\OrganizacionForm;
-use App\Filament\Resources\Organizacions\Schemas\OrganizacionInfolist;
-use App\Filament\Resources\Organizacions\Tables\OrganizacionsTable;
+use App\Filament\Resources\Organizaciones\Pages\CreateOrganizacion;
+use App\Filament\Resources\Organizaciones\Pages\EditOrganizacion;
+use App\Filament\Resources\Organizaciones\Pages\ListOrganizacion;
+use App\Filament\Resources\Organizaciones\Pages\ViewOrganizacion;
+use App\Filament\Resources\Organizaciones\Schemas\OrganizacionForm;
+use App\Filament\Resources\Organizaciones\Schemas\OrganizacionInfolist;
+use App\Filament\Resources\Organizaciones\Tables\OrganizacionTable;
 use App\Models\Organizacion;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -22,6 +22,13 @@ class OrganizacionResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $navigationLabel = 'Organizaciones';
+
+    protected static ?string $pluralModelLabel = 'Organizaciones';
+
+    protected static ?string $modelLabel = 'Organización';
+
+    protected static ?string $slug = 'organizaciones';
     protected static ?string $recordTitleAttribute = 'model organizacion';
 
     public static function form(Schema $schema): Schema
@@ -36,7 +43,7 @@ class OrganizacionResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return OrganizacionsTable::configure($table);
+        return OrganizacionTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -49,7 +56,7 @@ class OrganizacionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListOrganizacions::route('/'),
+            'index' => ListOrganizacion::route('/'),
             'create' => CreateOrganizacion::route('/create'),
             'view' => ViewOrganizacion::route('/{record}'),
             'edit' => EditOrganizacion::route('/{record}/edit'),

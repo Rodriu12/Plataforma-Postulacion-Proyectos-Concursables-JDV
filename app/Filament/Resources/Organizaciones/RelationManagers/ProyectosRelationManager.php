@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Organizacions\RelationManagers;
+namespace App\Filament\Resources\Organizaciones\RelationManagers;
 
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
