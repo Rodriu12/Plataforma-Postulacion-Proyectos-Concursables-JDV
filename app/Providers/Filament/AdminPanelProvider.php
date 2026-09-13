@@ -43,20 +43,17 @@ class AdminPanelProvider extends PanelProvider
                 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
                 
                 <style>
-                    /* 1. Fondo principal del sidebar (Azul Noche) */
                     aside.fi-sidebar, .fi-sidebar-header {
                         background-color: #0f172a !important;
                         border-right: none !important;
                     }
 
-                    /* 2. Color de los textos e íconos inactivos (Gris claro) */
                     aside.fi-sidebar .fi-sidebar-item-label, 
                     aside.fi-sidebar .fi-sidebar-item-icon,
                     aside.fi-sidebar .fi-logo {
                         color: #94a3b8 !important;
                     }
 
-                    /* 3. Efecto al pasar el mouse por encima (Hover) */
                     aside.fi-sidebar .fi-sidebar-item-button:hover {
                         background-color: #1e293b !important;
                     }
@@ -65,7 +62,6 @@ class AdminPanelProvider extends PanelProvider
                         color: #f1f5f9 !important;
                     }
 
-                    /* 4. Estilo del menú activo (Azul Corporativo JuntApp) */
                     aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button {
                         background-color: #2563eb !important;
                         border-radius: 8px !important;
