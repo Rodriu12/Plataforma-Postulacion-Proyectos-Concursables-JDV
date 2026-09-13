@@ -19,6 +19,10 @@ class VecinosTable
                     ->searchable()
                     ->sortable()
                     ->weight('bold'),
+                TextColumn::make('user.email')
+                    ->label('Correo')
+                    ->searchable()
+                    ->placeholder('Sin cuenta vinculada'),
                 TextColumn::make('rut')
                     ->searchable(),
                 TextColumn::make('direccion')
@@ -34,13 +38,10 @@ class VecinosTable
                     ->formatStateUsing(fn(string $state) => ucfirst($state)),
                 TextColumn::make('certificado')
                     ->label('Certificado')
-                    // 1. Mostramos texto distinto si está aprobado o no
-                    ->getStateUsing(fn ($record) => $record?->estado === 'aprobado' ? 'Descargar' : 'No disponible')
-                    // 2. Azul si está aprobado, gris si no lo está
-                    ->color(fn ($record) => $record?->estado === 'aprobado' ? 'primary' : 'gray')
+                    ->getStateUsing(fn($record) => $record?->estado === 'aprobado' ? 'Descargar' : 'No disponible')
+                    ->color(fn($record) => $record?->estado === 'aprobado' ? 'primary' : 'gray')
                     ->weight('bold')
-                    // 3. Solo generamos la ruta si está aprobado, sino queda sin enlace (null)
-                    ->url(fn ($record) => $record?->estado === 'aprobado' ? route('vecino.certificado', $record->id) : null)
+                    ->url(fn($record) => $record?->estado === 'aprobado' ? route('vecino.certificado', $record->id) : null)
                     ->openUrlInNewTab(),
             ])
             ->filters([
