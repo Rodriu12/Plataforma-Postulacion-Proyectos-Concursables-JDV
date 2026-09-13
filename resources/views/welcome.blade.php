@@ -365,7 +365,7 @@
                             <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
                         </div>
                         <span
-                            class="text-xs font-mono text-slate-300 font-medium tracking-tight">portal.juntapp.cl/yumbel</span>
+                            class="text-xs font-mono text-slate-300 font-medium tracking-tight">miproyecto.local</span>
                         <div
                             class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-900/80 border border-blue-500/40 text-[11px] font-semibold text-blue-200">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
