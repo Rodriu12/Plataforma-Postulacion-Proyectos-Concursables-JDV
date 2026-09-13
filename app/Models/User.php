@@ -55,4 +55,21 @@ class User extends Authenticatable
     {
         return $this->hasOne(Vecino::class);
     }
+
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            // Crea automáticamente un registro base en vecinos cuando nace un nuevo usuario
+            \App\Models\Vecino::firstOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'nombre' => $user->name,
+                    'rut' => 'Por definir',
+                    'direccion' => 'Por definir',
+                    'sector' => 'Cerro Parra',
+                    'estado' => 'pendiente',
+                ]
+            );
+        });
+    }
 }
