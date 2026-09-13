@@ -59,8 +59,7 @@ class User extends Authenticatable
     protected static function booted()
     {
         static::created(function ($user) {
-            // Crea automáticamente un registro base en vecinos cuando nace un nuevo usuario
-            \App\Models\Vecino::firstOrCreate(
+            Vecino::firstOrCreate(
                 ['user_id' => $user->id],
                 [
                     'nombre' => $user->name,
