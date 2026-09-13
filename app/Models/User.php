@@ -50,4 +50,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function vecino()
+    {
+        return $this->hasOne(Vecino::class);
+    }
 }

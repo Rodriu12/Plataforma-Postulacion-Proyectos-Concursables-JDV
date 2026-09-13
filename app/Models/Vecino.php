@@ -10,6 +10,7 @@ class Vecino extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'nombre',
         'rut',
         'direccion',
@@ -18,4 +19,8 @@ class Vecino extends Model
         'comprobante_domicilio',
         'estado',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
