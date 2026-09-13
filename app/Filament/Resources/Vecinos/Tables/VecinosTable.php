@@ -32,6 +32,16 @@ class VecinosTable
                         default => 'gray',
                     })
                     ->formatStateUsing(fn(string $state) => ucfirst($state)),
+                TextColumn::make('certificado')
+                    ->label('Certificado')
+                    // 1. Mostramos texto distinto si está aprobado o no
+                    ->getStateUsing(fn ($record) => $record?->estado === 'aprobado' ? 'Descargar' : 'No disponible')
+                    // 2. Azul si está aprobado, gris si no lo está
+                    ->color(fn ($record) => $record?->estado === 'aprobado' ? 'primary' : 'gray')
+                    ->weight('bold')
+                    // 3. Solo generamos la ruta si está aprobado, sino queda sin enlace (null)
+                    ->url(fn ($record) => $record?->estado === 'aprobado' ? route('vecino.certificado', $record->id) : null)
+                    ->openUrlInNewTab(),
             ])
             ->filters([
                 SelectFilter::make('estado')
