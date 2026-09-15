@@ -18,7 +18,7 @@ class VecinoResource extends Resource
 {
     protected static ?string $model = Vecino::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $recordTitleAttribute = 'model-vecino';
 
