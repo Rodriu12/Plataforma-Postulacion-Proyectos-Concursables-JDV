@@ -32,19 +32,23 @@
                         </div>
 
                         <div style="space-y: 8px;">
+                            <!-- Alpine.js :style controla dinámicamente el tamaño de la letra -->
                             <h4
-                                style="font-size: 14px; font-weight: 700; color: #0f172a; line-height: 1.4; margin: 0 0 6px 0;">
+                                :style="leyendo ? 'font-size: 22px; font-weight: 800;' : 'font-size: 14px; font-weight: 700;'"
+                                style="color: #0f172a; line-height: 1.4; margin: 0 0 6px 0; transition: all 0.3s ease;">
                                 {{ $proyecto->tipo ?? 'Regional' }}
                                 {{ $proyecto->organismo ?? ($proyecto->nombre_institucion ?? '') }}
                             </h4>
 
                             <p
-                                style="font-size: 13px; font-weight: 600; color: #334155; line-height: 1.4; margin: 0 0 6px 0;">
+                                :style="leyendo ? 'font-size: 18px;' : 'font-size: 13px;'"
+                                style="font-weight: 600; color: #334155; line-height: 1.4; margin: 0 0 6px 0; transition: all 0.3s ease;">
                                 {{ $proyecto->nombre }}
                             </p>
 
                             <p
-                                style="font-size: 12px; color: #64748b; font-weight: 500; line-height: 1.4; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                :style="leyendo ? 'font-size: 16px;' : 'font-size: 12px;'"
+                                style="color: #64748b; font-weight: 500; line-height: 1.4; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: all 0.3s ease;">
                                 Beneficiarios/as:
                                 {{ $proyecto->beneficiarios ?? ($proyecto->descripcion ?? 'Persona Jurídica') }}
                             </p>
@@ -54,7 +58,8 @@
                     <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #f1f5f9;">
                         <a href="{{ $proyecto->url_fuente }}" target="_blank" rel="noopener noreferrer"
                             class="shimmer-btn"
-                            style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 10px 16px; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13px; font-weight: 600; color: #1d4ed8; text-decoration: none; transition: all 0.2s;"
+                            :style="leyendo ? 'font-size: 16px; padding: 14px 20px;' : 'font-size: 13px; padding: 10px 16px;'"
+                            style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; font-weight: 600; color: #1d4ed8; text-decoration: none; transition: all 0.3s ease;"
                             onmouseover="this.style.backgroundColor='#eff6ff'; this.style.borderColor='#93c5fd';"
                             onmouseout="this.style.backgroundColor='#f8fafc'; this.style.borderColor='#cbd5e1';">
                             Ver enlace oficial del fondo
