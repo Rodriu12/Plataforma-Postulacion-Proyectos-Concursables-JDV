@@ -22,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'rut',
+        'phone',
+        'role',
+        'is_active',
     ];
 
     /**
@@ -45,5 +49,26 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function vecino()
+    {
+        return $this->hasOne(Vecino::class);
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            Vecino::firstOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'nombre' => $user->name,
+                    'rut' => 'Por definir',
+                    'direccion' => 'Por definir',
+                    'sector' => 'Cerro Parra',
+                    'estado' => 'pendiente',
+                ]
+            );
+        });
     }
 }

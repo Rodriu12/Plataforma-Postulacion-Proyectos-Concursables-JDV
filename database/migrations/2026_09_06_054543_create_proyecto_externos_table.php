@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('proyecto_externos', function (Blueprint $table) {
+            $table->id();
+            $table->string('titulo');
+            $table->text('descripcion')->nullable();
+            $table->string('institucion')->nullable();
+            $table->string('url_fuente')->unique();
+            $table->date('fecha_cierre')->nullable();
+            $table->string('estado_vigencia')->default('abierto');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('proyecto_externos');
+    }
+};

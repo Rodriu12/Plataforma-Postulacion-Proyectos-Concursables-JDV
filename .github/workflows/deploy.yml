@@ -1,0 +1,22 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Inyectar variables de entorno
+        run: cp ~/.env ./.env
+
+      - name: Reiniciar servidor
+        run: |
+          source ~/.bashrc
+          setsid (php artisan down && php artisan up) || setsid (php artisan serve &)
