@@ -15,7 +15,7 @@ class ProyectosTable
     {
         return $table
             ->columns([
-                TextColumn::make('organizacion.id')
+                TextColumn::make('organizacion.nombre')
                     ->searchable(),
                 TextColumn::make('titulo')
                     ->searchable(),
