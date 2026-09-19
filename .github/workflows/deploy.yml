@@ -16,7 +16,9 @@ jobs:
       - name: Inyectar variables de entorno
         run: cp ~/.env ./.env
 
+      - name: Instalar dependencias
+        run: composer install
+
       - name: Reiniciar servidor
         run: |
-          source ~/.bashrc
-          setsid (php artisan down && php artisan up) || setsid (php artisan serve &)
+          setsid php artisan down && php artisan up && setsid php artisan serve &
