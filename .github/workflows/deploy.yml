@@ -17,8 +17,11 @@ jobs:
         run: cp ~/.env ./.env
 
       - name: Instalar dependencias
-        run: composer install
+        run: |
+          source ~/.bashrc
+          composer install
 
       - name: Reiniciar servidor
         run: |
+          source ~/.bashrc
           setsid php artisan down && php artisan up && setsid php artisan serve &
