@@ -24,4 +24,5 @@ jobs:
       - name: Reiniciar servidor
         run: |
           source ~/.bashrc
-          setsid php artisan down && php artisan up && setsid php artisan serve &
+          pkill -f "php artisan serve" || true
+          setsid php artisan serve --port=443 &
