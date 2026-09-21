@@ -25,4 +25,5 @@ jobs:
         run: |
           source ~/.bashrc
           pkill -f '*/bin/php' || true
+          php artisan migrate
           setsid php artisan serve --port=443 --host=localhost &
