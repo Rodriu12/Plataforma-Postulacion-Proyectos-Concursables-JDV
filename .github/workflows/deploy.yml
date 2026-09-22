@@ -25,4 +25,4 @@ jobs:
         run: |
           source ~/.bashrc
           pkill '^php' || true
-          setsid php artisan serve --port=443 --host=0.0.0.0 &
+          PHP_CLI_SERVER_WORKERS=5 setsid php artisan serve --port=443 --host=0.0.0.0 > storage/logs/server.log 2>&1 &
