@@ -63,7 +63,7 @@ class User extends Authenticatable
                 ['user_id' => $user->id],
                 [
                     'nombre' => $user->name,
-                    'rut' => 'Por definir',
+                    'rut' => null,
                     'direccion' => 'Por definir',
                     'sector' => 'Cerro Parra',
                     'estado' => 'pendiente',
