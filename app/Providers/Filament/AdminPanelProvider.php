@@ -20,6 +20,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\Facades\Blade;
+use Filament\Navigation\MenuItem;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -29,51 +30,20 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => '#2563eb',
                 'gray' => Color::Slate,
             ])
-            ->renderHook(
-                PanelsRenderHook::HEAD_END,
-                fn() => Blade::render('
-                <!-- Google Fonts: Plus Jakarta Sans -->
-                <link rel="preconnect" href="https://fonts.googleapis.com">
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-                
-                <style>
-                    aside.fi-sidebar, .fi-sidebar-header {
-                        background-color: #0f172a !important;
-                        border-right: none !important;
-                    }
-
-                    aside.fi-sidebar .fi-sidebar-item-label, 
-                    aside.fi-sidebar .fi-sidebar-item-icon,
-                    aside.fi-sidebar .fi-logo {
-                        color: #94a3b8 !important;
-                    }
-
-                    aside.fi-sidebar .fi-sidebar-item-button:hover {
-                        background-color: #1e293b !important;
-                    }
-                    aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-label,
-                    aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-icon {
-                        color: #f1f5f9 !important;
-                    }
-
-                    aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button {
-                        background-color: #2563eb !important;
-                        border-radius: 8px !important;
-                    }
-                    aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-label,
-                    aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
-                        color: #ffffff !important;
-                        font-weight: 600 !important;
-                    }
-                </style>
-            ')
-            )
+            ->font('Inter')
+            ->userMenuItems([
+                'logout' => MenuItem::make()
+                    ->label('Cerrar sesión')
+                    ->url('/salir')
+                    ->icon('heroicon-o-arrow-right-on-rectangle'),
+            ])
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
