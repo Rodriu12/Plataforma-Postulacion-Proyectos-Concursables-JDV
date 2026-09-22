@@ -1,33 +1,77 @@
-@import '../../../../vendor/filament/filament/resources/css/theme.css';
+@import '/vendor/filament/filament/resources/css/theme.css';
 
-@source '../../../../app/Filament/**/*';
-@source '../../../../resources/views/filament/**/*';
+/* =========================================
+   1. TIPOGRAFÍA Y FONDO GLOBAL
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif !important;
+    background-color: #f8fafc !important; /* Tono bg-slate-50 de tu diseño */
+}
+
+.fi-main {
+    background-color: #f8fafc !important;
+}
+
+/* =========================================
+   2. SCROLLBARS PERSONALIZADOS
+   ========================================= */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* =========================================
+   3. MENÚ LATERAL (NUEVO ESTILO CLARO)
+   ========================================= */
+/* Fondo blanco y borde sutil */
 aside.fi-sidebar, .fi-sidebar-header {
-    background-color: #0f172a !important;
-    border-right: none !important;
+    background-color: #ffffff !important;
+    border-right: 1px solid #f1f5f9 !important;
 }
 
+/* Texto e iconos inactivos (Gris/Slate) */
 aside.fi-sidebar .fi-sidebar-item-label, 
-aside.fi-sidebar .fi-sidebar-item-icon,
-aside.fi-sidebar .fi-logo {
-    color: #94a3b8 !important;
+aside.fi-sidebar .fi-sidebar-item-icon {
+    color: #475569 !important; /* text-slate-600 */
+    font-weight: 500 !important;
 }
 
+/* Hover: Fondo gris muy claro al pasar el ratón */
 aside.fi-sidebar .fi-sidebar-item-button:hover {
-    background-color: #1e293b !important;
+    background-color: #f8fafc !important; /* bg-slate-50 */
 }
 aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-icon {
-    color: #f1f5f9 !important;
+    color: #0f172a !important; /* text-slate-900 */
 }
 
+/* Elemento Activo: Fondo azul claro y texto azul fuerte (Brand) */
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button {
-    background-color: #2563eb !important;
-    border-radius: 8px !important;
+    background-color: #eff6ff !important; /* bg-brand-50 */
+    border-radius: 0.5rem !important;
 }
-
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
-    color: #ffffff !important;
+    color: #1d4ed8 !important; /* text-brand-700 */
     font-weight: 600 !important;
+}
+
+/* =========================================
+   4. BARRA SUPERIOR (TOPBAR)
+   ========================================= */
+.fi-topbar {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #f1f5f9 !important;
 }

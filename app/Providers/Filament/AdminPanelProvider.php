@@ -33,9 +33,10 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => '#2563eb',
                 'gray' => Color::Slate,
             ])
+            ->font('Inter')
             ->userMenuItems([
                 'logout' => MenuItem::make()
                     ->label('Cerrar sesión')
