@@ -20,6 +20,8 @@ jobs:
         run: |
           source ~/.bashrc
           composer install
+          npm install
+          npm run build
 
       - name: Reiniciar servidor
         run: |
