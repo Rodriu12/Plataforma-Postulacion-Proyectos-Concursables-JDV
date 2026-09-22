@@ -20,11 +20,11 @@ Route::get('/vecinos/{id}/certificado', function ($id) {
 
     return $pdf->download('Certificado-Residencia-' . $vecino->rut . '.pdf');
 })->name('vecino.certificado');
-Route::post('/logout', function (Request $request) {
+Route::get('/salir', function (Request $request) {
     Auth::logout();
 
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 
     return redirect('/');
-})->name('logout');
+});

@@ -20,6 +20,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\Facades\Blade;
+use Filament\Navigation\MenuItem;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -33,6 +34,12 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
                 'gray' => Color::Slate,
+            ])
+            ->userMenuItems([
+                'logout' => MenuItem::make()
+                    ->label('Cerrar sesión')
+                    ->url('/salir')
+                    ->icon('heroicon-o-arrow-right-on-rectangle'),
             ])
             ->renderHook(
                 PanelsRenderHook::HEAD_END,
