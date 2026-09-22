@@ -25,4 +25,4 @@ jobs:
         run: |
           source ~/.bashrc
           pkill '^php' || true
-          setsid php artisan serve --port=443 --host=localhost &
+          setsid php artisan serve --port=443 --host=0.0.0.0 &
