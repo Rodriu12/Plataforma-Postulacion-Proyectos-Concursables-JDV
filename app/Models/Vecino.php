@@ -23,4 +23,9 @@ class Vecino extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function emergencias()
+    {
+        return $this->hasMany(Emergencia::class);
+    }
 }

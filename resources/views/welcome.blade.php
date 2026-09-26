@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Bienvenido a JuntApp - Plataforma de Gestión y Coordinación Comunitaria</title>
+    <title>Bienvenido a Vecindar - Plataforma de Gestión y Coordinación Comunitaria</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
@@ -23,7 +23,7 @@
                         sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
                     },
                     colors: {
-                        juntapp: {
+                        vecindar: {
                             50: '#eef6ff',
                             100: '#dbeafe',
                             200: '#bfdbfe',
@@ -311,7 +311,7 @@
                     <h1
                         class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 tracking-tight leading-[1.12]">
                         Bienvenido a <span
-                            class="bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 bg-clip-text text-transparent">JuntApp</span>
+                            class="bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 bg-clip-text text-transparent">Vecindar</span>
                     </h1>
                     <p class="text-xl sm:text-2xl font-bold text-blue-600 tracking-tight">
                         Plataforma de Gestión y Coordinación Comunitaria
@@ -455,7 +455,7 @@
             </div>
         </div>
 
-        <section aria-label="Pilares fundamentales de JuntApp"
+        <section aria-label="Pilares fundamentales de Vecindar"
             class="mt-16 sm:mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-up delay-500">
             <article
                 class="glass-card rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-blue-200 group">
@@ -506,7 +506,7 @@
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-medium">
             <p class="text-center md:text-left text-slate-600">
-                © 2026 JuntApp - Fundación Bío Bío Cultural, Yumbel. Desarrollando soluciones para la comunidad.
+                © 2026 Vecindar - Fundación Bío Bío Cultural, Yumbel. Desarrollando soluciones para la comunidad.
             </p>
         </div>
     </footer>

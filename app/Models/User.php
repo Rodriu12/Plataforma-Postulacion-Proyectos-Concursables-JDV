@@ -56,6 +56,16 @@ class User extends Authenticatable
         return $this->hasOne(Vecino::class);
     }
 
+    public function organizacion()
+    {
+        return $this->belongsTo(Organizacion::class);
+    }
+
+    public function emergencias()
+    {
+        return $this->hasManyThrough(Emergencia::class, Vecino::class);
+    }
+
     protected static function booted()
     {
         static::created(function ($user) {
