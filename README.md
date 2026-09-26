@@ -1,4 +1,4 @@
-#  JuntApp
+#  Vecindar
 
 Plataforma web de gestión comunitaria desarrollada para optimizar la administración, la transparencia y la coordinación en las **Juntas de Vecinos**. Su objetivo principal es centralizar la gestión de usuarios, recursos y trámites comunitarios bajo una interfaz moderna, limpia y altamente accesible.
 
