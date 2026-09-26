@@ -22,7 +22,12 @@ jobs:
           composer install
           npm install
           npm run build
+      
+      - name: Migrar tablas a la BD
+        run: |
+          php artisan migrate
 
+      
       - name: Reiniciar servidor
         run: |
           source ~/.bashrc
