@@ -16,7 +16,7 @@ class Emergencia extends Model
      * Roles que forman parte de la directiva y deben ser notificados
      * cuando se reporta una nueva emergencia.
      */
-    public const ROLES_DIRECTIVA = ['presidente', 'secretario', 'tesorero', 'director'];
+    public const ROLES_DIRECTIVA = User::ROLES_DIRECTIVA;
 
     protected $fillable = [
         'vecino_id',

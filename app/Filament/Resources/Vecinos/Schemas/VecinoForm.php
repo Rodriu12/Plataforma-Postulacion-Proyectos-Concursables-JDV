@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Vecinos\Schemas;
 
+use App\Models\User;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
@@ -9,6 +10,13 @@ use Filament\Forms\Components\FileUpload;
 
 class VecinoForm
 {
+    protected static function esDirectiva(): bool
+    {
+        $usuario = auth()->user();
+
+        return $usuario && in_array($usuario->role, User::ROLES_DIRECTIVA);
+    }
+
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -21,7 +29,9 @@ class VecinoForm
                     ->label('RUT')
                     ->required()
                     ->unique(ignoreRecord: true)
-                    ->maxLength(12),
+                    ->maxLength(12)
+                    ->disabled(fn () => ! static::esDirectiva())
+                    ->dehydrated(),
                     
                 TextInput::make('telefono')
                     ->label('Teléfono')
@@ -54,6 +64,8 @@ class VecinoForm
                         'rechazado' => 'Rechazado',
                     ])
                     ->default('pendiente')
+                    ->disabled(fn () => ! static::esDirectiva())
+                    ->dehydrated()
                     ->required(),
             ]);
     }
