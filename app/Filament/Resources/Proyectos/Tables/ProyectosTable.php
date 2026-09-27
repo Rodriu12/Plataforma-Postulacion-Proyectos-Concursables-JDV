@@ -28,7 +28,16 @@ class ProyectosTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('estado')
-                    ->badge(),
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'borrador' => 'Borrador',
+                        'en_postulacion' => 'En Postulación',
+                        'adjudicado' => 'Adjudicado',
+                        'rechazado' => 'Rechazado',
+                        'en_ejecucion' => 'En Ejecución',
+                        'rendido' => 'Rendido',
+                        default => ucfirst($state),
+                    }),
                 TextColumn::make('fecha_postulacion')
                     ->date()
                     ->sortable(),
