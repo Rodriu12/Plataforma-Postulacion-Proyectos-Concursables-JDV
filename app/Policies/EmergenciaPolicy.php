@@ -14,7 +14,9 @@ class EmergenciaPolicy
 
     public function view(User $user, Emergencia $emergencia): bool
     {
-        return in_array($user->role, User::ROLES_DIRECTIVA) || $emergencia->vecino?->user_id === $user->id;
+        return in_array($user->role, User::ROLES_DIRECTIVA)
+            || $emergencia->vecino?->user_id === $user->id
+            || $emergencia->voluntario?->user_id === $user->id;
     }
 
     public function create(User $user): bool
@@ -24,7 +26,9 @@ class EmergenciaPolicy
 
     public function update(User $user, Emergencia $emergencia): bool
     {
-        return in_array($user->role, User::ROLES_DIRECTIVA) || $emergencia->vecino?->user_id === $user->id;
+        return in_array($user->role, User::ROLES_DIRECTIVA)
+            || $emergencia->vecino?->user_id === $user->id
+            || $emergencia->voluntario?->user_id === $user->id;
     }
 
     public function delete(User $user, Emergencia $emergencia): bool

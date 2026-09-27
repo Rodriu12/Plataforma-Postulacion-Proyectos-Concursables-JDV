@@ -33,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Vecindar')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
+            ->registration(\App\Filament\Pages\Auth\CustomRegister::class)
             ->colors([
                 'primary' => '#2563eb',
                 'gray' => Color::Slate,
@@ -55,6 +56,10 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 FilamentInfoWidget::class,
             ])
+            ->renderHook(
+                PanelsRenderHook::CONTENT_START,
+                fn () => view('filament.narrador-accesibilidad'),
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

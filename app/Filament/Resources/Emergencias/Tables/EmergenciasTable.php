@@ -33,6 +33,9 @@ class EmergenciasTable
                     ->label('Organización')
                     ->searchable()
                     ->placeholder('Sin organización asociada'),
+                TextColumn::make('voluntario.nombre')
+                    ->label('Voluntario asignado')
+                    ->placeholder('Sin asignar'),
                 TextColumn::make('ubicacion')
                     ->searchable()
                     ->limit(30),
