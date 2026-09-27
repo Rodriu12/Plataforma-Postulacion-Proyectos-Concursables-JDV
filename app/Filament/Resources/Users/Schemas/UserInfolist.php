@@ -19,7 +19,26 @@ class UserInfolist
                     ->placeholder('-'),
                 TextEntry::make('phone')
                     ->placeholder('-'),
-                TextEntry::make('role'),
+                TextEntry::make('role')
+                    ->label('Rol')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'presidente' => 'Presidente/a',
+                        'secretario' => 'Secretario/a',
+                        'tesorero' => 'Tesorero/a',
+                        'director' => 'Director/a',
+                        'vecino' => 'Vecino/a',
+                        'voluntario' => 'Voluntario/a',
+                        default => ucfirst($state),
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'presidente' => 'danger',
+                        'secretario' => 'warning',
+                        'tesorero' => 'success',
+                        'director' => 'info',
+                        'voluntario' => 'primary',
+                        default => 'gray',
+                    }),
                 IconEntry::make('is_active')
                     ->boolean(),
                 TextEntry::make('email_verified_at')
