@@ -242,8 +242,8 @@
                         </svg>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Vecin<span
-                                class="text-blue-600">dar</span></span>
+                        <span class="text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Junt<span
+                                class="text-blue-600">App</span></span>
                         <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mt-0.5">Yumbel
                             Comunitaria</span>
                     </div>
@@ -282,6 +282,10 @@
                             d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                             stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
+                </a>
+                <a class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-blue-700 hover:bg-white/70 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
+                    href="/register">
+                    <span>Regístrate</span>
                 </a>
             </div>
         </div>
@@ -335,6 +339,10 @@
                             fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
+                    </a>
+                    <a class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl text-blue-700 font-bold text-base bg-white/80 border border-blue-200/80 hover:bg-blue-50 shadow-sm transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-200"
+                        href="/register">
+                        <span>¿Aún no tienes cuenta? Regístrate</span>
                     </a>
                 </div>
 
