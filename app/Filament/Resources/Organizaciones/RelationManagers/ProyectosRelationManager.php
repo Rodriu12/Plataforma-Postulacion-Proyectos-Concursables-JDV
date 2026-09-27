@@ -81,7 +81,7 @@ class ProyectosRelationManager extends RelationManager
                     ->money('CLP'),
             ])
             ->filters([
-                // Filtros futuros
+                //
             ])
             ->headerActions([
                 CreateAction::make()

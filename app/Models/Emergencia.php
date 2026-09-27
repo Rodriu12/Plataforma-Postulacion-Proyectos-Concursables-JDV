@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Mail;
 class Emergencia extends Model
 {
     use HasFactory;
-
-    /**
-     * Roles que forman parte de la directiva y deben ser notificados
-     * cuando se reporta una nueva emergencia.
-     */
     public const ROLES_DIRECTIVA = User::ROLES_DIRECTIVA;
 
     protected $fillable = [
@@ -45,10 +40,6 @@ class Emergencia extends Model
         });
     }
 
-    /**
-     * Envía un correo a la directiva (de la organización asociada si existe,
-     * o a toda la directiva registrada si la emergencia no tiene organización).
-     */
     public function notificarADirectiva(): void
     {
         $directiva = User::whereIn('role', self::ROLES_DIRECTIVA)

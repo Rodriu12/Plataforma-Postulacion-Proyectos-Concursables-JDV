@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,16 +13,8 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * Roles que forman parte de la directiva de la organización.
-     * Tienen acceso de gestión a Organizaciones, Proyectos, Vecinos y Emergencias.
-     */
     public const ROLES_DIRECTIVA = ['presidente', 'secretario', 'tesorero', 'director'];
 
-    /**
-     * Roles con permiso para gestionar cuentas de usuario (el módulo más sensible).
-     * Subconjunto de la directiva: solo presidente y secretario.
-     */
     public const ROLES_GESTION_USUARIOS = ['presidente', 'secretario'];
 
     /**
