@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,8 +13,16 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    /**
+     * Roles que forman parte de la directiva de la organización.
+     * Tienen acceso de gestión a Organizaciones, Proyectos, Vecinos y Emergencias.
+     */
     public const ROLES_DIRECTIVA = ['presidente', 'secretario', 'tesorero', 'director'];
 
+    /**
+     * Roles con permiso para gestionar cuentas de usuario (el módulo más sensible).
+     * Subconjunto de la directiva: solo presidente y secretario.
+     */
     public const ROLES_GESTION_USUARIOS = ['presidente', 'secretario'];
 
     /**
@@ -60,6 +68,11 @@ class User extends Authenticatable
         return $this->hasOne(Vecino::class);
     }
 
+    public function voluntario()
+    {
+        return $this->hasOne(Voluntario::class);
+    }
+
     public function organizacion()
     {
         return $this->belongsTo(Organizacion::class);
@@ -83,6 +96,21 @@ class User extends Authenticatable
                     'estado' => 'pendiente',
                 ]
             );
+
+            if ($user->role === 'voluntario') {
+                Voluntario::firstOrCreate(
+                    ['user_id' => $user->id],
+                    [
+                        'organizacion_id' => $user->organizacion_id,
+                        'nombre' => $user->name,
+                        'telefono' => $user->phone,
+                        'sector' => 'Por definir',
+                        'area_apoyo' => 'otro',
+                        'disponibilidad' => 'Por definir',
+                        'estado' => 'pendiente',
+                    ]
+                );
+            }
         });
     }
     public function canAccessPanel(Panel $panel): bool

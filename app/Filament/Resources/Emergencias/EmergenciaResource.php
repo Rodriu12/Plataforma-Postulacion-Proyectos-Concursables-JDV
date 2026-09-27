@@ -27,6 +27,10 @@ class EmergenciaResource extends Resource
 
     protected static ?string $pluralModelLabel = 'emergencias';
 
+    /**
+     * Un vecino solo ve y gestiona sus propios reportes.
+     * La directiva (presidente, secretario, tesorero, director) ve todo.
+     */
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();
@@ -34,7 +38,10 @@ class EmergenciaResource extends Resource
         $usuario = auth()->user();
 
         if ($usuario && ! in_array($usuario->role, Emergencia::ROLES_DIRECTIVA)) {
-            $query->whereHas('vecino', fn (Builder $q) => $q->where('user_id', $usuario->id));
+            $query->where(function (Builder $q) use ($usuario) {
+                $q->whereHas('vecino', fn (Builder $v) => $v->where('user_id', $usuario->id))
+                    ->orWhereHas('voluntario', fn (Builder $v) => $v->where('user_id', $usuario->id));
+            });
         }
 
         return $query;

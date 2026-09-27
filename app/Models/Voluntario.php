@@ -4,36 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Organizacion extends Model
+class Voluntario extends Model
 {
     use HasFactory;
-    protected $table = 'organizaciones';
 
     protected $fillable = [
+        'user_id',
+        'organizacion_id',
         'nombre',
-        'rut_juridico',
+        'telefono',
         'sector',
-        'fecha_constitucion',
+        'area_apoyo',
+        'disponibilidad',
+        'estado',
     ];
 
-    public function users(): HasMany
+    public function user(): BelongsTo
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
-    public function proyectos(): HasMany
+
+    public function organizacion(): BelongsTo
     {
-        return $this->hasMany(Proyecto::class);
+        return $this->belongsTo(Organizacion::class);
     }
 
     public function emergencias(): HasMany
     {
         return $this->hasMany(Emergencia::class);
-    }
-
-    public function voluntarios(): HasMany
-    {
-        return $this->hasMany(Voluntario::class);
     }
 }

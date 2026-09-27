@@ -42,6 +42,14 @@ class EmergenciaForm
                     ->dehydrated()
                     ->helperText('Se asigna automáticamente según tu organización si no la seleccionas.'),
 
+                Select::make('voluntario_id')
+                    ->label('Voluntario asignado')
+                    ->relationship('voluntario', 'nombre')
+                    ->searchable()
+                    ->preload()
+                    ->visible(fn () => static::esDirectiva())
+                    ->helperText('Solo la directiva puede asignar un voluntario a esta emergencia.'),
+
                 Select::make('tipo')
                     ->options([
                         'incendio' => 'Incendio',
