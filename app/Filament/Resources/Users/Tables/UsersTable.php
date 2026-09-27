@@ -31,6 +31,15 @@ class UsersTable
                 TextColumn::make('role')
                     ->label('Rol')
                     ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'presidente' => 'Presidente/a',
+                        'secretario' => 'Secretario/a',
+                        'tesorero' => 'Tesorero/a',
+                        'director' => 'Director/a',
+                        'vecino' => 'Vecino/a',
+                        'voluntario' => 'Voluntario/a',
+                        default => ucfirst($state),
+                    })
                     ->color(fn (string $state): string => match ($state) {
                         'admin' => 'blue',
                         'presidente' => 'danger',

@@ -27,10 +27,6 @@ class EmergenciaResource extends Resource
 
     protected static ?string $pluralModelLabel = 'emergencias';
 
-    /**
-     * Un vecino solo ve y gestiona sus propios reportes.
-     * La directiva (presidente, secretario, tesorero, director) ve todo.
-     */
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();
