@@ -66,6 +66,15 @@ class ProyectosRelationManager extends RelationManager
                 TextColumn::make('estado')
                     ->label('Estado')
                     ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'borrador' => 'Borrador',
+                        'en_postulacion' => 'En Postulación',
+                        'adjudicado' => 'Adjudicado',
+                        'rechazado' => 'Rechazado',
+                        'en_ejecucion' => 'En Ejecución',
+                        'rendido' => 'Rendido',
+                        default => ucfirst($state),
+                    })
                     ->color(fn (string $state): string => match ($state) {
                         'borrador' => 'gray',
                         'en_postulacion' => 'warning',
@@ -81,7 +90,7 @@ class ProyectosRelationManager extends RelationManager
                     ->money('CLP'),
             ])
             ->filters([
-                //
+                // Filtros futuros
             ])
             ->headerActions([
                 CreateAction::make()
