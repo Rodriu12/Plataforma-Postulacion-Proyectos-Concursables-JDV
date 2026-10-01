@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::redirect('/register', '/admin/register');
+Route::redirect('/register', '/admin/login');
 Route::get('/vecinos/{id}/certificado', function ($id) {
     $vecino = Vecino::findOrFail($id);
     $usuario = Auth::user();
