@@ -33,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Vecindar')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
-            ->registration(\App\Filament\Pages\Auth\CustomRegister::class)
+            ->passwordReset()
             ->colors([
                 'primary' => '#2563eb',
                 'gray' => Color::Slate,
