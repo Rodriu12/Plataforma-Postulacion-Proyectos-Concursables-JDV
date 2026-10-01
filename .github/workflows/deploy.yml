@@ -24,7 +24,7 @@ jobs:
           npm run build
           php artisan migrate
           php artisan optimize:clear
-          php artisan views:clear
+          php artisan view:clear
       
       - name: Reiniciar servidor
         run: |
