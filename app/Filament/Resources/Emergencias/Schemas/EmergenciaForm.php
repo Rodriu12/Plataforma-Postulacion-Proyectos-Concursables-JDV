@@ -8,7 +8,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
-
+use App\Models\User;
 class EmergenciaForm
 {
     protected static function esDirectiva(): bool
@@ -16,6 +16,11 @@ class EmergenciaForm
         $usuario = auth()->user();
 
         return $usuario && in_array($usuario->role, Emergencia::ROLES_DIRECTIVA);
+    }
+
+    protected static function esAdminCentral(): bool
+    {
+        return auth()->user()?->esAdminCentral() ?? false;
     }
 
     public static function configure(Schema $schema): Schema
@@ -38,7 +43,7 @@ class EmergenciaForm
                     ->searchable()
                     ->preload()
                     ->default(fn () => auth()->user()?->organizacion_id)
-                    ->disabled(fn () => ! static::esDirectiva())
+                    ->disabled(fn () => ! static::esAdminCentral())
                     ->dehydrated()
                     ->helperText('Se asigna automáticamente según tu organización si no la seleccionas.'),
 

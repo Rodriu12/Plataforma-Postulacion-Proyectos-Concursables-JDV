@@ -14,7 +14,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-
+use App\Models\User;
 class EmergenciaResource extends Resource
 {
     protected static ?string $model = Emergencia::class;
