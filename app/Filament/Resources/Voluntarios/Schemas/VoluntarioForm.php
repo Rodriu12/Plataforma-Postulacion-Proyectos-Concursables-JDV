@@ -16,6 +16,11 @@ class VoluntarioForm
         return $usuario && in_array($usuario->role, User::ROLES_DIRECTIVA);
     }
 
+    protected static function esAdminCentral(): bool
+    {
+        return auth()->user()?->esAdminCentral() ?? false;
+    }
+
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -34,7 +39,9 @@ class VoluntarioForm
                     ->relationship('organizacion', 'nombre')
                     ->searchable()
                     ->preload()
-                    ->default(fn () => auth()->user()?->organizacion_id),
+                    ->default(fn () => auth()->user()?->organizacion_id)
+                    ->disabled(fn () => ! static::esAdminCentral())
+                    ->dehydrated(),
 
                 TextInput::make('sector')
                     ->label('Sector o Villa')

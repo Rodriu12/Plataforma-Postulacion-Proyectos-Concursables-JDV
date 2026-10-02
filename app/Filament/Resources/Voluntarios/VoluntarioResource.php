@@ -27,21 +27,26 @@ class VoluntarioResource extends Resource
 
     protected static ?string $pluralModelLabel = 'voluntarios';
 
-    /**
-     * Un voluntario solo ve y gestiona su propio registro.
-     * La directiva ve y aprueba todos los registros.
-     */
+    
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();
 
         $usuario = auth()->user();
 
-        if ($usuario && ! in_array($usuario->role, User::ROLES_DIRECTIVA)) {
-            $query->where('user_id', $usuario->id);
+        if (! $usuario) {
+            return $query;
         }
 
-        return $query;
+        if ($usuario->esAdminCentral()) {
+            return $query;
+        }
+
+        if (in_array($usuario->role, User::ROLES_DIRECTIVA)) {
+            return $query->where('organizacion_id', $usuario->organizacion_id);
+        }
+
+        return $query->where('user_id', $usuario->id);
     }
 
     public static function form(Schema $schema): Schema
