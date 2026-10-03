@@ -13,9 +13,12 @@ class EditOrganizacion extends EditRecord
 
     protected function getHeaderActions(): array
     {
-        return [
-            ViewAction::make(),
-            DeleteAction::make(),
-        ];
+        $actions = [ViewAction::make()];
+
+        if (auth()->user()?->esAdminCentral()) {
+            $actions[] = DeleteAction::make();
+        }
+
+        return $actions;
     }
 }

@@ -17,9 +17,12 @@ class ListUsers extends ListRecords
     {
         return [
             ImportAction::make()
-                ->label('Importar desde Excel')
+                ->label('Importar planilla (Excel/CSV)')
                 ->importer(ResidenteImporter::class)
                 ->visible(fn () => in_array(auth()->user()?->role, User::ROLES_GESTION_USUARIOS))
+                // Excel en español usa ';' como separador de columnas en CSV,
+                // no ',' — con ',' todo se ve amontonado en una sola columna.
+                ->csvDelimiter(';')
                 ->options([
                     'organizacion_id' => auth()->user()?->organizacion_id,
                 ]),

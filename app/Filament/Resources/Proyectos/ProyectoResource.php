@@ -10,11 +10,13 @@ use App\Filament\Resources\Proyectos\Schemas\ProyectoForm;
 use App\Filament\Resources\Proyectos\Schemas\ProyectoInfolist;
 use App\Filament\Resources\Proyectos\Tables\ProyectosTable;
 use App\Models\Proyecto;
+use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProyectoResource extends Resource
 {
@@ -23,6 +25,19 @@ class ProyectoResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     protected static ?string $recordTitleAttribute = 'model Proyecto';
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        $usuario = auth()->user();
+
+        if ($usuario && ! $usuario->esAdminCentral()) {
+            $query->where('organizacion_id', $usuario->organizacion_id);
+        }
+
+        return $query;
+    }
 
     public static function form(Schema $schema): Schema
     {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,17 +14,14 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * Roles que forman parte de la directiva de la organización.
-     * Tienen acceso de gestión a Organizaciones, Proyectos, Vecinos y Emergencias.
-     */
-    public const ROLES_DIRECTIVA = ['presidente', 'secretario', 'tesorero', 'director'];
 
-    /**
-     * Roles con permiso para gestionar cuentas de usuario (el módulo más sensible).
-     * Subconjunto de la directiva: solo presidente y secretario.
-     */
-    public const ROLES_GESTION_USUARIOS = ['presidente', 'secretario'];
+    public const ROLE_ADMIN_CENTRAL = 'admin_central';
+
+
+    public const ROLES_DIRECTIVA = ['presidente', 'secretario', 'tesorero', 'director', self::ROLE_ADMIN_CENTRAL];
+
+    
+    public const ROLES_GESTION_USUARIOS = ['presidente', 'secretario', self::ROLE_ADMIN_CENTRAL];
 
     /**
      * The attributes that are mass assignable.
@@ -68,6 +66,14 @@ class User extends Authenticatable
         return $this->hasOne(Vecino::class);
     }
 
+
+    protected function role(): Attribute
+    {
+        return Attribute::make(
+            set: fn (?string $value) => $value !== null ? strtolower(trim($value)) : $value,
+        );
+    }
+
     public function voluntario()
     {
         return $this->hasOne(Voluntario::class);
@@ -81,6 +87,12 @@ class User extends Authenticatable
     public function emergencias()
     {
         return $this->hasManyThrough(Emergencia::class, Vecino::class);
+    }
+
+
+    public function esAdminCentral(): bool
+    {
+        return $this->role === self::ROLE_ADMIN_CENTRAL;
     }
 
     protected static function booted()

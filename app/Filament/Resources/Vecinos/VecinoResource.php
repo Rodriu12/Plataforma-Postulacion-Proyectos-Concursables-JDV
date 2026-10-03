@@ -7,7 +7,7 @@ use App\Filament\Resources\Vecinos\Pages\EditVecino;
 use App\Filament\Resources\Vecinos\Pages\ListVecinos;
 use App\Filament\Resources\Vecinos\Schemas\VecinoForm;
 use App\Filament\Resources\Vecinos\Tables\VecinosTable;
-use App\Models\User as User;
+use App\Models\User;
 use App\Models\Vecino;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -24,21 +24,26 @@ class VecinoResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'model-vecino';
 
-    /**
-     * Un vecino/voluntario solo ve su propio registro del padrón.
-     * La directiva ve y gestiona todos los registros.
-     */
+
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();
 
-        $usuario = auth()->User();
+        $usuario = auth()->user();
 
-        if ($usuario && ! in_array($usuario->role, User::ROLES_DIRECTIVA)) {
-            $query->where('user_id', $usuario->id);
+        if (! $usuario) {
+            return $query;
         }
 
-        return $query;
+        if ($usuario->esAdminCentral()) {
+            return $query;
+        }
+
+        if (in_array($usuario->role, User::ROLES_DIRECTIVA)) {
+            return $query->whereHas('user', fn (Builder $q) => $q->where('organizacion_id', $usuario->organizacion_id));
+        }
+
+        return $query->where('user_id', $usuario->id);
     }
 
     public static function form(Schema $schema): Schema

@@ -11,6 +11,11 @@ use Filament\Schemas\Schema;
 
 class ProyectoForm
 {
+    protected static function esAdminCentral(): bool
+    {
+        return auth()->user()?->esAdminCentral() ?? false;
+    }
+
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -20,7 +25,13 @@ class ProyectoForm
                     ->relationship('organizacion', 'nombre')
                     ->required()
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->default(fn () => auth()->user()?->organizacion_id)
+                    ->disabled(fn () => ! static::esAdminCentral())
+                    ->dehydrated()
+                    ->helperText(fn () => static::esAdminCentral()
+                        ? null
+                        : 'Se asigna automáticamente a tu organización.'),
 
                 TextInput::make('titulo')
                     ->label('Título del Proyecto')

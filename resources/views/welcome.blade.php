@@ -242,8 +242,8 @@
                         </svg>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Junt<span
-                                class="text-blue-600">App</span></span>
+                        <span class="text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Vecin<span
+                                class="text-blue-600">dar</span></span>
                         <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mt-0.5">Yumbel
                             Comunitaria</span>
                     </div>

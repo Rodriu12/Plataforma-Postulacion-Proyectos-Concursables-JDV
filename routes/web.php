@@ -16,9 +16,11 @@ Route::get('/vecinos/{id}/certificado', function ($id) {
     $usuario = Auth::user();
 
     $esDueno = $vecino->user_id === $usuario->id;
-    $esDirectiva = in_array($usuario->role, User::ROLES_DIRECTIVA);
+    $esAdminCentral = $usuario->esAdminCentral();
+    $esDirectivaDeSuOrganizacion = in_array($usuario->role, User::ROLES_DIRECTIVA)
+        && $vecino->user?->organizacion_id === $usuario->organizacion_id;
 
-    if (! $esDueno && ! $esDirectiva) {
+    if (! $esDueno && ! $esAdminCentral && ! $esDirectivaDeSuOrganizacion) {
         abort(403, 'No tienes permiso para descargar este certificado.');
     }
 

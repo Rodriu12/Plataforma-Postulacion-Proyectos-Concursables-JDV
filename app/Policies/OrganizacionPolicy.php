@@ -7,6 +7,15 @@ use App\Models\User;
 
 class OrganizacionPolicy
 {
+    protected function puedeGestionar(User $user, Organizacion $organizacion): bool
+    {
+        if (! in_array($user->role, User::ROLES_DIRECTIVA)) {
+            return false;
+        }
+
+        return $user->esAdminCentral() || $organizacion->id === $user->organizacion_id;
+    }
+
     public function viewAny(User $user): bool
     {
         return in_array($user->role, User::ROLES_DIRECTIVA);
@@ -14,26 +23,30 @@ class OrganizacionPolicy
 
     public function view(User $user, Organizacion $organizacion): bool
     {
-        return in_array($user->role, User::ROLES_DIRECTIVA);
+        return $this->puedeGestionar($user, $organizacion);
     }
 
+    /**
+     * Solo el admin_central crea organizaciones nuevas (se da de alta
+     * manualmente, como ya se hace hoy).
+     */
     public function create(User $user): bool
     {
-        return in_array($user->role, User::ROLES_DIRECTIVA);
+        return $user->esAdminCentral();
     }
 
     public function update(User $user, Organizacion $organizacion): bool
     {
-        return in_array($user->role, User::ROLES_DIRECTIVA);
+        return $this->puedeGestionar($user, $organizacion);
     }
 
     public function delete(User $user, Organizacion $organizacion): bool
     {
-        return in_array($user->role, User::ROLES_DIRECTIVA);
+        return $user->esAdminCentral();
     }
 
     public function deleteAny(User $user): bool
     {
-        return in_array($user->role, User::ROLES_DIRECTIVA);
+        return $user->esAdminCentral();
     }
 }

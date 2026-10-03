@@ -21,8 +21,14 @@ class GaleriaTerrenoWidget extends Widget
 
     protected function getViewData(): array
     {
+        $usuario = auth()->user();
+
         return [
             'proyectos' => Proyecto::whereNotNull('imagen_terreno')
+                ->when(
+                    ! $usuario?->esAdminCentral(),
+                    fn ($query) => $query->where('organizacion_id', $usuario?->organizacion_id)
+                )
                 ->latest()
                 ->take(6)
                 ->get(),

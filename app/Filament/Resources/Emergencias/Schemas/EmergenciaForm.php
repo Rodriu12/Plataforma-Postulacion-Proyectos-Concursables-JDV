@@ -18,6 +18,11 @@ class EmergenciaForm
         return $usuario && in_array($usuario->role, Emergencia::ROLES_DIRECTIVA);
     }
 
+    protected static function esAdminCentral(): bool
+    {
+        return auth()->user()?->esAdminCentral() ?? false;
+    }
+
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -38,7 +43,7 @@ class EmergenciaForm
                     ->searchable()
                     ->preload()
                     ->default(fn () => auth()->user()?->organizacion_id)
-                    ->disabled(fn () => ! static::esDirectiva())
+                    ->disabled(fn () => ! static::esAdminCentral())
                     ->dehydrated()
                     ->helperText('Se asigna automáticamente según tu organización si no la seleccionas.'),
 
