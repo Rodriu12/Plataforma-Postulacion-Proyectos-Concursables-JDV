@@ -28,4 +28,9 @@ class Vecino extends Model
     {
         return $this->hasMany(Emergencia::class);
     }
+
+    public function prestamosInventario()
+    {
+        return $this->hasMany(InventarioPrestamo::class);
+    }
 }

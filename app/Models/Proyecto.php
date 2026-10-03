@@ -24,7 +24,6 @@ class Proyecto extends Model
         'fecha_adjudicacion',
     ];
 
-
     protected function estado(): Attribute
     {
         return Attribute::make(
@@ -35,5 +34,10 @@ class Proyecto extends Model
     public function organizacion(): BelongsTo
     {
         return $this->belongsTo(Organizacion::class);
+    }
+
+    public function inventarioItems()
+    {
+        return $this->hasMany(InventarioItem::class);
     }
 }

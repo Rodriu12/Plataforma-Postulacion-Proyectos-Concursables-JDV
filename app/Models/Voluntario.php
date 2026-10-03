@@ -36,4 +36,9 @@ class Voluntario extends Model
     {
         return $this->hasMany(Emergencia::class);
     }
+
+    public function prestamosInventario(): HasMany
+    {
+        return $this->hasMany(InventarioPrestamo::class);
+    }
 }
