@@ -7,7 +7,6 @@ use App\Models\Vecino;
 
 class VecinoPolicy
 {
-
     protected function puedeGestionar(User $user, Vecino $vecino): bool
     {
         if (! in_array($user->role, User::ROLES_DIRECTIVA)) {

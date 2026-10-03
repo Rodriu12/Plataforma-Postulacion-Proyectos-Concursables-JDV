@@ -7,7 +7,6 @@ use App\Models\User;
 
 class OrganizacionPolicy
 {
-
     protected function puedeGestionar(User $user, Organizacion $organizacion): bool
     {
         if (! in_array($user->role, User::ROLES_DIRECTIVA)) {
@@ -27,6 +26,10 @@ class OrganizacionPolicy
         return $this->puedeGestionar($user, $organizacion);
     }
 
+    /**
+     * Solo el admin_central crea organizaciones nuevas (se da de alta
+     * manualmente, como ya se hace hoy).
+     */
     public function create(User $user): bool
     {
         return $user->esAdminCentral();

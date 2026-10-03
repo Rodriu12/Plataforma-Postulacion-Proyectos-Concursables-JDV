@@ -24,7 +24,7 @@ class VecinoResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'model-vecino';
 
-    
+
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();

@@ -37,6 +37,13 @@ class ProyectosTable
                         'en_ejecucion' => 'En Ejecución',
                         'rendido' => 'Rendido',
                         default => ucfirst($state),
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'adjudicado' => 'success',
+                        'rechazado' => 'danger',
+                        'en_postulacion', 'en_ejecucion' => 'warning',
+                        'rendido' => 'info',
+                        default => 'gray',
                     }),
                 TextColumn::make('fecha_postulacion')
                     ->date()

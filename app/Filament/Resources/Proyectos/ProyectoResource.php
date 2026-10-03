@@ -26,7 +26,6 @@ class ProyectoResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'model Proyecto';
 
-    
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();

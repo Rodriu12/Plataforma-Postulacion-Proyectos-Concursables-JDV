@@ -49,6 +49,7 @@ class ResidenteImporter extends Importer
         ];
     }
 
+
     public function resolveRecord(): ?User
     {
         return User::firstOrNew([
@@ -60,8 +61,10 @@ class ResidenteImporter extends Importer
     {
         $this->record->password = Str::password(24);
         $this->record->is_active = true;
+
         $this->record->organizacion_id = $this->options['organizacion_id'] ?? null;
     }
+
 
     protected function afterSave(): void
     {

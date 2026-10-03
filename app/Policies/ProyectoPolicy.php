@@ -7,7 +7,6 @@ use App\Models\User;
 
 class ProyectoPolicy
 {
-    
     protected function puedeGestionar(User $user, Proyecto $proyecto): bool
     {
         if (! in_array($user->role, User::ROLES_DIRECTIVA)) {

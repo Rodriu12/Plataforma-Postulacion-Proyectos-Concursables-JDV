@@ -7,7 +7,6 @@ use App\Models\Voluntario;
 
 class VoluntarioPolicy
 {
-
     protected function puedeGestionar(User $user, Voluntario $voluntario): bool
     {
         if (! in_array($user->role, User::ROLES_DIRECTIVA)) {

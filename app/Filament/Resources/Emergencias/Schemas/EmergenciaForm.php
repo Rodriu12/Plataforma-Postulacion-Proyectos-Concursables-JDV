@@ -8,7 +8,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
-use App\Models\User;
+
 class EmergenciaForm
 {
     protected static function esDirectiva(): bool

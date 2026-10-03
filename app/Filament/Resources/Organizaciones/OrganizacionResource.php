@@ -33,7 +33,7 @@ class OrganizacionResource extends Resource
     protected static ?string $slug = 'organizaciones';
     protected static ?string $recordTitleAttribute = 'model organizacion';
 
-    
+
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();

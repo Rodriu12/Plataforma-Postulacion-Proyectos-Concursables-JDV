@@ -27,7 +27,7 @@ class VoluntarioResource extends Resource
 
     protected static ?string $pluralModelLabel = 'voluntarios';
 
-    
+
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();
