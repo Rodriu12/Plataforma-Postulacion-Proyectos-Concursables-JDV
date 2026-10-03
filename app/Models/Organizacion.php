@@ -36,4 +36,9 @@ class Organizacion extends Model
     {
         return $this->hasMany(Voluntario::class);
     }
+
+    public function inventarioItems(): HasMany
+    {
+        return $this->hasMany(InventarioItem::class);
+    }
 }
