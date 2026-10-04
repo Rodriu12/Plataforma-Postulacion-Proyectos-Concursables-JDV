@@ -14,13 +14,27 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-
+    /**
+     * Rol del administrador central de la plataforma (ve y gestiona TODAS
+     * las organizaciones, sin quedar acotado a una sola). Es distinto de
+     * 'presidente' precisamente para poder diferenciarlo en el código.
+     */
     public const ROLE_ADMIN_CENTRAL = 'admin_central';
 
-
+    /**
+     * Roles que forman parte de la directiva de UNA organización.
+     * Tienen acceso de gestión a Organizaciones, Proyectos, Vecinos,
+     * Voluntarios y Emergencias — pero acotado a su propia organización
+     * (ver getEloquentQuery() de cada Resource). admin_central se incluye
+     * aquí para heredar automáticamente estos mismos permisos base; el
+     * acotamiento por organización se omite para él en cada Resource.
+     */
     public const ROLES_DIRECTIVA = ['presidente', 'secretario', 'tesorero', 'director', self::ROLE_ADMIN_CENTRAL];
 
-    
+    /**
+     * Roles con permiso para gestionar cuentas de usuario (el módulo más sensible).
+     * Subconjunto de la directiva: presidente, secretario y admin_central.
+     */
     public const ROLES_GESTION_USUARIOS = ['presidente', 'secretario', self::ROLE_ADMIN_CENTRAL];
 
     /**
@@ -61,12 +75,31 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Reemplaza el correo de restablecimiento de contraseña por defecto de
+     * Laravel (en inglés, sin marca) por el de Vecindar en español. Se
+     * dispara tanto por "olvidé mi contraseña" en el login como por
+     * Password::sendResetLink() desde el importador de Excel.
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $url = \Filament\Facades\Filament::getResetPasswordUrl($token, $this);
+
+        \Illuminate\Support\Facades\Mail::to($this->email)
+            ->send(new \App\Mail\RestablecerContrasenaMail($this, $url));
+    }
+
     public function vecino()
     {
         return $this->hasOne(Vecino::class);
     }
 
-
+    /**
+     * Normaliza el rol a minúsculas y sin espacios al guardarlo, sin importar
+     * cómo se haya escrito (formulario, seeder, import manual, etc.), para
+     * que siempre coincida con los valores usados en ROLES_DIRECTIVA y en
+     * las Policies.
+     */
     protected function role(): Attribute
     {
         return Attribute::make(
@@ -89,7 +122,10 @@ class User extends Authenticatable
         return $this->hasManyThrough(Emergencia::class, Vecino::class);
     }
 
-
+    /**
+     * El admin central ve y gestiona TODAS las organizaciones; todo lo
+     * demás (directiva normal, vecino, voluntario) queda acotado a la suya.
+     */
     public function esAdminCentral(): bool
     {
         return $this->role === self::ROLE_ADMIN_CENTRAL;
