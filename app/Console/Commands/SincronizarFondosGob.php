@@ -60,7 +60,7 @@ class SincronizarFondosGob extends Command
                 $cardText = $elemento->textContent;
                 $lines = array_values(array_filter(array_map('trim', explode("\n", $cardText))));
 
-                $estadoVigencia = 'abierto'; // por defecto
+                $estadoVigencia = 'abierto';
                 $cardTextUpper = mb_strtoupper($cardText);
                 
                 if (str_contains($cardTextUpper, 'POR ABRIR') || str_contains($cardTextUpper, 'PRÓXIMAMENTE') || str_contains($cardTextUpper, 'PROXIMAMENTE')) {
@@ -114,7 +114,6 @@ class SincronizarFondosGob extends Command
                     $titulo = $lines[1] ?? 'Fondo Concursable del Estado';
                 }
 
-                // 4. Extraer Fecha de Cierre
                 $fechaCierre = null;
                 if (preg_match('/(?:Fin|Cierre):\s*([0-9]{2}-[0-9]{2}-[0-9]{4})/i', $cardText, $matchFecha)) {
                     $partes = explode('-', $matchFecha[1]);
