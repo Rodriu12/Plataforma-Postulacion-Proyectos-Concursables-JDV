@@ -75,3 +75,40 @@ aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
     background-color: #ffffff !important;
     border-bottom: 1px solid #f1f5f9 !important;
 }
+
+/* =========================================
+   5. TABLAS EN FORMATO TARJETA (contentGrid)
+   ========================================= */
+.fi-ta-content-grid {
+    gap: 1rem !important;
+}
+
+.fi-ta-content-grid .fi-ta-record {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0; /* border-slate-200 */
+    border-radius: 1rem; /* rounded-2xl */
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    overflow: hidden;
+}
+
+.fi-ta-content-grid .fi-ta-record:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -8px rgb(37 99 235 / 0.18); /* sombra azul de marca */
+    border-color: #bfdbfe; /* border-blue-200 */
+}
+
+.fi-ta-content-grid .fi-ta-record-content-ctn,
+.fi-ta-content-grid .fi-ta-record-content {
+    padding: 1rem !important;
+}
+
+/* Avatar/ícono a la izquierda de la tarjeta */
+.fi-ta-content-grid .fi-ta-split {
+    align-items: flex-start !important;
+    gap: 0.875rem !important;
+}
+
+.fi-ta-content-grid .fi-ta-image-column img {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px #dbeafe; /* anillo azul claro de marca */
+}
