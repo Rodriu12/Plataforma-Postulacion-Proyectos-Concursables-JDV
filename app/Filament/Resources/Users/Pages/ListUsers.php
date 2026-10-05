@@ -20,13 +20,15 @@ class ListUsers extends ListRecords
                 ->label('Importar planilla (Excel/CSV)')
                 ->importer(ResidenteImporter::class)
                 ->visible(fn () => in_array(auth()->user()?->role, User::ROLES_GESTION_USUARIOS))
-                // Excel en español usa ';' como separador de columnas en CSV,
-                // no ',' — con ',' todo se ve amontonado en una sola columna.
-                ->csvDelimiter(';')
+                // Sin forzar un separador fijo: Filament detecta solo si el
+                // archivo subido usa ',' o ';' (Excel en español suele usar
+                // ';', pero forzarlo rompía la subida si el archivo real
+                // traía otro separador).
                 ->options([
                     'organizacion_id' => auth()->user()?->organizacion_id,
                 ]),
-            CreateAction::make(),
+            CreateAction::make()
+                ->createAnother(false),
         ];
     }
 }

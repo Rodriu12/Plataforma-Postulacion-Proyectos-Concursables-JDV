@@ -30,16 +30,19 @@ class ProyectosTable
                             'en_postulacion', 'en_ejecucion' => 'warning',
                             'rendido' => 'info',
                             default => 'gray',
-                        }),
+                        })
+                        ->grow(false),
 
                     Stack::make([
                         TextColumn::make('titulo')
                             ->weight('bold')
                             ->size('lg')
+                            ->wrap()
                             ->searchable(),
 
                         TextColumn::make('organizacion.nombre')
                             ->color('gray')
+                            ->wrap()
                             ->searchable(),
 
                         TextColumn::make('estado')

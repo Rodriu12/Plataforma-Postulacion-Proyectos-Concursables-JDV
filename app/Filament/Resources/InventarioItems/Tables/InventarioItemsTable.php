@@ -31,17 +31,20 @@ class InventarioItemsTable
                             default => 'heroicon-o-archive-box',
                         })
                         ->size('lg')
-                        ->color('primary'),
+                        ->color('primary')
+                        ->grow(false),
 
                     Stack::make([
                         TextColumn::make('nombre')
                             ->weight('bold')
                             ->size('lg')
+                            ->wrap()
                             ->searchable(),
 
                         TextColumn::make('organizacion.nombre')
                             ->label('Organización')
                             ->color('gray')
+                            ->wrap()
                             ->searchable()
                             ->toggleable(),
 

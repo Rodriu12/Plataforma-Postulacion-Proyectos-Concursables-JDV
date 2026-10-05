@@ -29,12 +29,14 @@ class EmergenciasTable
                             'incendio', 'delincuencia' => 'danger',
                             'accidente', 'emergencia_medica', 'inundacion' => 'warning',
                             default => 'gray',
-                        }),
+                        })
+                        ->grow(false),
 
                     Stack::make([
                         TextColumn::make('tipo')
                             ->weight('bold')
                             ->size('lg')
+                            ->wrap()
                             ->badge()
                             ->formatStateUsing(fn (string $state) => str_replace('_', ' ', ucfirst($state)))
                             ->color(fn (string $state): string => match ($state) {
@@ -45,6 +47,7 @@ class EmergenciasTable
 
                         TextColumn::make('ubicacion')
                             ->color('gray')
+                            ->wrap()
                             ->searchable(),
 
                         TextColumn::make('vecino.nombre')
