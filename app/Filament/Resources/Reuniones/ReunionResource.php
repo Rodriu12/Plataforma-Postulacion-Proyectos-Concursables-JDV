@@ -26,6 +26,8 @@ class ReunionResource extends Resource
 
     protected static ?string $pluralModelLabel = 'reuniones';
 
+    protected static ?string $slug = 'reuniones';
+
     /**
      * Todos ven las reuniones de su propia organización (son presenciales,
      * conviene que todos se enteren); el admin_central ve todas.
