@@ -25,7 +25,7 @@ class VecinosTable
                         ->label('')
                         ->circular()
                         ->size(56)
-                        ->getStateUsing(fn ($record) => Avatar::url($record->nombre, '16a34a'))
+                        ->getStateUsing(fn ($record) => $record->user?->avatarUrl() ?? Avatar::url($record->nombre, '16a34a'))
                         ->grow(false),
 
                     Stack::make([

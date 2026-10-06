@@ -6,10 +6,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Filament\Notifications\Notification as FilamentNotification;
 
 class Voluntario extends Model
 {
     use HasFactory;
+
+    protected static function booted(): void
+    {
+        static::updated(function (Voluntario $voluntario) {
+            if (! $voluntario->wasChanged('estado') || ! $voluntario->user) {
+                return;
+            }
+
+            if (! in_array($voluntario->estado, ['aprobado', 'rechazado'])) {
+                return;
+            }
+
+            FilamentNotification::make()
+                ->title($voluntario->estado === 'aprobado' ? 'Tu registro como voluntario fue aprobado' : 'Tu registro como voluntario fue rechazado')
+                ->icon('heroicon-o-hand-raised')
+                ->color($voluntario->estado === 'aprobado' ? 'success' : 'danger')
+                ->sendToDatabase($voluntario->user);
+        });
+    }
 
     protected $fillable = [
         'user_id',

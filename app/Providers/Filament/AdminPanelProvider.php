@@ -34,6 +34,9 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->passwordReset()
+            ->profile(\App\Filament\Pages\Auth\CustomEditProfile::class)
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('30s')
             ->colors([
                 'primary' => '#2563eb',
                 'gray' => Color::Slate,

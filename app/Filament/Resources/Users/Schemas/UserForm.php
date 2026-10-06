@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Users\Schemas;
 
 use App\Models\User;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
@@ -20,6 +21,13 @@ class UserForm
     {
         return $schema
             ->components([
+                FileUpload::make('avatar_path')
+                    ->label('Foto de perfil')
+                    ->avatar()
+                    ->disk('public')
+                    ->directory('avatares')
+                    ->image()
+                    ->columnSpanFull(),
                 Select::make('organizacion_id')
                     ->label('Organización')
                     ->relationship('organizacion', 'nombre')

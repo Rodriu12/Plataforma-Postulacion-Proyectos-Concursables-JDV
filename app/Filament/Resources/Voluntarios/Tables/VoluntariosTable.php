@@ -25,7 +25,7 @@ class VoluntariosTable
                         ->label('')
                         ->circular()
                         ->size(56)
-                        ->getStateUsing(fn ($record) => Avatar::url($record->nombre, 'd97706'))
+                        ->getStateUsing(fn ($record) => $record->user?->avatarUrl() ?? Avatar::url($record->nombre, 'd97706'))
                         ->grow(false),
 
                     Stack::make([

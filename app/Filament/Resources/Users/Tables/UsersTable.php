@@ -26,7 +26,7 @@ class UsersTable
                         ->label('')
                         ->circular()
                         ->size(56)
-                        ->getStateUsing(fn ($record) => Avatar::url($record->name))
+                        ->getStateUsing(fn ($record) => $record->avatarUrl())
                         ->grow(false),
 
                     Stack::make([
