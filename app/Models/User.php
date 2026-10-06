@@ -3,38 +3,36 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Support\Avatar;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
-class User extends Authenticatable
+class User extends Authenticatable implements HasAvatar
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * Rol del administrador central de la plataforma (ve y gestiona TODAS
-     * las organizaciones, sin quedar acotado a una sola). Es distinto de
-     * 'presidente' precisamente para poder diferenciarlo en el código.
-     */
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatarUrl();
+    }
+
+    public function avatarUrl(): string
+    {
+        return $this->avatar_path
+            ? Storage::disk('public')->url($this->avatar_path)
+            : Avatar::url($this->name);
+    }
+
     public const ROLE_ADMIN_CENTRAL = 'admin_central';
 
-    /**
-     * Roles que forman parte de la directiva de UNA organización.
-     * Tienen acceso de gestión a Organizaciones, Proyectos, Vecinos,
-     * Voluntarios y Emergencias — pero acotado a su propia organización
-     * (ver getEloquentQuery() de cada Resource). admin_central se incluye
-     * aquí para heredar automáticamente estos mismos permisos base; el
-     * acotamiento por organización se omite para él en cada Resource.
-     */
     public const ROLES_DIRECTIVA = ['presidente', 'secretario', 'tesorero', 'director', self::ROLE_ADMIN_CENTRAL];
 
-    /**
-     * Roles con permiso para gestionar cuentas de usuario (el módulo más sensible).
-     * Subconjunto de la directiva: presidente, secretario y admin_central.
-     */
     public const ROLES_GESTION_USUARIOS = ['presidente', 'secretario', self::ROLE_ADMIN_CENTRAL];
 
     /**
@@ -48,6 +46,7 @@ class User extends Authenticatable
         'password',
         'rut',
         'phone',
+        'avatar_path',
         'role',
         'is_active',
     ];
@@ -75,12 +74,6 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Reemplaza el correo de restablecimiento de contraseña por defecto de
-     * Laravel (en inglés, sin marca) por el de Vecindar en español. Se
-     * dispara tanto por "olvidé mi contraseña" en el login como por
-     * Password::sendResetLink() desde el importador de Excel.
-     */
     public function sendPasswordResetNotification($token): void
     {
         $url = \Filament\Facades\Filament::getResetPasswordUrl($token, $this);
@@ -94,12 +87,6 @@ class User extends Authenticatable
         return $this->hasOne(Vecino::class);
     }
 
-    /**
-     * Normaliza el rol a minúsculas y sin espacios al guardarlo, sin importar
-     * cómo se haya escrito (formulario, seeder, import manual, etc.), para
-     * que siempre coincida con los valores usados en ROLES_DIRECTIVA y en
-     * las Policies.
-     */
     protected function role(): Attribute
     {
         return Attribute::make(
@@ -122,10 +109,6 @@ class User extends Authenticatable
         return $this->hasManyThrough(Emergencia::class, Vecino::class);
     }
 
-    /**
-     * El admin central ve y gestiona TODAS las organizaciones; todo lo
-     * demás (directiva normal, vecino, voluntario) queda acotado a la suya.
-     */
     public function esAdminCentral(): bool
     {
         return $this->role === self::ROLE_ADMIN_CENTRAL;

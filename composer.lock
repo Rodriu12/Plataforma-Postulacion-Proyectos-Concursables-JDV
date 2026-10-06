@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20a14c592c38769ffa17435d649d0bff",
+    "content-hash": "70a59971e1ae053071c1c5d67f580b95",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -5248,6 +5248,87 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.9.3"
             },
             "time": "2026-06-18T03:57:49+00:00"
+        },
+        {
+            "name": "romansulzhyk/filament-import",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RomanSulzhyk/filament-import.git",
+                "reference": "a8c45be4708f2a436fc54ce8b4cb19b04493dfcb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RomanSulzhyk/filament-import/zipball/a8c45be4708f2a436fc54ce8b4cb19b04493dfcb",
+                "reference": "a8c45be4708f2a436fc54ce8b4cb19b04493dfcb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-zip": "*",
+                "filament/filament": "^4.0|^5.0",
+                "league/csv": "^9.16",
+                "openspout/openspout": "^4.23",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.16"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^9.0|^10.0|^11.0",
+                "pestphp/pest": "^3.0|^4.0",
+                "pestphp/pest-plugin-laravel": "^3.0|^4.0",
+                "pestphp/pest-plugin-livewire": "^3.0|^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RomanSulzhyk\\FilamentImport\\FilamentImportServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RomanSulzhyk\\FilamentImport\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Sulzhyk",
+                    "homepage": "https://github.com/RomanSulzhyk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Import CSV and Excel (.xlsx) files into any Filament v4 or v5 resource immediately, without a queue: delimiter and encoding detection, header matching, validation, upserts and a downloadable report of failed rows.",
+            "homepage": "https://github.com/RomanSulzhyk/filament-import",
+            "keywords": [
+                "csv",
+                "csv-import",
+                "excel",
+                "excel-import",
+                "filament",
+                "filament-plugin",
+                "filament-v4",
+                "filament-v5",
+                "filamentphp",
+                "import",
+                "importer",
+                "laravel",
+                "laravel-boost",
+                "romansulzhyk",
+                "spreadsheet",
+                "tsv",
+                "xlsx"
+            ],
+            "support": {
+                "issues": "https://github.com/RomanSulzhyk/filament-import/issues",
+                "security": "https://github.com/RomanSulzhyk/filament-import/security/policy",
+                "source": "https://github.com/RomanSulzhyk/filament-import"
+            },
+            "time": "2026-09-28T22:58:56+00:00"
         },
         {
             "name": "ryangjchandler/blade-capture-directive",

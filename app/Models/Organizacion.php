@@ -41,4 +41,9 @@ class Organizacion extends Model
     {
         return $this->hasMany(InventarioItem::class);
     }
+
+    public function reuniones(): HasMany
+    {
+        return $this->hasMany(Reunion::class);
+    }
 }

@@ -8,15 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Mail;
+use Filament\Notifications\Notification as FilamentNotification;
 
 class Emergencia extends Model
 {
     use HasFactory;
-
-    /**
-     * Roles que forman parte de la directiva y deben ser notificados
-     * cuando se reporta una nueva emergencia.
-     */
     public const ROLES_DIRECTIVA = User::ROLES_DIRECTIVA;
 
     protected $fillable = [
@@ -57,11 +53,6 @@ class Emergencia extends Model
             }
         });
     }
-
-    /**
-     * Envía un correo a la directiva (de la organización asociada si existe,
-     * o a toda la directiva registrada si la emergencia no tiene organización).
-     */
     public function notificarADirectiva(): void
     {
         $directiva = User::whereIn('role', self::ROLES_DIRECTIVA)
@@ -74,18 +65,29 @@ class Emergencia extends Model
 
         foreach ($directiva as $usuario) {
             Mail::to($usuario->email)->send(new NuevaEmergenciaMail($this));
+
+            FilamentNotification::make()
+                ->title('Nueva emergencia: ' . ucfirst($this->tipo))
+                ->body($this->ubicacion)
+                ->icon('heroicon-o-exclamation-triangle')
+                ->color('danger')
+                ->sendToDatabase($usuario);
         }
     }
 
-    /**
-     * Avisa por correo al voluntario cuando la directiva lo asigna a esta emergencia.
-     */
     public function notificarVoluntarioAsignado(): void
     {
-        $correo = $this->voluntario?->user?->email;
+        $usuario = $this->voluntario?->user;
 
-        if ($correo) {
-            Mail::to($correo)->send(new VoluntarioAsignadoMail($this));
+        if ($usuario) {
+            Mail::to($usuario->email)->send(new VoluntarioAsignadoMail($this));
+
+            FilamentNotification::make()
+                ->title('Fuiste asignado a una emergencia')
+                ->body(ucfirst($this->tipo) . ' — ' . $this->ubicacion)
+                ->icon('heroicon-o-hand-raised')
+                ->color('warning')
+                ->sendToDatabase($usuario);
         }
     }
 }

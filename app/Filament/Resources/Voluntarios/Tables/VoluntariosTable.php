@@ -25,17 +25,20 @@ class VoluntariosTable
                         ->label('')
                         ->circular()
                         ->size(56)
-                        ->getStateUsing(fn ($record) => Avatar::url($record->nombre, 'd97706')),
+                        ->getStateUsing(fn ($record) => $record->user?->avatarUrl() ?? Avatar::url($record->nombre, 'd97706'))
+                        ->grow(false),
 
                     Stack::make([
                         TextColumn::make('nombre')
                             ->weight('bold')
                             ->size('lg')
+                            ->wrap()
                             ->searchable(),
 
                         TextColumn::make('organizacion.nombre')
                             ->label('Organización')
                             ->color('gray')
+                            ->wrap()
                             ->searchable()
                             ->placeholder('Sin organización asociada'),
 

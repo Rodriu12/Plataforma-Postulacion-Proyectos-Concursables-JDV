@@ -6,8 +6,9 @@ use App\Filament\Imports\ResidenteImporter;
 use App\Filament\Resources\Users\UserResource;
 use App\Models\User;
 use Filament\Actions\CreateAction;
-use Filament\Actions\ImportAction;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
+use RomanSulzhyk\FilamentImport\Actions\ExcelImportAction;
 
 class ListUsers extends ListRecords
 {
@@ -16,17 +17,28 @@ class ListUsers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            ImportAction::make()
+            ExcelImportAction::make()
                 ->label('Importar planilla (Excel/CSV)')
                 ->importer(ResidenteImporter::class)
                 ->visible(fn () => in_array(auth()->user()?->role, User::ROLES_GESTION_USUARIOS))
-                // Excel en español usa ';' como separador de columnas en CSV,
-                // no ',' — con ',' todo se ve amontonado en una sola columna.
-                ->csvDelimiter(';')
-                ->options([
+                ->importerOptions([
                     'organizacion_id' => auth()->user()?->organizacion_id,
-                ]),
-            CreateAction::make(),
+                ])
+                ->afterImport(function ($data, $livewire, $action, $result) {
+                    $mensaje = "Se crearon o actualizaron {$result->created} + {$result->updated} fila(s).";
+
+                    if ($result->failed()) {
+                        $mensaje .= ' ' . count($result->failures) . ' fila(s) fallaron — revisa el archivo descargable.';
+                    }
+
+                    Notification::make()
+                        ->title('Importación completada')
+                        ->body($mensaje)
+                        ->success()
+                        ->send();
+                }),
+            CreateAction::make()
+                ->createAnother(false),
         ];
     }
 }

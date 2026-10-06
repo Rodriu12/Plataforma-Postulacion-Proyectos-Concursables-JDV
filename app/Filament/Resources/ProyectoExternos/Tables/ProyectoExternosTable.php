@@ -31,19 +31,21 @@ class ProyectoExternosTable
                             'por_abrir' => 'warning',
                             'cerrado' => 'danger',
                             default => 'gray',
-                        }),
+                        })
+                        ->grow(false),
 
                     Stack::make([
                         TextColumn::make('titulo')
                             ->label('Fondo Concursable')
                             ->weight('bold')
                             ->size('lg')
-                            ->searchable()
-                            ->limit(60),
+                            ->wrap()
+                            ->searchable(),
 
                         TextColumn::make('institucion')
                             ->label('Institución')
                             ->color('gray')
+                            ->wrap()
                             ->searchable(),
 
                         TextColumn::make('estado_vigencia')

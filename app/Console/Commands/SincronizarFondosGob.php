@@ -4,8 +4,10 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use App\Models\ProyectoExterno;
 use Illuminate\Support\Facades\Log;
+
 class SincronizarFondosGob extends Command
 {
     /**
@@ -21,6 +23,28 @@ class SincronizarFondosGob extends Command
      * @var string
      */
     protected $description = 'Extrae y actualiza los fondos concursables desde fondos.gob.cl';
+
+    private const PALABRAS_CLAVE_INSTITUCION = [
+        'GOBIERNO REGIONAL',
+        'MINISTERIO',
+        'CORFO',
+        'SERCOTEC',
+        'FOSIS',
+        'SUBSECRETARÍA',
+        'INDAP',
+        'SEREMI',
+        'INSTITUTO NACIONAL',
+    ];
+
+    private const PALABRAS_CLAVE_POR_ABRIR = ['POR ABRIR', 'PRÓXIMAMENTE', 'PROXIMAMENTE'];
+
+    private const LINEAS_A_IGNORAR_EN_TITULO = [
+        'ABIERTO', 'CERRADO', 'POR ABRIR', 'PRÓXIMAMENTE', 'NACIONAL', 'REGIONAL', 'INTERNACIONAL',
+    ];
+
+    private const LARGO_MIN_INSTITUCION = 3;
+    private const LARGO_MAX_INSTITUCION = 100;
+    private const LARGO_MIN_TITULO = 15;
 
     /**
      * Execute the console command.
@@ -60,51 +84,43 @@ class SincronizarFondosGob extends Command
                 $cardText = $elemento->textContent;
                 $lines = array_values(array_filter(array_map('trim', explode("\n", $cardText))));
 
-                $estadoVigencia = 'abierto';
                 $cardTextUpper = mb_strtoupper($cardText);
-                
-                if (str_contains($cardTextUpper, 'POR ABRIR') || str_contains($cardTextUpper, 'PRÓXIMAMENTE') || str_contains($cardTextUpper, 'PROXIMAMENTE')) {
-                    $estadoVigencia = 'por_abrir';
-                } elseif (str_contains($cardTextUpper, 'CERRADO')) {
-                    $estadoVigencia = 'cerrado';
-                }
+
+                $estadoVigencia = match (true) {
+                    Str::contains($cardTextUpper, self::PALABRAS_CLAVE_POR_ABRIR) => 'por_abrir',
+                    str_contains($cardTextUpper, 'CERRADO') => 'cerrado',
+                    default => 'abierto',
+                };
 
                 $institucion = 'Estado de Chile';
                 foreach ($lines as $line) {
-                    $lineUpper = mb_strtoupper($line);
+                    $largo = strlen($line);
+
                     if (
-                        str_contains($lineUpper, 'GOBIERNO REGIONAL') || 
-                        str_contains($lineUpper, 'MINISTERIO') || 
-                        str_contains($lineUpper, 'CORFO') || 
-                        str_contains($lineUpper, 'SERCOTEC') || 
-                        str_contains($lineUpper, 'FOSIS') || 
-                        str_contains($lineUpper, 'SUBSECRETARÍA') ||
-                        str_contains($lineUpper, 'INDAP') ||
-                        str_contains($lineUpper, 'SEREMI') ||
-                        str_contains($lineUpper, 'INSTITUTO NACIONAL')
+                        Str::contains(mb_strtoupper($line), self::PALABRAS_CLAVE_INSTITUCION)
+                        && $largo > self::LARGO_MIN_INSTITUCION
+                        && $largo < self::LARGO_MAX_INSTITUCION
                     ) {
-                        if (strlen($line) > 3 && strlen($line) < 100) {
-                            $institucion = $line;
-                            break;
-                        }
+                        $institucion = $line;
+                        break;
                     }
                 }
 
                 $titulo = '';
                 foreach ($lines as $line) {
                     $lineUpper = mb_strtoupper($line);
-                    
-                    if (
-                        in_array($lineUpper, ['ABIERTO', 'CERRADO', 'POR ABRIR', 'PRÓXIMAMENTE', 'NACIONAL', 'REGIONAL', 'INTERNACIONAL']) || 
-                        str_starts_with($lineUpper, 'FIN:') || 
-                        str_starts_with($lineUpper, 'INICIO:') ||
-                        str_contains($lineUpper, 'VER MÁS') ||
-                        $line === $institucion
-                    ) {
+
+                    $esLineaDeRelleno = in_array($lineUpper, self::LINEAS_A_IGNORAR_EN_TITULO)
+                        || str_starts_with($lineUpper, 'FIN:')
+                        || str_starts_with($lineUpper, 'INICIO:')
+                        || str_contains($lineUpper, 'VER MÁS')
+                        || $line === $institucion;
+
+                    if ($esLineaDeRelleno) {
                         continue;
                     }
 
-                    if (strlen($line) > 15 && $line !== $institucion) {
+                    if (strlen($line) > self::LARGO_MIN_TITULO) {
                         $titulo = $line;
                         break;
                     }

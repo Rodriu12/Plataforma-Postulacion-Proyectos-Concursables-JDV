@@ -25,17 +25,20 @@ class VecinosTable
                         ->label('')
                         ->circular()
                         ->size(56)
-                        ->getStateUsing(fn ($record) => Avatar::url($record->nombre, '16a34a')),
+                        ->getStateUsing(fn ($record) => $record->user?->avatarUrl() ?? Avatar::url($record->nombre, '16a34a'))
+                        ->grow(false),
 
                     Stack::make([
                         TextColumn::make('nombre')
                             ->weight('bold')
                             ->size('lg')
+                            ->wrap()
                             ->searchable(),
 
                         TextColumn::make('user.email')
                             ->label('Correo')
                             ->color('gray')
+                            ->wrap()
                             ->searchable()
                             ->placeholder('Sin cuenta vinculada'),
 
@@ -51,6 +54,7 @@ class VecinosTable
 
                         TextColumn::make('direccion')
                             ->color('gray')
+                            ->wrap()
                             ->visibleFrom('md'),
 
                         TextColumn::make('rut')

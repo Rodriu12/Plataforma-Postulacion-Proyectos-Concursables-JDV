@@ -25,17 +25,20 @@ class OrganizacionTable
                         ->label('')
                         ->circular()
                         ->size(56)
-                        ->getStateUsing(fn ($record) => Avatar::url($record->nombre, '1d4ed8')),
+                        ->getStateUsing(fn ($record) => Avatar::url($record->nombre, '1d4ed8'))
+                        ->grow(false),
 
                     Stack::make([
                         TextColumn::make('nombre')
                             ->label('Organización')
                             ->weight('bold')
                             ->size('lg')
+                            ->wrap()
                             ->searchable(),
 
                         TextColumn::make('sector')
                             ->color('gray')
+                            ->wrap()
                             ->searchable(),
 
                         TextColumn::make('rut_juridico')
