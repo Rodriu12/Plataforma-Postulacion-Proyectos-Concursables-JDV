@@ -10,11 +10,13 @@ use App\Filament\Resources\Organizaciones\Schemas\OrganizacionForm;
 use App\Filament\Resources\Organizaciones\Schemas\OrganizacionInfolist;
 use App\Filament\Resources\Organizaciones\Tables\OrganizacionTable;
 use App\Models\Organizacion;
+use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class OrganizacionResource extends Resource
 {
@@ -30,6 +32,20 @@ class OrganizacionResource extends Resource
 
     protected static ?string $slug = 'organizaciones';
     protected static ?string $recordTitleAttribute = 'model organizacion';
+
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        $usuario = auth()->user();
+
+        if ($usuario && ! $usuario->esAdminCentral()) {
+            $query->where('id', $usuario->organizacion_id);
+        }
+
+        return $query;
+    }
 
     public static function form(Schema $schema): Schema
     {

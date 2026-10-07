@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 
 Schedule::command('app:sincronizar-fondos-gob')->dailyAt('00:00');
-
+Schedule::command('app:enviar-novedades-proyectos')->dailyAt('10:00');
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');

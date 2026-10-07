@@ -12,6 +12,10 @@ class ListOrganizacion extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        if (! auth()->user()?->esAdminCentral()) {
+            return [];
+        }
+
         return [
             CreateAction::make(),
         ];

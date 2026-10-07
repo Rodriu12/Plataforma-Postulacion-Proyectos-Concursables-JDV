@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Models\User;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
@@ -10,10 +12,34 @@ use Filament\Schemas\Schema;
 
 class UserForm
 {
+    protected static function esAdminCentral(): bool
+    {
+        return auth()->user()?->esAdminCentral() ?? false;
+    }
+
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
+                FileUpload::make('avatar_path')
+                    ->label('Foto de perfil')
+                    ->avatar()
+                    ->disk('public')
+                    ->directory('avatares')
+                    ->image()
+                    ->columnSpanFull(),
+                Select::make('organizacion_id')
+                    ->label('Organización')
+                    ->relationship('organizacion', 'nombre')
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->default(fn () => auth()->user()?->organizacion_id)
+                    ->disabled(fn () => ! static::esAdminCentral())
+                    ->dehydrated()
+                    ->helperText(fn () => static::esAdminCentral()
+                        ? 'Elige a qué organización pertenecerá esta cuenta.'
+                        : 'Se asigna automáticamente a tu organización.'),
                 TextInput::make('name')
                     ->label('Nombre Completo')
                     ->required()
@@ -44,14 +70,14 @@ class UserForm
                     ->maxLength(20),
                 Select::make('role')
                     ->label('Seleccione su rol asignado dentro de su organización')
-                    ->options([
+                    ->options(fn () => array_merge([
                         'presidente' => 'Presidente/a',
                         'secretario' => 'Secretario/a',
                         'tesorero'   => 'Tesorero/a',
                         'director'   => 'Director/a',
                         'vecino'     => 'Vecino/a',
                         'voluntario' => 'Voluntario/a',
-                    ])
+                    ], static::esAdminCentral() ? ['admin_central' => 'Administrador/a Central'] : []))
                     ->required()
                     ->default('vecino'),
                 Toggle::make('is_active')

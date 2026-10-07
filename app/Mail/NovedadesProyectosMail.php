@@ -30,7 +30,7 @@ class NovedadesProyectosMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Novedades JuntApp: Nuevos Fondos y Proyectos Disponibles',
+            subject: 'Novedades Vecindar: Nuevos Fondos y Proyectos Disponibles',
         );
     }
 

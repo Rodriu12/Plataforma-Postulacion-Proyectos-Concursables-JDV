@@ -22,7 +22,10 @@ jobs:
           composer install
           npm install
           npm run build
-
+          php artisan migrate
+          php artisan optimize:clear
+          php artisan view:clear
+      
       - name: Reiniciar servidor
         run: |
           source ~/.bashrc

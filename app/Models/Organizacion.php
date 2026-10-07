@@ -26,4 +26,24 @@ class Organizacion extends Model
     {
         return $this->hasMany(Proyecto::class);
     }
+
+    public function emergencias(): HasMany
+    {
+        return $this->hasMany(Emergencia::class);
+    }
+
+    public function voluntarios(): HasMany
+    {
+        return $this->hasMany(Voluntario::class);
+    }
+
+    public function inventarioItems(): HasMany
+    {
+        return $this->hasMany(InventarioItem::class);
+    }
+
+    public function reuniones(): HasMany
+    {
+        return $this->hasMany(Reunion::class);
+    }
 }

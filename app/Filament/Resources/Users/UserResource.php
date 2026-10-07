@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserResource extends Resource
 {
@@ -31,6 +32,20 @@ class UserResource extends Resource
     protected static ?string $modelLabel = 'Usuario';
     
     protected static ?string $slug = 'usuarios';
+
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        $usuario = auth()->user();
+
+        if ($usuario && ! $usuario->esAdminCentral()) {
+            $query->where('organizacion_id', $usuario->organizacion_id);
+        }
+
+        return $query;
+    }
 
     public static function form(Schema $schema): Schema
     {

@@ -15,7 +15,6 @@
 </head>
 <body>
     <div class="header">
-        <!-- AQUÍ INYECTAMOS EL NOMBRE DEL SECTOR EN EL TÍTULO -->
         <h2>Junta de Vecinos {{ $vecino->sector }}</h2>
         <p>Comuna de Yumbel, Región del Biobío</p>
     </div>
@@ -39,7 +38,6 @@
     <div class="signature">
         <div class="signature-line">
             <strong>La Directiva</strong><br>
-            <!-- AQUÍ TAMBIÉN FIRMA LA JUNTA ESPECÍFICA -->
             Junta de Vecinos {{ $vecino->sector }}
         </div>
     </div>

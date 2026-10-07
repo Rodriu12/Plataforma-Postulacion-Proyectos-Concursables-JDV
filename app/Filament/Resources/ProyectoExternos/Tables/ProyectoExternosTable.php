@@ -6,54 +6,79 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Table;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+
 class ProyectoExternosTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->contentGrid(['md' => 2, 'xl' => 3])
             ->columns([
-                TextColumn::make('titulo')
-                    ->label('Fondo Concursable')
-                    ->searchable()
-                    ->sortable()
-                    ->limit(50),
+                Split::make([
+                    IconColumn::make('estado_vigencia')
+                        ->label('')
+                        ->icon('heroicon-o-banknotes')
+                        ->size('lg')
+                        ->color(fn (string $state): string => match ($state) {
+                            'abierto' => 'success',
+                            'por_abrir' => 'warning',
+                            'cerrado' => 'danger',
+                            default => 'gray',
+                        })
+                        ->grow(false),
 
-                TextColumn::make('institucion')
-                    ->label('Institución')
-                    ->searchable()
-                    ->badge(),
+                    Stack::make([
+                        TextColumn::make('titulo')
+                            ->label('Fondo Concursable')
+                            ->weight('bold')
+                            ->size('lg')
+                            ->wrap()
+                            ->searchable(),
 
-                TextColumn::make('estado_vigencia')
-                    ->label('Estado')
-                    ->badge()
-                    ->formatStateUsing(fn(string $state): string => match ($state) {
-                        'abierto' => 'Abierto',
-                        'por_abrir' => 'Por abrir',
-                        'cerrado' => 'Cerrado',
-                        default => ucfirst($state),
-                    })
-                    ->color(fn(string $state): string => match ($state) {
-                        'abierto' => 'success',
-                        'por_abrir' => 'warning',
-                        'cerrado' => 'danger',
-                        default => 'gray',
-                    }),
+                        TextColumn::make('institucion')
+                            ->label('Institución')
+                            ->color('gray')
+                            ->wrap()
+                            ->searchable(),
 
-                TextColumn::make('fecha_cierre')
-                    ->label('Cierre')
-                    ->date('d/m/Y')
-                    ->sortable(),
+                        TextColumn::make('estado_vigencia')
+                            ->label('Estado')
+                            ->badge()
+                            ->formatStateUsing(fn (string $state): string => match ($state) {
+                                'abierto' => 'Abierto',
+                                'por_abrir' => 'Por abrir',
+                                'cerrado' => 'Cerrado',
+                                default => ucfirst($state),
+                            })
+                            ->color(fn (string $state): string => match ($state) {
+                                'abierto' => 'success',
+                                'por_abrir' => 'warning',
+                                'cerrado' => 'danger',
+                                default => 'gray',
+                            }),
 
-                TextColumn::make('url_fuente')
-                    ->label('Enlace Oficial')
-                    ->url(fn($record) => $record->url_fuente)
-                    ->openUrlInNewTab()
-                    ->icon('heroicon-o-arrow-top-right-on-square')
-                    ->limit(30),
+                        TextColumn::make('fecha_cierre')
+                            ->label('Cierre')
+                            ->date('d/m/Y')
+                            ->color('gray')
+                            ->size('xs'),
+
+                        TextColumn::make('url_fuente')
+                            ->label('Enlace Oficial')
+                            ->url(fn ($record) => $record->url_fuente)
+                            ->openUrlInNewTab()
+                            ->icon('heroicon-o-arrow-top-right-on-square')
+                            ->limit(30)
+                            ->visibleFrom('md'),
+                    ])->space(1),
+                ]),
             ])
             ->filters([
                 SelectFilter::make('estado_vigencia')
@@ -66,23 +91,15 @@ class ProyectoExternosTable
                 SelectFilter::make('mes_proyecto')
                     ->label('Filtrar por Mes')
                     ->options([
-                        '01' => 'Enero',
-                        '02' => 'Febrero',
-                        '03' => 'Marzo',
-                        '04' => 'Abril',
-                        '05' => 'Mayo',
-                        '06' => 'Junio',
-                        '07' => 'Julio',
-                        '08' => 'Agosto',
-                        '09' => 'Septiembre',
-                        '10' => 'Octubre',
-                        '11' => 'Noviembre',
-                        '12' => 'Diciembre',
+                        '01' => 'Enero', '02' => 'Febrero', '03' => 'Marzo',
+                        '04' => 'Abril', '05' => 'Mayo', '06' => 'Junio',
+                        '07' => 'Julio', '08' => 'Agosto', '09' => 'Septiembre',
+                        '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre',
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query->when(
                             $data['value'],
-                            fn(Builder $query, $value): Builder => $query->whereMonth('fecha_cierre', $value)
+                            fn (Builder $query, $value): Builder => $query->whereMonth('fecha_cierre', $value)
                         );
                     })
                     ->indicator('Mes de cierre'),

@@ -2,12 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Nuevos Proyectos - JuntApp</title>
+    <title>Nuevos Proyectos - Vecindar</title>
 </head>
 <body style="font-family: Arial, sans-serif; background-color: #f8fbff; color: #333333; padding: 20px; margin: 0;">
     <div style="max-width: 600px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #e5e7eb;">
         
-        <h2 style="color: #1d4ed8; text-align: center; margin-top: 0;">JuntApp - Yumbel Comunitaria</h2>
+        <h2 style="color: #1d4ed8; text-align: center; margin-top: 0;">Vecindar - Yumbel Comunitaria</h2>
         <h3 style="color: #111827; border-bottom: 2px solid #eff6ff; padding-bottom: 10px;">Nuevos Fondos Disponibles</h3>
         
         <p style="color: #4b5563; font-size: 15px; line-height: 1.5;">Hola,</p>
@@ -37,7 +37,7 @@
         </div>
 
         <p style="text-align: center; font-size: 11px; color: #9ca3af; margin-top: 40px;">
-            © {{ date('Y') }} JuntApp. Este es un correo automático, por favor no respondas a este mensaje.
+            © {{ date('Y') }} Vecindar. Este es un correo automático, por favor no respondas a este mensaje.
         </p>
     </div>
 </body>
