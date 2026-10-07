@@ -63,7 +63,6 @@ class ResidenteImporter extends Importer
                 }),
         ];
     }
-
     public function resolveRecord(): ?User
     {
         return User::firstOrNew([
@@ -77,7 +76,6 @@ class ResidenteImporter extends Importer
         $this->record->is_active = true;
         $this->record->organizacion_id = $this->options['organizacion_id'] ?? null;
     }
-
     protected function afterSave(): void
     {
         $sector = trim((string) ($this->data['sector'] ?? '')) ?: 'Por definir';
