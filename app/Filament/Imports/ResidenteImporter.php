@@ -12,13 +12,6 @@ use Illuminate\Support\Str;
 class ResidenteImporter extends Importer
 {
     protected static ?string $model = User::class;
-
-    /**
-     * El presidente/secretario sube un Excel con sus vecinos y voluntarios;
-     * esta clase define cómo se lee cada fila y se crea/actualiza cada User.
-     * No se pide contraseña en la planilla: se genera una aleatoria que
-     * nadie conoce y se le envía un correo de "definir tu contraseña".
-     */
     public static function getColumns(): array
     {
         return [
@@ -53,7 +46,8 @@ class ResidenteImporter extends Importer
                 ->label('Sector o Villa')
                 ->exampleHeader('SECTOR O VILLA')
                 ->example('Cerro Parra')
-                ->rules(['nullable', 'max:255']),
+                ->rules(['nullable', 'max:255'])
+                ->fillRecordUsing(fn () => null),
 
             ImportColumn::make('role')
                 ->label('Rol')
