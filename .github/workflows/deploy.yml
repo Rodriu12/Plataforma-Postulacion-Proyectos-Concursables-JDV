@@ -25,6 +25,7 @@ jobs:
           php artisan migrate
           php artisan optimize:clear
           php artisan view:clear
+          php artisan config:clear
       
       - name: Reiniciar servidor
         run: |
