@@ -154,27 +154,11 @@ return [
     'ulid' => 'El campo :attribute debe ser un ULID válido.',
     'uuid' => 'El campo :attribute debe ser un UUID válido.',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Mensajes personalizados
-    |--------------------------------------------------------------------------
-    */
-
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Nombres amigables de los campos
-    |--------------------------------------------------------------------------
-    |
-    | Reemplazan el nombre técnico del campo en los mensajes
-    | (ej. "El campo correo electrónico es obligatorio.").
-    |
-    */
 
     'attributes' => [
         'name' => 'nombre',
