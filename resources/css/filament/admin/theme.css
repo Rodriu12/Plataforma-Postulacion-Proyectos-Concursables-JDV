@@ -1,6 +1,5 @@
 @import '/vendor/filament/filament/resources/css/theme.css';
 
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 body {
@@ -11,7 +10,6 @@ body {
 .fi-main {
     background-color: #f8fafc !important;
 }
-
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -34,7 +32,7 @@ aside.fi-sidebar, .fi-sidebar-header {
 
 aside.fi-sidebar .fi-sidebar-item-label, 
 aside.fi-sidebar .fi-sidebar-item-icon {
-    color: #475569 !important;
+    color: #475569 !important; 
     font-weight: 500 !important;
 }
 
@@ -59,45 +57,4 @@ aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
 .fi-topbar {
     background-color: #ffffff !important;
     border-bottom: 1px solid #f1f5f9 !important;
-}
-
-.fi-ta-content-grid {
-    gap: 1rem !important;
-}
-
-.fi-ta-content-grid .fi-ta-record {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 1rem;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.04);
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-}
-
-.fi-ta-content-grid .fi-ta-record:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px -8px rgb(37 99 235 / 0.18);
-    border-color: #bfdbfe;
-}
-
-.fi-ta-content-grid .fi-ta-record-content-ctn,
-.fi-ta-content-grid .fi-ta-record-content {
-    padding: 1rem !important;
-}
-
-.fi-ta-content-grid .fi-ta-split {
-    align-items: flex-start !important;
-    gap: 0.875rem !important;
-}
-
-.fi-ta-content-grid .fi-ta-image-column img {
-    box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px #dbeafe;
-}
-
-.fi-ta-content-grid .fi-ta-split > *:last-child {
-    min-width: 0;
-    flex: 1 1 auto;
-}
-
-.fi-ta-content-grid .fi-ta-text-item {
-    white-space: normal !important;
 }

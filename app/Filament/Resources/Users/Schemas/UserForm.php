@@ -24,7 +24,8 @@ class UserForm
                 FileUpload::make('avatar_path')
                     ->label('Foto de perfil')
                     ->avatar()
-                    ->disk('public')
+                    ->disk('uploads')
+                    ->visibility('public')
                     ->directory('avatares')
                     ->image()
                     ->columnSpanFull(),

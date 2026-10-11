@@ -6,9 +6,6 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\Layout\Split;
-use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -19,66 +16,45 @@ class ProyectoExternosTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->contentGrid(['md' => 2, 'xl' => 3])
             ->columns([
-                Split::make([
-                    IconColumn::make('estado_vigencia')
-                        ->label('')
-                        ->icon('heroicon-o-banknotes')
-                        ->size('lg')
-                        ->color(fn (string $state): string => match ($state) {
-                            'abierto' => 'success',
-                            'por_abrir' => 'warning',
-                            'cerrado' => 'danger',
-                            default => 'gray',
-                        })
-                        ->grow(false),
+                TextColumn::make('titulo')
+                    ->label('Fondo Concursable')
+                    ->weight('bold')
+                    ->searchable()
+                    ->limit(60),
 
-                    Stack::make([
-                        TextColumn::make('titulo')
-                            ->label('Fondo Concursable')
-                            ->weight('bold')
-                            ->size('lg')
-                            ->wrap()
-                            ->searchable(),
+                TextColumn::make('institucion')
+                    ->label('Institución')
+                    ->searchable(),
 
-                        TextColumn::make('institucion')
-                            ->label('Institución')
-                            ->color('gray')
-                            ->wrap()
-                            ->searchable(),
+                TextColumn::make('estado_vigencia')
+                    ->label('Estado')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'abierto' => 'Abierto',
+                        'por_abrir' => 'Por abrir',
+                        'cerrado' => 'Cerrado',
+                        default => ucfirst($state),
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'abierto' => 'success',
+                        'por_abrir' => 'warning',
+                        'cerrado' => 'danger',
+                        default => 'gray',
+                    }),
 
-                        TextColumn::make('estado_vigencia')
-                            ->label('Estado')
-                            ->badge()
-                            ->formatStateUsing(fn (string $state): string => match ($state) {
-                                'abierto' => 'Abierto',
-                                'por_abrir' => 'Por abrir',
-                                'cerrado' => 'Cerrado',
-                                default => ucfirst($state),
-                            })
-                            ->color(fn (string $state): string => match ($state) {
-                                'abierto' => 'success',
-                                'por_abrir' => 'warning',
-                                'cerrado' => 'danger',
-                                default => 'gray',
-                            }),
+                TextColumn::make('fecha_cierre')
+                    ->label('Cierre')
+                    ->date('d/m/Y')
+                    ->sortable(),
 
-                        TextColumn::make('fecha_cierre')
-                            ->label('Cierre')
-                            ->date('d/m/Y')
-                            ->color('gray')
-                            ->size('xs'),
-
-                        TextColumn::make('url_fuente')
-                            ->label('Enlace Oficial')
-                            ->url(fn ($record) => $record->url_fuente)
-                            ->openUrlInNewTab()
-                            ->icon('heroicon-o-arrow-top-right-on-square')
-                            ->limit(30)
-                            ->visibleFrom('md'),
-                    ])->space(1),
-                ]),
+                TextColumn::make('url_fuente')
+                    ->label('Enlace Oficial')
+                    ->url(fn ($record) => $record->url_fuente)
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-arrow-top-right-on-square')
+                    ->limit(30)
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('estado_vigencia')

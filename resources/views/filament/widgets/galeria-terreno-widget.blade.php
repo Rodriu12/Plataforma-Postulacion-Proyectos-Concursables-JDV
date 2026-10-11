@@ -21,7 +21,7 @@
                     style="border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
 
                     <div style="width: 100%; height: 180px; background-color: #f3f4f6; overflow: hidden;">
-                        <img src="{{ asset('storage/' . $proyecto->imagen_terreno) }}" alt="{{ $proyecto->nombre }}"
+                        <img src="{{ \Illuminate\Support\Facades\Storage::disk('uploads')->url($proyecto->imagen_terreno) }}" alt="{{ $proyecto->titulo }}"
                             style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;"
                             onmouseover="this.style.transform='scale(1.05)'"
                             onmouseout="this.style.transform='scale(1)'">
@@ -36,7 +36,7 @@
                             </span>
                             <h3
                                 style="font-weight: bold; font-size: 16px; color: #111827; margin-bottom: 6px; line-height: 1.3;">
-                                {{ $proyecto->nombre }}
+                                {{ $proyecto->titulo }}
                             </h3>
                             <p
                                 style="font-size: 13px; color: #4b5563; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">

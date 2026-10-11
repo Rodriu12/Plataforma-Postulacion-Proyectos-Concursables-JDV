@@ -46,6 +46,8 @@ class ProyectoForm
                 FileUpload::make('imagen_terreno')
                     ->label('Fotografía del Proyecto en Terreno (Logro Cumplido)')
                     ->image()
+                    ->disk('uploads')
+                    ->visibility('public')
                     ->directory('proyectos-terreno')
                     ->columnSpanFull(),
 
