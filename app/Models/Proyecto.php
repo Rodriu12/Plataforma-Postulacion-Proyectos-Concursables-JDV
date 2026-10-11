@@ -16,6 +16,7 @@ class Proyecto extends Model
         'organizacion_id',
         'titulo',
         'descripcion',
+        'imagen_terreno',
         'fuente_financiamiento',
         'monto_solicitado',
         'monto_adjudicado',
