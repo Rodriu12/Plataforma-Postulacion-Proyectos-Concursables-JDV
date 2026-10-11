@@ -16,12 +16,6 @@ class RestablecerContrasenaMail extends Mailable
     public User $usuario;
 
     public string $url;
-
-    /**
-     * Se usa tanto para "olvidé mi contraseña" como para el primer ingreso
-     * de alguien creado vía la importación de Excel (en ambos casos Laravel
-     * llama a User::sendPasswordResetNotification(), que redirige aquí).
-     */
     public function __construct(User $usuario, string $url)
     {
         $this->usuario = $usuario;
