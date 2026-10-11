@@ -5,6 +5,7 @@ namespace App\Filament\Widgets;
 use App\Models\User;
 use Filament\Widgets\Widget;
 use App\Models\Proyecto;
+use Illuminate\Support\Facades\Storage;
 class GaleriaTerrenoWidget extends Widget
 {
     protected string $view = 'filament.widgets.galeria-terreno-widget';
@@ -30,8 +31,11 @@ class GaleriaTerrenoWidget extends Widget
                     fn ($query) => $query->where('organizacion_id', $usuario?->organizacion_id)
                 )
                 ->latest()
+                ->take(30)
+                ->get()
+                ->filter(fn (Proyecto $proyecto) => Storage::disk('uploads')->exists($proyecto->imagen_terreno))
                 ->take(6)
-                ->get(),
+                ->values(),
         ];
     }
 }
