@@ -24,11 +24,12 @@ class User extends Authenticatable implements HasAvatar
 
     public function avatarUrl(): string
     {
-        return $this->avatar_path
-            ? Storage::disk('public')->url($this->avatar_path)
-            : Avatar::url($this->name);
-    }
+        if ($this->avatar_path && Storage::disk('uploads')->exists($this->avatar_path)) {
+            return Storage::disk('uploads')->url($this->avatar_path);
+        }
 
+        return Avatar::url($this->name);
+    }
     public const ROLE_ADMIN_CENTRAL = 'admin_central';
 
     public const ROLES_DIRECTIVA = ['presidente', 'secretario', 'tesorero', 'director', self::ROLE_ADMIN_CENTRAL];
