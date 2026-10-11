@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateVecino extends CreateRecord
 {
     protected static string $resource = VecinoResource::class;
+
+    protected static bool $canCreateAnother = false;
 }

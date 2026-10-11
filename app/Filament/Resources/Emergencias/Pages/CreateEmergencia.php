@@ -8,4 +8,5 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateEmergencia extends CreateRecord
 {
     protected static string $resource = EmergenciaResource::class;
+    protected static bool $canCreateAnother = false;
 }

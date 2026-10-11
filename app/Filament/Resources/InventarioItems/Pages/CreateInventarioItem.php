@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateInventarioItem extends CreateRecord
 {
     protected static string $resource = InventarioItemResource::class;
+
+    protected static bool $canCreateAnother = false;
 }

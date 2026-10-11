@@ -8,4 +8,5 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateVoluntario extends CreateRecord
 {
     protected static string $resource = VoluntarioResource::class;
+    protected static bool $canCreateAnother = false;
 }

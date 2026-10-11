@@ -5,8 +5,6 @@ namespace App\Filament\Resources\Organizaciones\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
 class OrganizacionForm
 {
     public static function configure(Schema $schema): Schema
@@ -39,19 +37,6 @@ class OrganizacionForm
                     ->placeholder('Ej: Sector Cerro Parra')
                     ->maxLength(100),
 
-                TextInput::make('nombre')
-                    ->required()
-                    ->label('Nombre del Proyecto'),
-
-                Textarea::make('descripcion')
-                    ->label('Descripción'),
-
-                FileUpload::make('imagen_terreno')
-                ->label('Fotografía en Terreno / Proyecto Aprobado')
-                ->image()
-                ->directory('proyectos-terreno')
-                ->columnSpanFull(),
-                
                 DatePicker::make('fecha_constitucion')
                     ->label('Fecha de Constitución'),
             ]);
