@@ -1,5 +1,4 @@
 @import '/vendor/filament/filament/resources/css/theme.css';
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 body {
@@ -10,6 +9,7 @@ body {
 .fi-main {
     background-color: #f8fafc !important;
 }
+
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -32,13 +32,14 @@ aside.fi-sidebar, .fi-sidebar-header {
 
 aside.fi-sidebar .fi-sidebar-item-label, 
 aside.fi-sidebar .fi-sidebar-item-icon {
-    color: #475569 !important; 
+    color: #475569 !important;
     font-weight: 500 !important;
 }
 
 aside.fi-sidebar .fi-sidebar-item-button:hover {
     background-color: #f8fafc !important;
 }
+
 aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-icon {
     color: #0f172a !important;
@@ -48,10 +49,18 @@ aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button {
     background-color: #eff6ff !important;
     border-radius: 0.5rem !important;
 }
+
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
     color: #1d4ed8 !important;
     font-weight: 600 !important;
+}
+
+@media (max-width: 1023px) {
+    aside.fi-sidebar {
+        width: min(var(--sidebar-width, 20rem), 85vw) !important;
+        max-width: 85vw !important;
+    }
 }
 
 .fi-topbar {
