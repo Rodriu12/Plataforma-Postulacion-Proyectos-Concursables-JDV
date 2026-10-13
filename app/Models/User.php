@@ -3,16 +3,21 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Mail\RestablecerContrasenaMail;
 use App\Support\Avatar;
 use Database\Factories\UserFactory;
+use Filament\Facades\Filament;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use Filament\Models\Contracts\HasAvatar;
-use Filament\Panel;
-class User extends Authenticatable implements HasAvatar
+
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -30,6 +35,7 @@ class User extends Authenticatable implements HasAvatar
 
         return Avatar::url($this->name);
     }
+
     public const ROLE_ADMIN_CENTRAL = 'admin_central';
 
     public const ROLES_DIRECTIVA = ['presidente', 'secretario', 'tesorero', 'director', self::ROLE_ADMIN_CENTRAL];
@@ -77,10 +83,10 @@ class User extends Authenticatable implements HasAvatar
 
     public function sendPasswordResetNotification($token): void
     {
-        $url = \Filament\Facades\Filament::getResetPasswordUrl($token, $this);
+        $url = Filament::getResetPasswordUrl($token, $this);
 
-        \Illuminate\Support\Facades\Mail::to($this->email)
-            ->send(new \App\Mail\RestablecerContrasenaMail($this, $url));
+        Mail::to($this->email)
+            ->send(new RestablecerContrasenaMail($this, $url));
     }
 
     public function vecino()
@@ -145,6 +151,7 @@ class User extends Authenticatable implements HasAvatar
             }
         });
     }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
