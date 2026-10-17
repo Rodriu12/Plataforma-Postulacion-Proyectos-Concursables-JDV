@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 Route::redirect('/register', '/admin/login');
 Route::get('/vecinos/{id}/certificado', function ($id) {
-    $vecino = Vecino::findOrFail($id);
+    $vecino = Vecino::with('user.organizacion')->findOrFail($id);
     $usuario = Auth::user();
 
     $esDueno = $vecino->user_id === $usuario->id;
@@ -28,7 +28,18 @@ Route::get('/vecinos/{id}/certificado', function ($id) {
         abort(403, 'El certificado de este vecino aún no está aprobado.');
     }
 
-    $pdf = Pdf::loadView('pdf.certificado-residencia', ['vecino' => $vecino]);
+    $organizacion = $vecino->user?->organizacion;
+    $nombreOrganizacion = $organizacion?->nombre
+        ?: 'Junta de Vecinos ' . ($vecino->sector ?: 'Comunidad');
+    $sectorOrganizacion = $organizacion?->sector;
+
+    $pdf = Pdf::loadView('pdf.certificado-residencia', [
+        'vecino' => $vecino,
+        'organizacion' => $organizacion,
+        'nombreOrganizacion' => $nombreOrganizacion,
+        'sectorOrganizacion' => $sectorOrganizacion,
+        'comuna' => 'Yumbel',
+    ])->setPaper('a4', 'portrait');
 
     return $pdf->download('Certificado-Residencia-' . $vecino->rut . '.pdf');
 })->middleware('auth')->name('vecino.certificado');
