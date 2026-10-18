@@ -156,6 +156,38 @@ El proyecto está construido utilizando el **TALL Stack** y herramientas moderna
 * **Enfoque en Accesibilidad:** Diseño pensado para ser intuitivo y accesible para líderes comunitarios de distintas edades.
 * **Arquitectura Escalable:** Estructura modular basada en buenas prácticas de ingeniería de software.
 
+## Pruebas automatizadas
+
+Las pruebas siguen las categorías del taller: Pest para pruebas unitarias aisladas y de integración, y Symfony Panther para los flujos E2E en un navegador Chrome real. Las pruebas de integración usan SQLite en memoria; E2E prepara una base SQLite temporal y levanta su propio servidor local.
+
+Después de instalar las dependencias con Composer, descarga el ChromeDriver compatible con el Chrome instalado:
+
+```powershell
+php vendor/bin/bdi detect drivers
+```
+
+Ejecuta cada suite desde la raíz del proyecto:
+
+```powershell
+php artisan test --testsuite=Unit
+php artisan test --testsuite=Feature
+php artisan test --testsuite=E2E
+```
+
+Para correr todas las suites:
+
+```powershell
+php artisan test
+```
+
+Las pruebas E2E guardan capturas de los formularios y resultados en `storage/app/e2e-screenshots/`. Requieren Google Chrome instalado; no es necesario iniciar Apache, MySQL ni `php artisan serve`.
+
+**Cobertura actual:**
+
+- **Unitarias (4):** normalización de rol; identificación del administrador central; normalización del estado de proyecto; autorización de actualización según organización.
+- **Integración (4 endpoints):** inicio `GET /`; redirección `GET /register`; cierre de sesión `GET /salir`; descarga de certificado `GET /vecinos/{id}/certificado`, incluidos rechazos por titularidad y estado pendiente.
+- **E2E (2 flujos):** inicio de sesión y creación de proyecto; inicio de sesión y reporte de emergencia. Ambos se ejecutan en Chrome real mediante Panther y verifican los datos persistidos.
+
 ---
 
 ##  Requisitos del Sistema
