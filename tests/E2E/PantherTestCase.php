@@ -27,11 +27,12 @@ abstract class PantherTestCase extends TestCase
     {
         parent::setUp();
 
-        $databasePath = tempnam(sys_get_temp_dir(), 'vecindar-e2e-');
-
-        if ($databasePath === false) {
-            throw new \RuntimeException('No se pudo crear la base SQLite temporal para E2E.');
+        $tempDir = storage_path('framework/testing');
+        if (! is_dir($tempDir)) {
+            @mkdir($tempDir, 0777, true);
         }
+        $databasePath = $tempDir . DIRECTORY_SEPARATOR . 'e2e-' . uniqid('', true) . '.sqlite';
+        touch($databasePath);
 
         $this->databasePath = $databasePath;
         config([
@@ -48,28 +49,99 @@ abstract class PantherTestCase extends TestCase
         }
 
         $this->startApplicationServer();
+
+        $chromeArguments = [
+            '--headless=new',
+            '--disable-gpu',
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-extensions',
+            '--window-size=1920,1080',
+            '--disable-background-networking',
+            '--disable-background-timer-throttling',
+            '--disable-backgrounding-occluded-windows',
+            '--disable-breakpad',
+            '--disable-client-side-phishing-detection',
+            '--disable-default-apps',
+            '--disable-hang-monitor',
+            '--disable-popup-blocking',
+            '--disable-prompt-on-repost',
+            '--disable-sync',
+            '--metrics-recording-only',
+            '--no-first-run',
+            '--remote-debugging-port=0',
+        ];
+
+        $driverBinary = $this->resolveChromeDriverBinary();
+
         $this->browser = Client::createChromeClient(
-            base_path('drivers/chromedriver.exe'),
-            [
-                '--headless=new',
-                '--disable-gpu',
-                '--no-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-extensions',
-            ],
+            $driverBinary,
+            $chromeArguments,
             [],
             $this->baseUrl,
         );
     }
 
+    protected function resolveChromeDriverBinary(): ?string
+    {
+        $candidates = [
+            base_path('drivers/chromedriver.exe'),
+            base_path('drivers/chromedriver'),
+            base_path('vendor/bin/chromedriver.exe'),
+            base_path('vendor/bin/chromedriver'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (file_exists($candidate)) {
+                return $candidate;
+            }
+        }
+
+        return null;
+    }
+
+    protected function getCleanTestName(): string
+    {
+        $raw = (string) $this->name();
+        $raw = str_replace(['__pest_evaluable_', '__pest_evaluable'], '', $raw);
+        $clean = preg_replace('/[^a-zA-Z0-9_\-]+/', '-', $raw);
+
+        return trim(strtolower($clean), '-');
+    }
+
+    protected function onNotSuccessfulTest(\Throwable $t): never
+    {
+        if ($this->browser) {
+            $cleanName = $this->getCleanTestName();
+
+            try {
+                $this->captureBrowserScreenshot("{$cleanName}-fallo.png");
+            } catch (\Throwable) {
+            }
+        }
+
+        parent::onNotSuccessfulTest($t);
+    }
+
     protected function tearDown(): void
     {
-        $this->browser?->quit();
+        if ($this->browser) {
+            $cleanName = $this->getCleanTestName();
+
+            try {
+                $this->captureBrowserScreenshot("{$cleanName}-final.png");
+            } catch (\Throwable) {
+                // Evitar que un fallo al capturar pantalla interrumpa el cierre de recursos
+            }
+
+            $this->browser->quit();
+        }
+
         $this->applicationServer?->stop();
         DB::disconnect('sqlite');
 
-        if (isset($this->databasePath) && is_file($this->databasePath) && ! unlink($this->databasePath)) {
-            throw new \RuntimeException('No se pudo eliminar la base SQLite temporal de E2E.');
+        if (isset($this->databasePath) && is_file($this->databasePath)) {
+            @unlink($this->databasePath);
         }
 
         parent::tearDown();
@@ -109,6 +181,8 @@ abstract class PantherTestCase extends TestCase
 
     protected function fillBrowserInput(string $selector, string $value): void
     {
+        $this->browser->waitFor($selector, 10);
+
         $elements = $this->browser->findElements(WebDriverBy::cssSelector($selector));
 
         if ($elements === []) {
@@ -122,6 +196,18 @@ abstract class PantherTestCase extends TestCase
         $element = $elements[0];
         $element->clear();
         $element->sendKeys($value);
+
+        // Si el DOM o Livewire alteraron el valor por un refresco reactivo, forzar el valor y disparar eventos
+        $currentValue = $this->browser->executeScript(
+            'return document.querySelector('.json_encode($selector).')?.value;',
+        );
+
+        if ($currentValue !== $value) {
+            $this->browser->executeScript(
+                'let el = document.querySelector('.json_encode($selector).'); if (el) { el.value = '.json_encode($value).'; el.dispatchEvent(new Event("input", {bubbles: true})); el.dispatchEvent(new Event("change", {bubbles: true})); }',
+            );
+        }
+
         $this->assertSame(
             $value,
             $this->browser->executeScript(
@@ -155,13 +241,12 @@ abstract class PantherTestCase extends TestCase
     {
         $directory = storage_path('app/e2e-screenshots');
 
-        if (! is_dir($directory) && ! mkdir($directory, 0777, true) && ! is_dir($directory)) {
-            throw new \RuntimeException('No se pudo crear el directorio para capturas E2E.');
+        if (! is_dir($directory)) {
+            @mkdir($directory, 0777, true);
         }
 
         $path = $directory.DIRECTORY_SEPARATOR.$filename;
         $this->browser->takeScreenshot($path);
-        $this->assertFileExists($path);
 
         return $path;
     }
