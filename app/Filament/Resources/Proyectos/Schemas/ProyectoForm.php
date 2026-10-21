@@ -49,6 +49,10 @@ class ProyectoForm
                     ->disk('uploads')
                     ->visibility('public')
                     ->directory('proyectos-terreno')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->rules(['file', 'mimes:jpeg,png,jpg,webp', 'max:5120'])
+                    ->maxSize(5120)
+                    ->helperText('Solo imágenes JPG, PNG o WEBP (máx. 5 MB). No se permiten GIFs ni archivos de audio.')
                     ->columnSpanFull(),
 
                 TextInput::make('fuente_financiamiento')
