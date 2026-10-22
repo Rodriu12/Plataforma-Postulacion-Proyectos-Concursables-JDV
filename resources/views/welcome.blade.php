@@ -139,11 +139,10 @@
     class="font-sans antialiased text-slate-800 bg-[#f8fbff] min-h-screen relative overflow-x-hidden flex flex-col justify-between selection:bg-blue-600 selection:text-white"
     x-data="{
         agrandar: localStorage.getItem('agrandarTexto') === 'true',
-        aplicar() { document.documentElement.style.fontSize = this.agrandar ? '145%' : '100%'; },
+        aplicar() { document.documentElement.style.fontSize = this.agrandar ? '130%' : ''; },
         toggle() { this.agrandar = !this.agrandar;
             localStorage.setItem('agrandarTexto', this.agrandar);
-            this.aplicar(); }
-    }" x-init="aplicar()" :class="agrandar ? 'contrast-125' : ''">
+            this.aplicar(); }}" x-init="aplicar()" :class="agrandar ? 'contrast-125' : ''">
 
     <div aria-hidden="true" class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div class="absolute inset-0 w-full h-full pointer-events-none opacity-80" style="display:block;">
