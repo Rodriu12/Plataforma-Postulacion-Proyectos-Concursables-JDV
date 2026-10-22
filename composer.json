@@ -14,13 +14,17 @@
         "romansulzhyk/filament-import": "^1.1"
     },
     "require-dev": {
+        "dbrekelmans/bdi": "1.4.*",
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.24",
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^11.5.50"
+        "pestphp/pest": "3.8.*",
+        "pestphp/pest-plugin-laravel": "3.2.*",
+        "phpunit/phpunit": "^11.5.50",
+        "symfony/panther": "2.4.*"
     },
     "autoload": {
         "psr-4": {
@@ -50,6 +54,14 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "test:unit": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test --testsuite=Unit,Feature"
+        ],
+        "test:e2e": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test --testsuite=E2E"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

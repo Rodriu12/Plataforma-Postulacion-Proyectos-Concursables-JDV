@@ -51,8 +51,12 @@ class VecinoForm
                     
                 FileUpload::make('comprobante_domicilio')
                     ->label('Comprobante de Domicilio (Boleta Luz/Agua)')
+                    ->disk('uploads')
                     ->directory('comprobantes-domicilio')
-                    ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png'])
+                    ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png', 'image/webp'])
+                    ->rules(['file', 'mimes:pdf,jpeg,png,jpg,webp', 'max:5120'])
+                    ->maxSize(5120)
+                    ->helperText('Solo documentos PDF o imágenes JPG, PNG o WEBP (máx. 5 MB). No se permiten GIFs, audio ni otros formatos no autorizados.')
                     ->openable() 
                     ->downloadable()
                     ->columnSpanFull(),

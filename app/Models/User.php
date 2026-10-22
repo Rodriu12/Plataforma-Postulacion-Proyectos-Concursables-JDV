@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
@@ -48,6 +49,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
      * @var list<string>
      */
     protected $fillable = [
+        'organizacion_id',
         'name',
         'email',
         'password',
@@ -78,6 +80,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
         ];
     }
 
@@ -150,10 +153,42 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
                 );
             }
         });
+
+        static::updating(function ($user) {
+            if ($user->isDirty('organizacion_id') && filled($user->organizacion_id)) {
+                $estabaSinOrganizacion = empty($user->getOriginal('organizacion_id'));
+                if ($estabaSinOrganizacion) {
+                    $user->is_active = true;
+                }
+            }
+        });
+
+        static::updated(function ($user) {
+            if ($user->wasChanged('organizacion_id') && filled($user->organizacion_id)) {
+                $estabaSinOrganizacion = empty($user->getOriginal('organizacion_id'));
+                if ($estabaSinOrganizacion) {
+                    Password::sendResetLink(['email' => $user->email]);
+                }
+
+                if ($user->voluntario && empty($user->voluntario->organizacion_id)) {
+                    $user->voluntario->update([
+                        'organizacion_id' => $user->organizacion_id,
+                    ]);
+                }
+            }
+        });
     }
 
     public function canAccessPanel(Panel $panel): bool
     {
+        if (! $this->is_active) {
+            return false;
+        }
+
+        if (! $this->esAdminCentral() && empty($this->organizacion_id)) {
+            return false;
+        }
+
         return true;
     }
 }

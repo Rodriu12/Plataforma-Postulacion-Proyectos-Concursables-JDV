@@ -27,6 +27,10 @@ class UserForm
                     ->disk('uploads')
                     ->visibility('public')
                     ->directory('avatares')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->rules(['file', 'mimes:jpeg,png,jpg,webp', 'max:2048'])
+                    ->maxSize(2048)
+                    ->helperText('Solo formatos JPG, PNG o WEBP (máx. 2 MB). No se permiten GIFs ni audio.')
                     ->image()
                     ->columnSpanFull(),
                 Select::make('organizacion_id')

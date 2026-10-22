@@ -82,7 +82,12 @@ class EmergenciaForm
                 FileUpload::make('evidencia')
                     ->label('Foto o evidencia (opcional)')
                     ->image()
+                    ->disk('uploads')
                     ->directory('emergencias')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->rules(['file', 'mimes:jpeg,png,jpg,webp', 'max:5120'])
+                    ->maxSize(5120)
+                    ->helperText('Solo imágenes JPG, PNG o WEBP (máx. 5 MB). No se permiten GIFs ni archivos de audio.')
                     ->openable()
                     ->columnSpanFull(),
 
