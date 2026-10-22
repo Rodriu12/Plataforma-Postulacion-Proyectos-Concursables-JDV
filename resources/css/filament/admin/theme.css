@@ -57,25 +57,14 @@ aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
 }
 
 @media (max-width: 1023px) {
-    /*
-     * En móvil se fija el ancho del sidebar en píxeles para que NO crezca
-     * cuando la accesibilidad de lectura aumenta el font-size del <html>.
-     * 320px equivale a ~80vw en un teléfono de 400px — suficiente para los
-     * ítems de navegación y seguro para no tapar el contenido principal.
-     */
     aside.fi-sidebar,
     #fi-main-sidebar {
         width: 280px !important;
         max-width: 80vw !important;
         min-width: 0 !important;
-        /* Garantizamos que el sidebar no desborde si la pantalla es muy pequeña */
         overflow-x: hidden !important;
     }
 
-    /*
-     * El overlay que oscurece el fondo cuando el sidebar está abierto
-     * debe cubrir exactamente la pantalla — sin verse afectado por el zoom.
-     */
     .fi-sidebar-close-overlay {
         position: fixed !important;
         inset: 0 !important;

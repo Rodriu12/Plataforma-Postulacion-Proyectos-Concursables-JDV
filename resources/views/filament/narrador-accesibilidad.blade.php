@@ -1,10 +1,8 @@
-{{-- Menú desplegable de Accesibilidad (panel Filament) --}}
 <div
     x-data="accesibilidadPanel()"
     data-accesibilidad-omitir
     style="display:flex; justify-content:flex-end; padding:10px 20px 0; position:relative; z-index:50;"
 >
-    {{-- Botón principal desplegable --}}
     <button
         @click="abierto = !abierto"
         @keydown.escape.window="abierto = false"
@@ -14,13 +12,11 @@
         style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:9999px; border:1px solid #bfdbfe; font-size:14px; font-weight:600; cursor:pointer; background:#eff6ff; color:#1d4ed8; transition:background 0.15s, box-shadow 0.15s;"
         :style="abierto ? 'background:#dbeafe; box-shadow:0 2px 8px rgba(37,99,235,0.15);' : ''"
     >
-        {{-- Icono accesibilidad --}}
         <svg style="width:18px;height:18px;flex-shrink:0;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="4" r="1.5" fill="currentColor" stroke="none"/>
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 7c-2.8 0-5 .5-5 .5L8 10l1 5-2 6h2l1.5-4L12 19l1.5-2L15 21h2l-2-6 1-5 1-2.5S14.8 7 12 7z"/>
         </svg>
         <span>Accesibilidad</span>
-        {{-- Chevron --}}
         <svg
             style="width:14px;height:14px;flex-shrink:0;transition:transform 0.2s;"
             :style="abierto ? 'transform:rotate(180deg);' : ''"
@@ -30,7 +26,6 @@
         </svg>
     </button>
 
-    {{-- Panel desplegable --}}
     <div
         x-show="abierto"
         x-transition:enter="transition ease-out duration-150"
@@ -45,7 +40,6 @@
     >
         <p style="font-size:11px; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.06em; padding:4px 10px 6px;">Herramientas</p>
 
-        {{-- Botón 1: Accesibilidad de lectura --}}
         <button
             @click="toggleLectura(); abierto = false"
             type="button"
@@ -68,7 +62,6 @@
 
         <div style="height:1px; background:#f1f5f9; margin:4px 0;"></div>
 
-        {{-- Botón 2: Narrador de voz --}}
         <button
             @click="toggleNarrador(); abierto = false"
             type="button"
@@ -97,13 +90,9 @@
 <script>
 document.addEventListener('alpine:init', () => {
     Alpine.data('accesibilidadPanel', () => ({
-        // Estado del dropdown
         abierto: false,
-
-        // Estado: accesibilidad de lectura
         agrandar: localStorage.getItem('agrandarTexto') === 'true',
 
-        // Estado: narrador
         leyendo: false,
         sintesis: window.speechSynthesis,
         fragmentos: [],
@@ -111,11 +100,9 @@ document.addEventListener('alpine:init', () => {
 
         init() {
             this.aplicarLectura();
-            // Sincronizar estado si la pestaña estaba con narrador activo
             if (this.sintesis && this.sintesis.speaking) this.leyendo = true;
         },
 
-        // ─── Accesibilidad de lectura ──────────────────────────────
         toggleLectura() {
             this.agrandar = !this.agrandar;
             localStorage.setItem('agrandarTexto', this.agrandar);
@@ -126,7 +113,6 @@ document.addEventListener('alpine:init', () => {
             document.documentElement.style.fontSize = this.agrandar ? '130%' : '';
         },
 
-        // ─── Narrador de voz ───────────────────────────────────────
         toggleNarrador() {
             if (this.leyendo) return this.detener();
             this.sintesis.cancel();
