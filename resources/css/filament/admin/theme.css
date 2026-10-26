@@ -75,3 +75,15 @@ aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
     background-color: #ffffff !important;
     border-bottom: 1px solid #f1f5f9 !important;
 }
+
+.fi-topbar .fi-topbar-database-notifications-btn,
+.fi-topbar .fi-topbar-database-notifications-btn:hover {
+    color: #64748b !important;
+}
+
+.fi-topbar .fi-topbar-database-notifications-btn .fi-icon-btn-badge-ctn .fi-badge {
+    min-width: 1.25rem;
+    justify-content: center;
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+}
