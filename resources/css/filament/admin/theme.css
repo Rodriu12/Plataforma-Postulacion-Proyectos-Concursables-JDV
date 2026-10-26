@@ -57,9 +57,17 @@ aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
 }
 
 @media (max-width: 1023px) {
-    aside.fi-sidebar {
-        width: min(var(--sidebar-width, 20rem), 85vw) !important;
-        max-width: 85vw !important;
+    aside.fi-sidebar,
+    #fi-main-sidebar {
+        width: 280px !important;
+        max-width: 80vw !important;
+        min-width: 0 !important;
+        overflow-x: hidden !important;
+    }
+
+    .fi-sidebar-close-overlay {
+        position: fixed !important;
+        inset: 0 !important;
     }
 }
 
