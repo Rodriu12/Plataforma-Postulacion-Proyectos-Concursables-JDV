@@ -1,13 +1,14 @@
 <div
     x-data="accesibilidadPanel()"
     data-accesibilidad-omitir
-    style="display:flex; justify-content:flex-end; padding:10px 20px 0; position:relative; z-index:50;"
+    style="display:flex; align-items:center; position:relative; z-index:50;"
 >
     <button
         @click="abierto = !abierto"
         @keydown.escape.window="abierto = false"
         type="button"
         :aria-expanded="abierto"
+        aria-controls="accesibilidad-menu"
         aria-haspopup="true"
         style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:9999px; border:1px solid #bfdbfe; font-size:14px; font-weight:600; cursor:pointer; background:#eff6ff; color:#1d4ed8; transition:background 0.15s, box-shadow 0.15s;"
         :style="{ background: abierto ? '#dbeafe' : '#eff6ff', boxShadow: abierto ? '0 2px 8px rgba(37,99,235,0.15)' : 'none' }"
@@ -23,10 +24,22 @@
             fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"
         >
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+        aria-label="Herramientas de accesibilidad"
+        title="Herramientas de accesibilidad"
+        style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; padding:0; border:0; border-radius:8px; cursor:pointer; background:transparent; color:#64748b; transition:background 0.15s, color 0.15s;"
+        :style="abierto ? 'background:#f1f5f9; color:#1d4ed8;' : ''"
+        @mouseenter="$el.style.background = abierto ? '#f1f5f9' : '#f8fafc'"
+        @mouseleave="$el.style.background = abierto ? '#f1f5f9' : 'transparent'"
+    >
+        <svg style="width:22px;height:22px;flex-shrink:0;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <circle cx="12" cy="6.8" r="1.2" fill="currentColor" stroke="none" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0-3-4.5-1m4.5 1 4.5-1M12 13l-2.5 4.5M12 13l2.5 4.5" />
         </svg>
     </button>
 
     <div
+        id="accesibilidad-menu"
         x-show="abierto"
         x-transition:enter="transition ease-out duration-150"
         x-transition:enter-start="opacity-0 scale-95"
@@ -35,7 +48,7 @@
         x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95"
         @click.outside="abierto = false"
-        style="position:absolute; top:calc(100% + 4px); right:20px; min-width:220px; background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 8px 24px -4px rgba(15,23,42,0.12); padding:8px; display:none;"
+        style="position:absolute; top:calc(100% + 4px); right:0; min-width:220px; background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 8px 24px -4px rgba(15,23,42,0.12); padding:8px; display:none;"
         x-cloak
     >
         <p style="font-size:11px; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.06em; padding:4px 10px 6px;">Herramientas</p>

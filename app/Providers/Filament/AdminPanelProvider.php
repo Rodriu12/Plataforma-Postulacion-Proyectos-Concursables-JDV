@@ -60,7 +60,7 @@ class AdminPanelProvider extends PanelProvider
                 FilamentInfoWidget::class,
             ])
             ->renderHook(
-                PanelsRenderHook::CONTENT_START,
+                PanelsRenderHook::GLOBAL_SEARCH_AFTER,
                 fn () => view('filament.narrador-accesibilidad'),
             )
             ->middleware([
