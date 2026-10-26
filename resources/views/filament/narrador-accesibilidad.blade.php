@@ -10,6 +10,20 @@
         :aria-expanded="abierto"
         aria-controls="accesibilidad-menu"
         aria-haspopup="true"
+        style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:9999px; border:1px solid #bfdbfe; font-size:14px; font-weight:600; cursor:pointer; background:#eff6ff; color:#1d4ed8; transition:background 0.15s, box-shadow 0.15s;"
+        :style="{ background: abierto ? '#dbeafe' : '#eff6ff', boxShadow: abierto ? '0 2px 8px rgba(37,99,235,0.15)' : 'none' }"
+    >
+        <svg style="width:18px;height:18px;flex-shrink:0;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="4" r="1.5" fill="currentColor" stroke="none"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7c-2.8 0-5 .5-5 .5L8 10l1 5-2 6h2l1.5-4L12 19l1.5-2L15 21h2l-2-6 1-5 1-2.5S14.8 7 12 7z"/>
+        </svg>
+        <span>Accesibilidad</span>
+        <svg
+            style="width:14px;height:14px;flex-shrink:0;transition:transform 0.2s;"
+            :style="{ transform: abierto ? 'rotate(180deg)' : 'rotate(0deg)' }"
+            fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
         aria-label="Herramientas de accesibilidad"
         title="Herramientas de accesibilidad"
         style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; padding:0; border:0; border-radius:8px; cursor:pointer; background:transparent; color:#64748b; transition:background 0.15s, color 0.15s;"
@@ -44,12 +58,12 @@
             type="button"
             :aria-pressed="agrandar"
             style="display:flex; align-items:center; gap:10px; width:100%; padding:9px 10px; border-radius:8px; border:none; font-size:13px; font-weight:500; cursor:pointer; text-align:left; transition:background 0.12s;"
-            :style="agrandar ? 'background:#eff6ff; color:#1d4ed8; font-weight:600;' : 'background:transparent; color:#334155;'"
+            :style="{ background: agrandar ? '#eff6ff' : 'transparent', color: agrandar ? '#1d4ed8' : '#334155', fontWeight: agrandar ? '600' : '500' }"
             @mouseenter="$el.style.background = agrandar ? '#dbeafe' : '#f8fafc'"
             @mouseleave="$el.style.background = agrandar ? '#eff6ff' : 'transparent'"
         >
             <span style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:8px; flex-shrink:0;"
-                  :style="agrandar ? 'background:#dbeafe;' : 'background:#f1f5f9;'">
+                  :style="{ background: agrandar ? '#dbeafe' : '#f1f5f9' }">
                 <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -66,12 +80,12 @@
             type="button"
             :aria-pressed="leyendo"
             style="display:flex; align-items:center; gap:10px; width:100%; padding:9px 10px; border-radius:8px; border:none; font-size:13px; font-weight:500; cursor:pointer; text-align:left; transition:background 0.12s;"
-            :style="leyendo ? 'background:#fff1f2; color:#be123c; font-weight:600;' : 'background:transparent; color:#334155;'"
+            :style="{ background: leyendo ? '#fff1f2' : 'transparent', color: leyendo ? '#be123c' : '#334155', fontWeight: leyendo ? '600' : '500' }"
             @mouseenter="$el.style.background = leyendo ? '#ffe4e6' : '#f8fafc'"
             @mouseleave="$el.style.background = leyendo ? '#fff1f2' : 'transparent'"
         >
             <span style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:8px; flex-shrink:0;"
-                  :style="leyendo ? 'background:#ffe4e6;' : 'background:#f1f5f9;'">
+                  :style="{ background: leyendo ? '#ffe4e6' : '#f1f5f9' }">
                 <svg x-show="!leyendo" style="width:16px;height:16px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
                 </svg>
