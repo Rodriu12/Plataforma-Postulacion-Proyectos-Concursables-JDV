@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Vecino;
@@ -43,6 +44,14 @@ Route::get('/vecinos/{id}/certificado', function ($id) {
 
     return $pdf->download('Certificado-Residencia-' . $vecino->rut . '.pdf');
 })->middleware('auth')->name('vecino.certificado');
+Route::post('/admin/proyectos-externos/actualizar-fondos', function () {
+    abort_unless(Auth::check(), 403);
+
+    Artisan::call('app:sincronizar-fondos-gob');
+
+    return redirect()->back()->with('status', 'Los fondos se actualizaron correctamente.');
+})->middleware('auth')->name('proyectos.externos.actualizar');
+
 Route::get('/salir', function (Request $request) {
     Auth::logout();
 
