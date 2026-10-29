@@ -26,10 +26,10 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
         aria-label="Herramientas de accesibilidad"
         title="Herramientas de accesibilidad"
-        style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; padding:0; border:0; border-radius:8px; cursor:pointer; background:transparent; color:#64748b; transition:background 0.15s, color 0.15s;"
-        :style="abierto ? 'background:#f1f5f9; color:#1d4ed8;' : ''"
-        @mouseenter="$el.style.background = abierto ? '#f1f5f9' : '#f8fafc'"
-        @mouseleave="$el.style.background = abierto ? '#f1f5f9' : 'transparent'"
+        style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; padding:0; border:1px solid rgba(148,163,184,.18); border-radius:10px; cursor:pointer; background:rgba(15,23,42,.04); color:#334155; transition:all 0.2s ease; box-shadow:0 1px 2px rgba(15,23,42,.04);"
+        :style="abierto ? 'background:rgba(59,130,246,.12); color:#1d4ed8; border-color:rgba(96,165,250,.25); box-shadow:0 8px 18px rgba(59,130,246,.12);' : ''"
+        @mouseenter="$el.style.background = abierto ? 'rgba(59,130,246,.12)' : 'rgba(148,163,184,.08)'; $el.style.borderColor = abierto ? 'rgba(96,165,250,.35)' : 'rgba(148,163,184,.18)'; $el.style.boxShadow = '0 8px 18px rgba(15,23,42,.08)';"
+        @mouseleave="$el.style.background = abierto ? 'rgba(59,130,246,.12)' : 'rgba(15,23,42,.04)'; $el.style.borderColor = abierto ? 'rgba(96,165,250,.25)' : 'rgba(148,163,184,.18)'; $el.style.boxShadow = '0 1px 2px rgba(15,23,42,.04)';"
     >
         <svg style="width:22px;height:22px;flex-shrink:0;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="9" />
