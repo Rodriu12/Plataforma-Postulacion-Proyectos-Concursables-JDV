@@ -25,14 +25,57 @@ class VoluntarioForm
     {
         return $schema
             ->components([
+                Select::make('user_id')
+                    ->label('Usuario de la organización')
+                    ->options(function () {
+                        $usuarioActual = auth()->user();
+
+                        $query = User::query()
+                            ->where('is_active', true)
+                            ->whereNotNull('name');
+
+                        if ($usuarioActual?->esAdminCentral()) {
+                            $query->orderBy('name');
+                        } elseif (! empty($usuarioActual?->organizacion_id)) {
+                            $query->where('organizacion_id', $usuarioActual->organizacion_id);
+                            $query->orderBy('name');
+                        } else {
+                            $query->where('id', $usuarioActual?->id ?? 0);
+                        }
+
+                        return $query->get()->mapWithKeys(fn (User $usuarioSeleccionado) => [
+                            $usuarioSeleccionado->id => $usuarioSeleccionado->name . ($usuarioSeleccionado->rut ? ' — ' . $usuarioSeleccionado->rut : ''),
+                        ])->all();
+                    })
+                    ->searchable()
+                    ->preload()
+                    ->placeholder('Selecciona un usuario')
+                    ->helperText('Solo aparecen los usuarios activos de la organización actual; si eres administrador central, se muestran todos los usuarios activos.')
+                    ->live()
+                    ->afterStateUpdated(function ($state, $set) {
+                        if (empty($state)) {
+                            return;
+                        }
+
+                        $usuario = User::with('vecino')->find($state);
+
+                        $set('nombre', $usuario?->name ?? '');
+                        $set('telefono', $usuario?->phone ?? '');
+                        $set('sector', $usuario?->vecino?->sector ?? 'Por definir');
+                        $set('organizacion_id', $usuario?->organizacion_id ?? auth()->user()?->organizacion_id);
+                    })
+                    ->required(),
+
                 TextInput::make('nombre')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->readOnly(),
 
                 TextInput::make('telefono')
                     ->label('Teléfono')
                     ->tel()
-                    ->maxLength(15),
+                    ->maxLength(15)
+                    ->readOnly(),
 
                 Select::make('organizacion_id')
                     ->label('Junta de Vecinos / Organización a la que apoya')
@@ -46,7 +89,8 @@ class VoluntarioForm
                 TextInput::make('sector')
                     ->label('Sector o Villa')
                     ->placeholder('Ej: Cerro Parra, Los Copihues...')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->readOnly(),
 
                 Select::make('area_apoyo')
                     ->label('Área de apoyo')
