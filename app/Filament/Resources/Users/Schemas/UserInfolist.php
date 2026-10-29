@@ -12,17 +12,21 @@ class UserInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
+                TextEntry::make('name')
+                    ->label('Nombre completo'),
                 TextEntry::make('email')
-                    ->label('Email address'),
+                    ->label('Correo electrónico'),
                 TextEntry::make('rut')
+                    ->label('RUT')
                     ->placeholder('-'),
                 TextEntry::make('phone')
+                    ->label('Teléfono')
                     ->placeholder('-'),
                 TextEntry::make('role')
                     ->label('Rol')
                     ->badge()
                     ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'admin_central' => 'Administrador/a Central',
                         'presidente' => 'Presidente/a',
                         'secretario' => 'Secretario/a',
                         'tesorero' => 'Tesorero/a',
@@ -32,6 +36,7 @@ class UserInfolist
                         default => ucfirst($state),
                     })
                     ->color(fn (string $state): string => match ($state) {
+                        'admin_central' => 'primary',
                         'presidente' => 'danger',
                         'secretario' => 'warning',
                         'tesorero' => 'success',
@@ -40,15 +45,19 @@ class UserInfolist
                         default => 'gray',
                     }),
                 IconEntry::make('is_active')
-                    ->boolean(),
-                TextEntry::make('email_verified_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+                    ->label('Cuenta activa')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('gray'),
                 TextEntry::make('created_at')
-                    ->dateTime()
+                    ->label('Creado')
+                    ->dateTime('d/m/Y H:i')
                     ->placeholder('-'),
                 TextEntry::make('updated_at')
-                    ->dateTime()
+                    ->label('Actualizado')
+                    ->dateTime('d/m/Y H:i')
                     ->placeholder('-'),
             ]);
     }
