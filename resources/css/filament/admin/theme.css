@@ -25,35 +25,126 @@ body {
     background: #94a3b8;
 }
 
-aside.fi-sidebar, .fi-sidebar-header {
-    background-color: #ffffff !important;
-    border-right: 1px solid #f1f5f9 !important;
+.fi-sidebar,
+aside.fi-sidebar,
+.fi-sidebar-header {
+    background: #f3f6fb !important;
+    border-right: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
 }
 
-aside.fi-sidebar .fi-sidebar-item-label, 
-aside.fi-sidebar .fi-sidebar-item-icon {
-    color: #475569 !important;
-    font-weight: 500 !important;
+.fi-sidebar .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item-icon,
+.fi-sidebar .fi-sidebar-section-title,
+.fi-sidebar .fi-sidebar-item-text,
+.fi-sidebar .fi-sidebar-header-brand,
+.fi-sidebar .fi-sidebar-header a,
+.fi-sidebar .fi-sidebar-brand,
+aside.fi-sidebar .fi-sidebar-item-label,
+aside.fi-sidebar .fi-sidebar-item-icon,
+aside.fi-sidebar .fi-sidebar-section-title,
+aside.fi-sidebar .fi-sidebar-item-text,
+aside.fi-sidebar .fi-sidebar-header-brand,
+aside.fi-sidebar .fi-sidebar-header a,
+aside.fi-sidebar .fi-sidebar-brand {
+    color: #1f2937 !important;
+    font-weight: 600 !important;
 }
 
+.fi-sidebar .fi-sidebar-item-button,
+aside.fi-sidebar .fi-sidebar-item-button {
+    border-radius: 0.75rem !important;
+    transition: all 0.18s ease !important;
+    padding: 0.75rem 0.8rem !important;
+}
+
+.fi-sidebar .fi-sidebar-item-button:hover,
 aside.fi-sidebar .fi-sidebar-item-button:hover {
-    background-color: #f8fafc !important;
+    background: #f8fafc !important;
 }
 
+.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-icon,
 aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-icon {
     color: #0f172a !important;
 }
 
+.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button {
-    background-color: #eff6ff !important;
-    border-radius: 0.5rem !important;
+    background: #eaf4ff !important;
+    border: 1px solid rgba(96, 165, 250, 0.14) !important;
+    border-radius: 0.75rem !important;
+    box-shadow: none !important;
 }
 
+.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
     color: #1d4ed8 !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
+}
+
+.fi-sidebar .fi-sidebar-item-badge-ctn .fi-badge,
+aside.fi-sidebar .fi-sidebar-item-badge-ctn .fi-badge {
+    background: #eff6ff !important;
+    color: #2563eb !important;
+    border-color: rgba(96, 165, 250, 0.2) !important;
+}
+
+.fi-sidebar .fi-sidebar-header,
+aside.fi-sidebar .fi-sidebar-header {
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.fi-sidebar .fi-sidebar-nav,
+aside.fi-sidebar .fi-sidebar-nav {
+    padding-top: 0.75rem !important;
+}
+
+.fi-topbar {
+    background: linear-gradient(180deg, #0f172a 0%, #111827 100%) !important;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18) !important;
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.12) !important;
+    color: #e2e8f0 !important;
+}
+
+.fi-topbar *,
+.fi-topbar .fi-topbar-item,
+.fi-topbar .fi-icon-btn,
+.fi-topbar .fi-topbar-user,
+.fi-topbar .fi-topbar-user-name,
+.fi-topbar .fi-sidebar-trigger,
+.fi-topbar .fi-topbar-search,
+.fi-topbar .fi-topbar-actions,
+.fi-topbar .fi-topbar-menu-button,
+.fi-topbar .fi-topbar-button,
+.fi-topbar .fi-topbar-item-btn,
+.fi-topbar .fi-topbar-item-label,
+.fi-topbar .fi-user-menu-trigger,
+.fi-topbar button,
+.fi-topbar .fi-dropdown-trigger {
+    color: #e2e8f0 !important;
+}
+
+.fi-topbar .fi-topbar-item-btn {
+    background: transparent !important;
+}
+
+.fi-topbar .fi-topbar-item-btn:hover {
+    background: rgba(148, 163, 184, 0.12) !important;
+}
+
+.fi-topbar .fi-topbar-database-notifications-btn,
+.fi-topbar .fi-topbar-database-notifications-btn:hover {
+    color: #dbeafe !important;
+}
+
+.fi-topbar .fi-topbar-database-notifications-btn .fi-icon-btn-badge-ctn .fi-badge {
+    background: linear-gradient(135deg, #3b82f6 0%, #22d3ee 100%) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 @media (max-width: 1023px) {
