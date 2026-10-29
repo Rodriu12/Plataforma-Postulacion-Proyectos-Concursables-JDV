@@ -89,7 +89,6 @@ class UserForm
                     ->label('Cuenta Activa')
                     ->default(true)
                     ->columnSpanFull(),
-                DateTimePicker::make('email_verified_at'),
                 TextInput::make('password')
                     ->label('Contraseña')
                     ->password()
