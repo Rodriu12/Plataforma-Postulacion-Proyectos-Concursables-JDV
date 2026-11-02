@@ -28,74 +28,98 @@ body {
 .fi-sidebar,
 aside.fi-sidebar,
 .fi-sidebar-header {
-    background: #f3f6fb !important;
-    border-right: 1px solid #e2e8f0 !important;
+    background: #0f172a !important; /* Azul oscuro elegante acorde a la topbar */
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: none !important;
+}
+
+/* Logo de la marca / Brand Name en Sidebar y Topbar */
+.fi-logo,
+.fi-sidebar-header-brand,
+.fi-sidebar-brand,
+.fi-sidebar-header a,
+.fi-topbar .fi-logo {
+    color: #ffffff !important;
 }
 
 .fi-sidebar .fi-sidebar-item-label,
 .fi-sidebar .fi-sidebar-item-icon,
 .fi-sidebar .fi-sidebar-section-title,
 .fi-sidebar .fi-sidebar-item-text,
-.fi-sidebar .fi-sidebar-header-brand,
-.fi-sidebar .fi-sidebar-header a,
-.fi-sidebar .fi-sidebar-brand,
 aside.fi-sidebar .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-icon,
 aside.fi-sidebar .fi-sidebar-section-title,
-aside.fi-sidebar .fi-sidebar-item-text,
-aside.fi-sidebar .fi-sidebar-header-brand,
-aside.fi-sidebar .fi-sidebar-header a,
-aside.fi-sidebar .fi-sidebar-brand {
-    color: #1f2937 !important;
-    font-weight: 600 !important;
+aside.fi-sidebar .fi-sidebar-item-text {
+    color: #cbd5e1 !important; /* Gris claro muy legible sobre fondo oscuro */
+    font-weight: 500 !important;
 }
 
+/* Botones de navegación del sidebar (item-btn e item-button) */
+.fi-sidebar .fi-sidebar-item-btn,
 .fi-sidebar .fi-sidebar-item-button,
+aside.fi-sidebar .fi-sidebar-item-btn,
 aside.fi-sidebar .fi-sidebar-item-button {
-    border-radius: 0.75rem !important;
-    transition: all 0.18s ease !important;
-    padding: 0.75rem 0.8rem !important;
+    border-radius: 0.65rem !important;
+    border: 1px solid transparent !important; /* Mismo grosor que el activo para que no salte ni se descuadre */
+    transition: all 0.15s ease !important;
+    padding: 0.65rem 0.85rem !important;
+    box-sizing: border-box !important;
 }
 
+/* Hover: Mismo padding, mismo borde y alineación */
+.fi-sidebar .fi-sidebar-item:hover > .fi-sidebar-item-btn,
+.fi-sidebar .fi-sidebar-item-btn:hover,
 .fi-sidebar .fi-sidebar-item-button:hover,
+aside.fi-sidebar .fi-sidebar-item-btn:hover,
 aside.fi-sidebar .fi-sidebar-item-button:hover {
-    background: #f8fafc !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
+.fi-sidebar .fi-sidebar-item:hover .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item:hover .fi-sidebar-item-icon,
+.fi-sidebar .fi-sidebar-item-btn:hover .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item-btn:hover .fi-sidebar-item-icon,
 .fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-label,
 .fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-icon,
+aside.fi-sidebar .fi-sidebar-item-btn:hover .fi-sidebar-item-label,
+aside.fi-sidebar .fi-sidebar-item-btn:hover .fi-sidebar-item-icon,
 aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-icon {
-    color: #0f172a !important;
+    color: #ffffff !important;
 }
 
+/* Elemento activo del menú: Mismo grosor de 1px, fondo azul Vecindar */
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn,
 .fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button {
-    background: #eaf4ff !important;
-    border: 1px solid rgba(96, 165, 250, 0.14) !important;
-    border-radius: 0.75rem !important;
-    box-shadow: none !important;
+    background: #2563eb !important; /* Azul de Vecindar */
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 0.65rem !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+    padding: 0.65rem 0.85rem !important;
 }
 
+.fi-sidebar-item.fi-active .fi-sidebar-item-label,
+.fi-sidebar-item.fi-active .fi-sidebar-item-icon,
 .fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-label,
 .fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
-    color: #1d4ed8 !important;
-    font-weight: 700 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
 }
 
 .fi-sidebar .fi-sidebar-item-badge-ctn .fi-badge,
 aside.fi-sidebar .fi-sidebar-item-badge-ctn .fi-badge {
-    background: #eff6ff !important;
-    color: #2563eb !important;
-    border-color: rgba(96, 165, 250, 0.2) !important;
+    background: rgba(37, 99, 235, 0.25) !important;
+    color: #93c5fd !important;
+    border-color: rgba(147, 197, 253, 0.3) !important;
 }
 
 .fi-sidebar .fi-sidebar-header,
 aside.fi-sidebar .fi-sidebar-header {
-    border-bottom: 1px solid #e2e8f0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .fi-sidebar .fi-sidebar-nav,
@@ -104,47 +128,119 @@ aside.fi-sidebar .fi-sidebar-nav {
 }
 
 .fi-topbar {
-    background: linear-gradient(180deg, #0f172a 0%, #111827 100%) !important;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.18) !important;
-    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.12) !important;
+    background: #0f172a !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
     color: #e2e8f0 !important;
 }
 
-.fi-topbar *,
-.fi-topbar .fi-topbar-item,
-.fi-topbar .fi-icon-btn,
-.fi-topbar .fi-topbar-user,
-.fi-topbar .fi-topbar-user-name,
-.fi-topbar .fi-sidebar-trigger,
-.fi-topbar .fi-topbar-search,
-.fi-topbar .fi-topbar-actions,
-.fi-topbar .fi-topbar-menu-button,
-.fi-topbar .fi-topbar-button,
+/* Elementos dentro del topbar (botones, iconos, trigger de usuario) */
 .fi-topbar .fi-topbar-item-btn,
-.fi-topbar .fi-topbar-item-label,
+.fi-topbar .fi-icon-btn,
+.fi-topbar .fi-sidebar-trigger,
 .fi-topbar .fi-user-menu-trigger,
-.fi-topbar button,
-.fi-topbar .fi-dropdown-trigger {
-    color: #e2e8f0 !important;
+.fi-topbar [data-accesibilidad-omitir] > button {
+    color: #cbd5e1 !important;
 }
 
-.fi-topbar .fi-topbar-item-btn {
-    background: transparent !important;
-}
-
-.fi-topbar .fi-topbar-item-btn:hover {
-    background: rgba(148, 163, 184, 0.12) !important;
+.fi-topbar .fi-topbar-item-btn:hover,
+.fi-topbar .fi-icon-btn:hover,
+.fi-topbar .fi-sidebar-trigger:hover,
+.fi-topbar .fi-user-menu-trigger:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
 }
 
 .fi-topbar .fi-topbar-database-notifications-btn,
 .fi-topbar .fi-topbar-database-notifications-btn:hover {
-    color: #dbeafe !important;
+    color: #cbd5e1 !important;
 }
 
 .fi-topbar .fi-topbar-database-notifications-btn .fi-icon-btn-badge-ctn .fi-badge {
-    background: linear-gradient(135deg, #3b82f6 0%, #22d3ee 100%) !important;
+    background: #2563eb !important;
     color: #ffffff !important;
     border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ========================================================
+   MENÚ DESPLEGABLE DE ACCESIBILIDAD Y USUARIO
+   Colores nítidos, alto contraste y legible como en la portada
+   ======================================================== */
+.accesibilidad-dropdown-panel,
+.fi-dropdown-panel {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Forzar que todos los botones y textos internos del panel de accesibilidad sean oscuros y legibles */
+.accesibilidad-dropdown-panel button,
+.accesibilidad-dropdown-panel span,
+.accesibilidad-dropdown-panel p {
+    color: #1e293b !important;
+}
+
+.accesibilidad-dropdown-panel p {
+    color: #64748b !important;
+}
+
+.accesibilidad-dropdown-panel button:hover {
+    background-color: #f1f5f9 !important;
+}
+
+.accesibilidad-dropdown-panel button:hover span {
+    color: #0f172a !important;
+}
+
+/* Textos e iconos de los ítems del menú desplegable de usuario */
+.fi-dropdown-panel .fi-dropdown-list-item,
+.fi-dropdown-list-item {
+    color: #1e293b !important; /* Slate 800 oscuro y de alto contraste */
+    font-weight: 500 !important;
+}
+
+.fi-dropdown-panel .fi-dropdown-list-item-label,
+.fi-dropdown-list-item-label {
+    color: #1e293b !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+}
+
+.fi-dropdown-panel .fi-dropdown-list-item .fi-icon,
+.fi-dropdown-panel .fi-dropdown-list-item > svg,
+.fi-dropdown-list-item .fi-icon,
+.fi-dropdown-list-item > svg {
+    color: #3b82f6 !important; /* Azul visible y vibrante para iconos */
+}
+
+/* Hover en los ítems */
+.fi-dropdown-panel .fi-dropdown-list-item:hover,
+.fi-dropdown-list-item:hover {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+}
+
+.fi-dropdown-panel .fi-dropdown-list-item:hover .fi-dropdown-list-item-label,
+.fi-dropdown-list-item:hover .fi-dropdown-list-item-label {
+    color: #0f172a !important;
+    font-weight: 600 !important;
+}
+
+.fi-dropdown-panel .fi-dropdown-list-item:hover .fi-icon,
+.fi-dropdown-list-item:hover .fi-icon {
+    color: #1d4ed8 !important;
+}
+
+/* Selector de temas (claro/oscuro/sistema) dentro del menú */
+.fi-theme-switcher,
+.fi-theme-switcher-btn {
+    color: #475569 !important;
+}
+
+.fi-theme-switcher-btn:hover {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
 }
 
 @media (max-width: 1023px) {
@@ -160,21 +256,4 @@ aside.fi-sidebar .fi-sidebar-nav {
         position: fixed !important;
         inset: 0 !important;
     }
-}
-
-.fi-topbar {
-    background-color: #ffffff !important;
-    border-bottom: 1px solid #f1f5f9 !important;
-}
-
-.fi-topbar .fi-topbar-database-notifications-btn,
-.fi-topbar .fi-topbar-database-notifications-btn:hover {
-    color: #64748b !important;
-}
-
-.fi-topbar .fi-topbar-database-notifications-btn .fi-icon-btn-badge-ctn .fi-badge {
-    min-width: 1.25rem;
-    justify-content: center;
-    background-color: #2563eb !important;
-    color: #ffffff !important;
 }
