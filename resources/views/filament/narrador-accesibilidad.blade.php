@@ -1,7 +1,7 @@
 <div
     x-data="accesibilidadPanel()"
     data-accesibilidad-omitir
-    style="display:flex; align-items:center; position:relative; z-index:50;"
+    style="display:inline-flex; align-items:center; justify-content:center; position:relative; z-index:50; flex-shrink:0; margin-left:0.5rem;"
 >
     <button
         @click="abierto = !abierto"
@@ -26,7 +26,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
         aria-label="Herramientas de accesibilidad"
         title="Herramientas de accesibilidad"
-        style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; padding:0; border:1px solid rgba(255,255,255,0.15); border-radius:10px; cursor:pointer; background:rgba(255,255,255,0.06); color:#cbd5e1; transition:all 0.2s ease; box-shadow:0 1px 2px rgba(0,0,0,0.1);"
+        style="display:inline-flex; align-items:center; justify-content:center; width:40px; min-width:40px; height:40px; min-height:40px; padding:0; border:1px solid rgba(255,255,255,0.15); border-radius:10px; cursor:pointer; background:rgba(255,255,255,0.06); color:#cbd5e1; transition:all 0.2s ease; box-shadow:0 1px 2px rgba(0,0,0,0.1); flex-shrink:0;"
         :style="abierto ? 'background:#2563eb; color:#ffffff; border-color:#3b82f6; box-shadow:0 4px 14px rgba(37,99,235,0.4);' : ''"
         @mouseenter="$el.style.background = abierto ? '#2563eb' : 'rgba(255,255,255,0.12)'; $el.style.color = '#ffffff';"
         @mouseleave="$el.style.background = abierto ? '#2563eb' : 'rgba(255,255,255,0.06)'; $el.style.color = abierto ? '#ffffff' : '#cbd5e1';"
