@@ -31,6 +31,8 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->brandName('Vecindar')
+            ->brandLogo(fn () => view('filament.brand-logo'))
+            ->brandLogoHeight('2.4rem')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->passwordReset()
