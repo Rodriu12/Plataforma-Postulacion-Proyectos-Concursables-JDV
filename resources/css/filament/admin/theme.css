@@ -256,4 +256,38 @@ aside.fi-sidebar .fi-sidebar-nav {
         position: fixed !important;
         inset: 0 !important;
     }
+
+    .fi-topbar {
+        gap: 0.5rem !important;
+    }
+
+    .fi-topbar .fi-global-search,
+    .fi-topbar .fi-global-search > div,
+    .fi-topbar .fi-global-search input,
+    .fi-topbar .fi-global-search .fi-input {
+        min-width: 0 !important;
+        width: 100% !important;
+        flex: 1 1 auto !important;
+    }
+
+    [data-accesibilidad-omitir] {
+        display: inline-flex !important;
+        flex-shrink: 0 !important;
+        margin-left: 0.5rem !important;
+    }
+
+    [data-accesibilidad-omitir] > button {
+        width: 2.5rem !important;
+        min-width: 2.5rem !important;
+        height: 2.5rem !important;
+        min-height: 2.5rem !important;
+        border-radius: 0.75rem !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
+    }
+
+    [data-accesibilidad-omitir] > button svg {
+        width: 1.2rem !important;
+        height: 1.2rem !important;
+    }
 }
