@@ -31,7 +31,7 @@ abstract class PantherTestCase extends TestCase
         if (! is_dir($tempDir)) {
             @mkdir($tempDir, 0777, true);
         }
-        $databasePath = $tempDir . DIRECTORY_SEPARATOR . 'e2e-' . uniqid('', true) . '.sqlite';
+        $databasePath = $tempDir.DIRECTORY_SEPARATOR.'e2e-'.uniqid('', true).'.sqlite';
         touch($databasePath);
 
         $this->databasePath = $databasePath;
@@ -246,6 +246,12 @@ abstract class PantherTestCase extends TestCase
             @mkdir($directory, 0777, true);
         }
 
+        $this->browser->wait(10)->until(
+            fn ($driver): bool => $driver->executeScript(
+                'const main = document.querySelector(".fi-main"); const chevron = document.querySelector("[data-accesibilidad-omitir] > button svg:last-of-type"); return main !== null && getComputedStyle(main).backgroundColor === "rgb(248, 250, 252)" && chevron !== null && Math.abs(chevron.getBoundingClientRect().width - 14) < 1;',
+            ),
+        );
+
         $path = $directory.DIRECTORY_SEPARATOR.$filename;
         $this->browser->takeScreenshot($path);
 
@@ -276,7 +282,7 @@ abstract class PantherTestCase extends TestCase
                 "127.0.0.1:{$port}",
                 '-t',
                 public_path(),
-                public_path('index.php'),
+                base_path('tests/E2E/server.php'),
             ],
             base_path(),
             [

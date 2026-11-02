@@ -10,6 +10,20 @@
         :aria-expanded="abierto"
         aria-controls="accesibilidad-menu"
         aria-haspopup="true"
+        style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:9999px; border:1px solid #bfdbfe; font-size:14px; font-weight:600; cursor:pointer; background:#eff6ff; color:#1d4ed8; transition:background 0.15s, box-shadow 0.15s;"
+        :style="{ background: abierto ? '#dbeafe' : '#eff6ff', boxShadow: abierto ? '0 2px 8px rgba(37,99,235,0.15)' : 'none' }"
+    >
+        <svg style="width:18px;height:18px;flex-shrink:0;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="4" r="1.5" fill="currentColor" stroke="none"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7c-2.8 0-5 .5-5 .5L8 10l1 5-2 6h2l1.5-4L12 19l1.5-2L15 21h2l-2-6 1-5 1-2.5S14.8 7 12 7z"/>
+        </svg>
+        <span>Accesibilidad</span>
+        <svg
+            style="width:14px;height:14px;flex-shrink:0;transition:transform 0.2s;"
+            :style="{ transform: abierto ? 'rotate(180deg)' : 'rotate(0deg)' }"
+            fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
         aria-label="Herramientas de accesibilidad"
         title="Herramientas de accesibilidad"
         style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; padding:0; border:1px solid rgba(255,255,255,0.15); border-radius:10px; cursor:pointer; background:rgba(255,255,255,0.06); color:#cbd5e1; transition:all 0.2s ease; box-shadow:0 1px 2px rgba(0,0,0,0.1);"
