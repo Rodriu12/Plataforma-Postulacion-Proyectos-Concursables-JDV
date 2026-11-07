@@ -16,8 +16,7 @@ class DocumentoOcrService
             ];
         }
 
-        $binarios = ['pdftoppm', 'tesseract'];
-        foreach ($binarios as $binario) {
+        foreach (['pdftoppm', 'tesseract'] as $binario) {
             if (! $this->binarioDisponible($binario)) {
                 return [
                     'aprobado' => null,
@@ -70,13 +69,20 @@ class DocumentoOcrService
 
     public function extraerTextoDesdePdf(string $rutaPdf): string
     {
+        $pdftoppm = $this->resolverRutaBinario('pdftoppm');
+        $tesseract = $this->resolverRutaBinario('tesseract');
+
+        if (! $pdftoppm || ! $tesseract) {
+            return '';
+        }
+
         $tmpDir = sys_get_temp_dir() . '/vecindar_ocr_' . uniqid('', true);
         if (! is_dir($tmpDir) && ! mkdir($tmpDir, 0777, true) && ! is_dir($tmpDir)) {
             return '';
         }
 
         $convertir = new Process([
-            'pdftoppm',
+            $pdftoppm,
             '-png',
             '-r',
             '300',
@@ -97,7 +103,7 @@ class DocumentoOcrService
 
         foreach ($imagenes ?: [] as $imagen) {
             $ocr = new Process([
-                'tesseract',
+                $tesseract,
                 $imagen,
                 'stdout',
                 '--psm',
@@ -132,14 +138,61 @@ class DocumentoOcrService
 
     protected function binarioDisponible(string $binario): bool
     {
-        $comando = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'
-            ? ['where', $binario]
-            : ['which', $binario];
+        return $this->resolverRutaBinario($binario) !== null;
+    }
 
-        $process = new Process($comando);
-        $process->run();
+    protected function resolverRutaBinario(string $binario): ?string
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $rutaExif = [
+                'tesseract' => 'C:/Program Files/Tesseract-OCR/tesseract.exe',
+                'pdftoppm' => 'C:/Users/rodrigo.DESKTOP-2PHUO8N/Desktop/TD/Release-26.09.0-0/poppler-26.09.0/Library/bin/pdftoppm.exe',
+            ];
 
-        return $process->isSuccessful();
+            if (isset($rutaExif[$binario]) && is_file($rutaExif[$binario])) {
+                return $rutaExif[$binario];
+            }
+        }
+
+        $candidatos = [];
+
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $candidatos = [
+                'C:/Program Files/Tesseract-OCR/tesseract.exe',
+                'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe',
+                'C:/Users/rodrigo.DESKTOP-2PHUO8N/Desktop/TD/Release-26.09.0-0/poppler-26.09.0/Library/bin/pdftoppm.exe',
+                'C:/Program Files/poppler/Library/bin/pdftoppm.exe',
+                'C:/Program Files (x86)/poppler/Library/bin/pdftoppm.exe',
+                'C:/tools/poppler/Library/bin/pdftoppm.exe',
+                'C:/tools/Tesseract-OCR/tesseract.exe',
+                'C:/tools/tesseract/tesseract.exe',
+            ];
+        }
+
+        foreach ($candidatos as $ruta) {
+            if (is_file($ruta)) {
+                return $ruta;
+            }
+        }
+
+        $path = getenv('PATH');
+        if (is_string($path)) {
+            foreach (explode(PATH_SEPARATOR, $path) as $directorio) {
+                $directorio = trim((string) $directorio);
+                if ($directorio === '') {
+                    continue;
+                }
+
+                foreach ([$binario, $binario . '.exe'] as $nombre) {
+                    $ruta = rtrim($directorio, '\\/') . DIRECTORY_SEPARATOR . $nombre;
+                    if (is_file($ruta)) {
+                        return $ruta;
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 
     protected function limpiarDir(string $rutaDir): void
