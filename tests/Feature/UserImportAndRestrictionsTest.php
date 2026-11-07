@@ -8,6 +8,7 @@ use App\Models\Vecino;
 use App\Models\Voluntario;
 use Filament\Panel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 uses(RefreshDatabase::class);
@@ -145,4 +146,59 @@ test('las reglas de ResidenteImporter validan telefono y rol', function () {
     expect(validator(['role' => 'vecino'], ['role' => $roleRules])->passes())->toBeTrue();
     expect(validator(['role' => 'voluntario'], ['role' => $roleRules])->passes())->toBeTrue();
     expect(validator(['role' => 'admin_hacker'], ['role' => $roleRules])->fails())->toBeTrue();
+});
+
+test('al crear un vecino con comprobante invalidado se envia una notificacion a la directiva', function () {
+    $org = Organizacion::create([
+        'nombre' => 'Junta de Prueba',
+        'rut_juridico' => '76.123.456-7',
+        'direccion' => 'Calle Falsa 123',
+    ]);
+
+    $presidente = User::create([
+        'name' => 'Presidente',
+        'email' => 'presidente@ejemplo.com',
+        'password' => bcrypt('password123'),
+        'role' => 'presidente',
+        'organizacion_id' => $org->id,
+        'is_active' => true,
+    ]);
+
+    $secretario = User::create([
+        'name' => 'Secretario',
+        'email' => 'secretario@ejemplo.com',
+        'password' => bcrypt('password123'),
+        'role' => 'secretario',
+        'organizacion_id' => $org->id,
+        'is_active' => true,
+    ]);
+
+    $user = User::create([
+        'name' => 'Vecino Prueba',
+        'email' => 'vecino@ejemplo.com',
+        'password' => bcrypt('password123'),
+        'role' => 'vecino',
+        'organizacion_id' => $org->id,
+        'is_active' => true,
+    ]);
+
+    Vecino::create([
+        'user_id' => $user->id,
+        'nombre' => 'Vecino Prueba',
+        'rut' => '11.222.333-4',
+        'direccion' => 'Avenida Siempre Viva 742',
+        'sector' => 'Centro',
+        'telefono' => '+56 9 1234 5678',
+        'comprobante_domicilio' => 'pdf-invalido.pdf',
+        'comprobante_validado' => false,
+        'comprobante_motivo' => 'No coincide con los datos del vecino.',
+        'estado' => 'pendiente',
+    ]);
+
+    $notificaciones = DB::table('notifications')
+        ->whereIn('notifiable_id', [$presidente->id, $secretario->id])
+        ->where('notifiable_type', User::class)
+        ->count();
+
+    expect($notificaciones)->toBeGreaterThanOrEqual(1);
 });

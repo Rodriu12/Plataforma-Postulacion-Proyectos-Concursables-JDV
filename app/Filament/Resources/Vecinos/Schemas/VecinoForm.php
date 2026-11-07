@@ -50,17 +50,73 @@ class VecinoForm
                     ->maxLength(255),
                     
                 FileUpload::make('comprobante_domicilio')
-                    ->label('Comprobante de Domicilio (Boleta Luz/Agua)')
+                    ->label('Comprobante de Domicilio (PDF)')
                     ->disk('uploads')
                     ->directory('comprobantes-domicilio')
-                    ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png', 'image/webp'])
-                    ->rules(['file', 'mimes:pdf,jpeg,png,jpg,webp', 'max:5120'])
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->rules(['file', 'mimes:pdf', 'max:5120'])
                     ->maxSize(5120)
-                    ->helperText('Solo documentos PDF o imágenes JPG, PNG o WEBP (máx. 5 MB). No se permiten GIFs, audio ni otros formatos no autorizados.')
-                    ->openable() 
+                    ->helperText('Solo se aceptan archivos PDF. El documento será revisado mediante OCR para validar que corresponda al vecino y a la dirección registrada.')
+                    ->openable()
                     ->downloadable()
                     ->columnSpanFull(),
-                    
+
+                TextInput::make('comprobante_validado')
+                    ->label('Estado OCR')
+                    ->disabled()
+                    ->dehydrated(false)
+                    ->formatStateUsing(function ($state, $record) {
+                        if (blank($record?->comprobante_domicilio)) {
+                            return 'Sin comprobante cargado';
+                        }
+
+                        if ($record?->comprobante_validado === true) {
+                            return 'Válido';
+                        }
+
+                        if ($record?->comprobante_validado === false) {
+                            return 'No coincide';
+                        }
+
+                        return 'Pendiente de validación';
+                    })
+                    ->extraAttributes(function ($record) {
+                        $color = 'background-color: #f8fafc; color: #0f172a;';
+
+                        if (blank($record?->comprobante_domicilio)) {
+                            $color = 'background-color: #f8fafc; color: #475569;';
+                        } elseif ($record?->comprobante_validado === true) {
+                            $color = 'background-color: #ecfdf5; color: #166534;';
+                        } elseif ($record?->comprobante_validado === false) {
+                            $color = 'background-color: #fef2f2; color: #991b1b;';
+                        } else {
+                            $color = 'background-color: #fff7ed; color: #9a5b00;';
+                        }
+
+                        return ['style' => $color];
+                    }),
+
+                TextInput::make('comprobante_motivo')
+                    ->label('Resultado OCR')
+                    ->disabled()
+                    ->dehydrated(false)
+                    ->formatStateUsing(fn ($state, $record) => $record?->comprobante_motivo ?: 'Sin resultado de validación OCR disponible.')
+                    ->extraAttributes(function ($record) {
+                        $color = 'background-color: #f8fafc; color: #0f172a;';
+
+                        if (blank($record?->comprobante_domicilio)) {
+                            $color = 'background-color: #f8fafc; color: #475569;';
+                        } elseif ($record?->comprobante_validado === true) {
+                            $color = 'background-color: #ecfdf5; color: #166534;';
+                        } elseif ($record?->comprobante_validado === false) {
+                            $color = 'background-color: #fef2f2; color: #991b1b;';
+                        } else {
+                            $color = 'background-color: #fff7ed; color: #9a5b00;';
+                        }
+
+                        return ['style' => $color];
+                    }),
+
                 Select::make('estado')
                     ->options([
                         'pendiente' => 'Pendiente de Revisión',
