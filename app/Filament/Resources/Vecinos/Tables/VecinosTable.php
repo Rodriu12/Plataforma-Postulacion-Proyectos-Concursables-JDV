@@ -60,12 +60,53 @@ class VecinosTable
                                 default => 'gray',
                             })
                             ->formatStateUsing(fn (string $state) => ucfirst($state)),
+
+                        TextColumn::make('validacion_ocr')
+                            ->label('OCR')
+                            ->badge()
+                            ->grow(false)
+                            ->getStateUsing(function ($record) {
+                                if (blank($record->comprobante_domicilio)) {
+                                    return 'Sin PDF';
+                                }
+
+                                if ($record->comprobante_validado === true) {
+                                    return 'Válido';
+                                }
+
+                                if ($record->comprobante_validado === false) {
+                                    return 'No coincide';
+                                }
+
+                                return 'Pendiente';
+                            })
+                            ->color(function ($record): string {
+                                if (blank($record->comprobante_domicilio)) {
+                                    return 'gray';
+                                }
+
+                                return match (true) {
+                                    $record->comprobante_validado === true => 'success',
+                                    $record->comprobante_validado === false => 'danger',
+                                    default => 'warning',
+                                };
+                            })
+                            ->tooltip(function ($record): ?string {
+                                return $record->comprobante_motivo ?: 'Sin resultado de validación OCR.';
+                            }),
                     ]),
 
                     Stack::make([
                         Tarjetas::linea('rut', 'RUT'),
                         Tarjetas::linea('direccion', 'Dirección'),
                         Tarjetas::linea('sector', 'Sector'),
+
+                        TextColumn::make('comprobante_motivo')
+                            ->label('Resultado OCR')
+                            ->wrap()
+                            ->color(fn ($record) => $record?->comprobante_validado === true ? 'success' : ($record?->comprobante_validado === false ? 'danger' : 'warning'))
+                            ->getStateUsing(fn ($record) => $record?->comprobante_motivo ?: 'Sin comprobante cargado')
+                            ->limit(80),
 
                         TextColumn::make('certificado')
                             ->label('Certificado')
