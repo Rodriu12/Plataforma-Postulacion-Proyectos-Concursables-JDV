@@ -7,6 +7,7 @@ use Symfony\Component\Process\Process;
 
 Schedule::command('app:sincronizar-fondos-gob')->dailyAt('00:00');
 Schedule::command('app:enviar-novedades-proyectos')->dailyAt('10:00');
+Schedule::command('app:enviar-recordatorios-reuniones')->everyMinute()->withoutOverlapping();
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
