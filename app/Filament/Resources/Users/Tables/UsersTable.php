@@ -91,7 +91,8 @@ class UsersTable
                         Tarjetas::linea('phone', 'Teléfono'),
                         TextColumn::make('organizacion.nombre')
                             ->label('Organización')
-                            ->formatStateUsing(fn ($state, User $record) => 'Organización: ' . (filled($record->organizacion_id) ? ($record->organizacion?->nombre ?? '—') : '⚠️ Sin junta asignada (Pendiente)'))
+                            ->icon(fn (User $record) => empty($record->organizacion_id) ? 'heroicon-o-exclamation-triangle' : 'heroicon-o-building-office-2')
+                            ->formatStateUsing(fn ($state, User $record) => filled($record->organizacion_id) ? ('Organización: ' . ($record->organizacion?->nombre ?? '—')) : 'Sin junta asignada (Pendiente)')
                             ->color(fn (User $record) => empty($record->organizacion_id) ? 'danger' : 'gray')
                             ->wrap()
                             ->extraAttributes(Tarjetas::TEXTO_QUE_ENVUELVE),

@@ -7,7 +7,12 @@
 <body style="font-family: Arial, sans-serif; background-color: #fff7f7; color: #333333; padding: 20px; margin: 0;">
     <div style="max-width: 600px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #fecaca;">
 
-        <h2 style="color: #b91c1c; text-align: center; margin-top: 0;">⚠ Vecindar - Aviso de Emergencia</h2>
+        <h2 style="color: #b91c1c; text-align: center; margin-top: 0;">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 8px; display: inline-block;">
+                <path d="M12 2.75a1 1 0 0 1 .9.55l8.34 15.07A1 1 0 0 1 20.34 20H3.66a1 1 0 0 1-.9-1.63L11.1 3.3a1 1 0 0 1 .9-.55Zm0 5.45a1 1 0 0 0-1 1v4.5a1 1 0 1 0 2 0v-4.5a1 1 0 0 0-1-1Zm0 9.5a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5Z" fill="#b91c1c"/>
+            </svg>
+            Vecindar - Aviso de Emergencia
+        </h2>
         <h3 style="color: #111827; border-bottom: 2px solid #fee2e2; padding-bottom: 10px;">Se ha reportado una nueva emergencia</h3>
 
         <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
