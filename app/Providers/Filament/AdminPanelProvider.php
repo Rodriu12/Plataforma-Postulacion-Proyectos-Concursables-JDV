@@ -67,6 +67,64 @@ class AdminPanelProvider extends PanelProvider
                 PanelsRenderHook::GLOBAL_SEARCH_AFTER,
                 fn () => view('filament.narrador-accesibilidad'),
             )
+            ->renderHook(
+                PanelsRenderHook::HEAD_START,
+                fn () => Blade::render(<<<'HTML'
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const injectLabel = () => {
+                                document.querySelectorAll('input[type="checkbox"][aria-label]').forEach((checkbox) => {
+                                    const ariaLabel = (checkbox.getAttribute('aria-label') || '').toLowerCase();
+                                    const isBulkSelect = ariaLabel.includes('select all') || ariaLabel.includes('seleccionar todo') || ariaLabel.includes('bulk select page');
+
+                                    if (! isBulkSelect) {
+                                        return;
+                                    }
+
+                                    if (checkbox.parentElement?.classList.contains('fi-bulk-select-wrapper')) {
+                                        return;
+                                    }
+
+                                    const existing = checkbox.parentElement?.querySelector('.fi-bulk-select-label');
+                                    if (existing) {
+                                        return;
+                                    }
+
+                                    const wrapper = document.createElement('span');
+                                    wrapper.className = 'fi-bulk-select-wrapper';
+                                    wrapper.style.display = 'inline-flex';
+                                    wrapper.style.alignItems = 'center';
+                                    wrapper.style.gap = '0.5rem';
+                                    wrapper.style.lineHeight = '1.2';
+
+                                    const label = document.createElement('span');
+                                    label.className = 'fi-bulk-select-label';
+                                    label.textContent = 'Seleccionar todo';
+                                    label.style.fontSize = '0.82rem';
+                                    label.style.fontWeight = '600';
+                                    label.style.color = '#10233c';
+                                    label.style.whiteSpace = 'nowrap';
+
+                                    checkbox.parentNode.insertBefore(wrapper, checkbox);
+                                    wrapper.appendChild(checkbox);
+                                    wrapper.appendChild(label);
+                                });
+                            };
+
+                            injectLabel();
+
+                            const observer = new MutationObserver(() => {
+                                injectLabel();
+                            });
+
+                            observer.observe(document.body, {
+                                childList: true,
+                                subtree: true,
+                            });
+                        });
+                    </script>
+                HTML),
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
