@@ -44,11 +44,24 @@ Artisan::command('test {--suite=all : Suite a ejecutar: all, Unit, Feature, E2E}
     if (! $compact) {
         $this->output->writeln('');
         $this->output->writeln('<info>'.$globalStartMessage.$filterLabel.'</info>');
-        $this->output->writeln('<comment>Comando: '.implode(' ', array_map('escapeshellarg', $command)).'</comment>');
         $this->output->writeln('');
     }
 
-    $process = new Process($command, base_path());
+    $process = new Process(
+        $command,
+        base_path(),
+        [
+            'APP_ENV' => 'testing',
+            'APP_DEBUG' => 'true',
+            'DB_CONNECTION' => 'sqlite',
+            'DB_DATABASE' => ':memory:',
+            'DB_FOREIGN_KEYS' => 'true',
+            'CACHE_STORE' => 'array',
+            'QUEUE_CONNECTION' => 'sync',
+            'SESSION_DRIVER' => 'array',
+            'MAIL_MAILER' => 'array',
+        ],
+    );
     $process->setTty(Process::isTtySupported());
     $process->setTimeout(0);
     $process->setIdleTimeout(0);
