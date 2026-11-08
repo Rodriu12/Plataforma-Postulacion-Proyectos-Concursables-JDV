@@ -135,11 +135,34 @@ test('las reglas de ResidenteImporter validan el formato de RUT', function () {
     expect($invalido->fails())->toBeTrue();
 });
 
+test('el RUT se normaliza con puntos y guion en formato chileno', function () {
+    $user = User::create([
+        'name' => 'Rodrigo Alarcón',
+        'email' => 'rodrigo@ejemplo.com',
+        'password' => bcrypt('password123'),
+        'role' => 'vecino',
+        'rut' => '215704823',
+        'is_active' => true,
+    ]);
+
+    expect($user->rut)->toBe('21.570.482-3');
+
+    $organizacion = Organizacion::create([
+        'nombre' => 'Junta de prueba',
+        'rut_juridico' => '215704823',
+        'direccion' => 'Calle Falsa 123',
+    ]);
+
+    expect($organizacion->rut_juridico)->toBe('21.570.482-3');
+});
+
 test('las reglas de ResidenteImporter validan telefono y rol', function () {
     $columns = collect(ResidenteImporter::getColumns())->keyBy(fn ($c) => $c->getName());
 
     $phoneRules = $columns->get('phone')->getDataValidationRules();
     expect(validator(['phone' => '+56 9 1234 5678'], ['phone' => $phoneRules])->passes())->toBeTrue();
+    expect(validator(['phone' => '912345678'], ['phone' => $phoneRules])->passes())->toBeTrue();
+    expect(validator(['phone' => '+56 2 2345 6789'], ['phone' => $phoneRules])->passes())->toBeTrue();
     expect(validator(['phone' => '12345678abc'], ['phone' => $phoneRules])->fails())->toBeTrue();
 
     $roleRules = $columns->get('role')->getDataValidationRules();
