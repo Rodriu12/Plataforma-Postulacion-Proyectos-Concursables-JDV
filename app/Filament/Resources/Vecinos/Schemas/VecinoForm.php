@@ -36,7 +36,48 @@ class VecinoForm
                 TextInput::make('telefono')
                     ->label('Teléfono')
                     ->tel()
-                    ->maxLength(15),
+                    ->maxLength(20)
+                    ->placeholder('+56 9 1234 5678')
+                    ->rules([
+                        'nullable',
+                        'regex:/^(?:\+56\s?)?(?:9[\s-]?\d{4}[\s-]?\d{4}|[2-9][\s-]?\d{3,4}[\s-]?\d{4})$/',
+                    ])
+                    ->extraInputAttributes(['x-on:input' => <<<'JS'
+                            let digits = $el.value.replace(/\D/g, '');
+
+                            if (! digits) {
+                                $el.value = '';
+                                return;
+                            }
+
+                            if (digits.startsWith('56')) {
+                                digits = digits.slice(2);
+                            }
+
+                            if (digits.length > 9) {
+                                digits = digits.slice(0, 9);
+                            }
+
+                            let formatted = digits;
+
+                            if (digits.startsWith('9')) {
+                                if (digits.length <= 1) {
+                                    formatted = digits;
+                                } elseif (digits.length <= 5) {
+                                    formatted = digits.replace(/(\d{1})(\d{0,4})/, '$1 $2').trim();
+                                } else {
+                                    formatted = digits.replace(/(\d{1})(\d{4})(\d{0,4})/, '$1 $2 $3').trim();
+                                }
+                            } else {
+                                if (digits.length <= 4) {
+                                    formatted = digits;
+                                } else {
+                                    formatted = digits.replace(/(\d{4})(\d{0,4})/, '$1 $2').trim();
+                                }
+                            }
+
+                            $el.value = '+56 ' + formatted.replace(/\s+/g, ' ').trim();
+                        JS]),
                     
                 TextInput::make('direccion')
                     ->label('Dirección Completa')

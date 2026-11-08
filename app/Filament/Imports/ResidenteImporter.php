@@ -67,11 +67,7 @@ class ResidenteImporter extends Importer
                 ->rules([
                     'nullable',
                     'max:20',
-                    function (string $attribute, mixed $value, \Closure $fail): void {
-                        if (filled($value) && ! preg_match('/^[\+0-9\s\-]+$/', (string) $value)) {
-                            $fail('El teléfono solo puede contener números, espacios, guiones y el signo +.');
-                        }
-                    },
+                    'regex:/^(?:\+56\s?)?(?:9[\s-]?\d{4}[\s-]?\d{4}|[2-9][\s-]?\d{3,4}[\s-]?\d{4})$/',
                 ]),
 
             ImportColumn::make('sector')

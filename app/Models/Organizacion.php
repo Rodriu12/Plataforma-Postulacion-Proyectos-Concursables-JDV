@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,6 +18,32 @@ class Organizacion extends Model
         'sector',
         'fecha_constitucion',
     ];
+
+    protected function rutJuridico(): Attribute
+    {
+        return Attribute::make(
+            set: function (?string $value): ?string {
+                if (blank($value)) {
+                    return null;
+                }
+
+                $limpio = preg_replace('/[^0-9kK]/', '', (string) $value);
+
+                if ($limpio === '') {
+                    return null;
+                }
+
+                $dv = strtoupper(substr($limpio, -1));
+                $cuerpo = substr($limpio, 0, -1);
+
+                if ($cuerpo === '') {
+                    return $dv;
+                }
+
+                return preg_replace('/(?<=\d)(?=(\d{3})+(?!\d))/', '.', $cuerpo) . '-' . $dv;
+            },
+        );
+    }
 
     public function users(): HasMany
     {
