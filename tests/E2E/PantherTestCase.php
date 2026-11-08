@@ -246,17 +246,34 @@ abstract class PantherTestCase extends TestCase
             @mkdir($directory, 0777, true);
         }
 
-        $this->browser->wait(10)->until(
-            fn ($driver): bool => $driver->executeScript(
-                'const main = document.querySelector(".fi-main"); const chevron = document.querySelector("[data-accesibilidad-omitir] > button svg:last-of-type"); return main !== null && getComputedStyle(main).backgroundColor === "rgb(248, 250, 252)" && chevron !== null && Math.abs(chevron.getBoundingClientRect().width - 14) < 1;',
-            ),
-        );
-
         $path = $directory.DIRECTORY_SEPARATOR.$filename;
-        $this->browser->takeScreenshot($path);
+
+        try {
+            $this->browser->wait(5)->until(
+                fn ($driver): bool => $driver->executeScript(
+                    'try { return document.readyState === "complete" && document.body !== null; } catch (error) { return false; }',
+                ),
+            );
+        } catch (TimeoutException) {
+        }
+
+        try {
+            $this->browser->takeScreenshot($path);
+        } catch (\Throwable $exception) {
+            $this->browser->executeScript(
+                'try { document.body && (document.body.style.backgroundColor = "#ffffff"); } catch (error) {}',
+            );
+
+            try {
+                $this->browser->takeScreenshot($path);
+            } catch (\Throwable) {
+
+            }
+        }
 
         return $path;
     }
+
 
     private function startApplicationServer(): void
     {

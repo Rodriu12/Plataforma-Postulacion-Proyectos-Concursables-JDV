@@ -169,16 +169,28 @@ php vendor/bin/bdi detect drivers
 Ejecuta cada suite desde la raíz del proyecto:
 
 ```powershell
-php artisan test --testsuite=Unit
-php artisan test --testsuite=Feature
-php artisan test --testsuite=E2E
+php artisan test:unit
+php artisan test:feature
+php artisan test:e2e
+```
+
+También puedes usar la forma nativa con suite explícita:
+
+```powershell
+php artisan test --suite=Unit
+php artisan test --suite=Feature
+php artisan test --suite=E2E
 ```
 
 Para correr todas las suites:
 
 ```powershell
+php artisan test:all
+# o la forma nativa
 php artisan test
 ```
+
+La salida muestra el nombre de la suite actual y luego Pest/ PHPUnit imprime cada test que se está ejecutando en tiempo real.
 
 Las pruebas E2E guardan capturas de los formularios y resultados en `storage/app/e2e-screenshots/`. Requieren Google Chrome instalado; no es necesario iniciar Apache, MySQL ni `php artisan serve`.
 
