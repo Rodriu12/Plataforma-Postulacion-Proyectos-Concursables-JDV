@@ -25,6 +25,10 @@ jobs:
           fi
           ln -sfn ~/uploads ./public/uploads
 
+      - name: Quitar artefactos de pruebas
+        run: |
+          rm -rf ./tests ./phpunit.xml ./phpunit.xml.dist ./storage/framework/testing 2>/dev/null || true
+
       - name: Instalar dependencias
         run: |
           source ~/.bashrc
