@@ -40,6 +40,8 @@ class AdminPanelProvider extends PanelProvider
             ->profile(\App\Filament\Pages\Auth\CustomEditProfile::class)
             ->databaseNotifications()
             ->databaseNotificationsPolling('30s')
+            ->darkMode(false)
+            ->themeSwitcher(false)
             ->colors([
                 'primary' => '#2563eb',
                 'gray' => Color::Slate,
@@ -60,7 +62,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->renderHook(
                 PanelsRenderHook::GLOBAL_SEARCH_AFTER,
