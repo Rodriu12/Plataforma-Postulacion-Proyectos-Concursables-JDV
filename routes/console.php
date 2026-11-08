@@ -16,6 +16,21 @@ Artisan::command('test {--suite=all : Suite a ejecutar: all, Unit, Feature, E2E}
     $suite = $this->option('suite');
     $filter = $this->option('filter');
     $compact = $this->option('compact');
+
+    $displaySuite = match ($suite) {
+        'all' => 'globales',
+        'Unit' => 'unitarias',
+        'Feature' => 'de integración',
+        'E2E' => 'E2E',
+        default => 'de la suite '.$suite,
+    };
+
+    $globalStartMessage = $suite === 'all'
+        ? 'Ejecutando tests globales'
+        : 'Ejecutando test '.$displaySuite;
+
+    $filterLabel = $filter !== null && $filter !== '' ? ' (filtro: '.$filter.')' : '';
+
     $command = [PHP_BINARY, 'vendor/bin/pest'];
 
     if ($suite !== 'all') {
@@ -27,26 +42,36 @@ Artisan::command('test {--suite=all : Suite a ejecutar: all, Unit, Feature, E2E}
     }
 
     if (! $compact) {
-        $this->newLine();
-        $this->info('▶ Ejecutando pruebas '.($suite === 'all' ? 'globales' : 'de la suite '.$suite));
-        $this->newLine();
+        $this->output->writeln('');
+        $this->output->writeln('<info>'.$globalStartMessage.$filterLabel.'</info>');
+        $this->output->writeln('<comment>Comando: '.implode(' ', array_map('escapeshellarg', $command)).'</comment>');
+        $this->output->writeln('');
     }
 
     $process = new Process($command, base_path());
     $process->setTty(Process::isTtySupported());
+    $process->setTimeout(0);
+    $process->setIdleTimeout(0);
     $process->run(function ($type, $buffer): void {
-        if ($type === Process::OUT) {
+        if ($type === Process::OUT || $type === Process::ERR) {
             $this->output->write($buffer);
         }
     });
 
-    if ($process->getExitCode() !== 0) {
-        return $process->getExitCode();
+    $exitCode = $process->getExitCode();
+
+    if ($exitCode !== 0) {
+        if (! $compact) {
+            $this->output->writeln('');
+            $this->output->writeln('<error>Fallaron los tests '.$displaySuite.$filterLabel.'</error>');
+        }
+
+        return $exitCode;
     }
 
     if (! $compact) {
-        $this->newLine();
-        $this->info('Finalizaron las pruebas de '.$suite);
+        $this->output->writeln('');
+        $this->output->writeln('<info>Finalizaron los tests '.$displaySuite.$filterLabel.'</info>');
     }
 
     return 0;
