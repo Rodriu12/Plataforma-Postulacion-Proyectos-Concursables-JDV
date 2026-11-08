@@ -1,10 +1,8 @@
-<x-filament-widgets::widget>
-    <x-filament::section>
+<x-filament-widgets::widget class="proyectos-novedades-widget">
+    <x-filament::section class="proyectos-novedades-section">
         <x-slot name="heading">
-            <div
-                style="display: flex; align-items: center; gap: 10px; color: #1d4ed8; font-weight: 700; font-size: 18px;">
-                <div
-                    style="width: 28px; height: 28px; border-radius: 8px; background-color: #eff6ff; display: flex; align-items: center; justify-content: center; color: #2563eb;">
+            <div class="novedades-title">
+                <div class="novedades-icon">
                     <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" stroke-width="2"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -16,59 +14,45 @@
             </div>
         </x-slot>
 
-        <div
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 12px;">
+        <div class="proyectos-novedades-grid">
             @forelse($proyectos as $proyecto)
-                <div class="fund-card"
-                    style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 1px 3px 0 rgba(0,0,0,0.04);">
+                <div class="fund-card">
                     <div>
-                        <div style="margin-bottom: 12px;">
-                            <span
-                                style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; background-color: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; text-transform: uppercase; letter-spacing: 0.05em;">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #2563eb;"
-                                    class="pulse-dot"></span>
+                        <div class="fund-badge-wrap">
+                            <span class="fund-badge">
+                                <span class="pulse-dot"></span>
                                 ABIERTO
                             </span>
                         </div>
 
-                        <div style="space-y: 8px;">
-                            <!-- Alpine.js :style controla dinámicamente el tamaño de la letra -->
-                            <h4
-                                :style="leyendo ? 'font-size: 22px; font-weight: 800;' : 'font-size: 14px; font-weight: 700;'"
-                                style="color: #0f172a; line-height: 1.4; margin: 0 0 6px 0; transition: all 0.3s ease;">
+                        <div class="fund-content">
+                            <h4 class="fund-title" :style="leyendo ? 'font-size: 22px; font-weight: 800;' : 'font-size: 14px; font-weight: 700;'">
                                 {{ $proyecto->tipo ?? 'Regional' }}
                                 {{ $proyecto->organismo ?? ($proyecto->nombre_institucion ?? '') }}
                             </h4>
 
-                            <p
-                                :style="leyendo ? 'font-size: 18px;' : 'font-size: 13px;'"
-                                style="font-weight: 600; color: #334155; line-height: 1.4; margin: 0 0 6px 0; transition: all 0.3s ease;">
+                            <p class="fund-name" :style="leyendo ? 'font-size: 18px;' : 'font-size: 13px;'">
                                 {{ $proyecto->nombre }}
                             </p>
 
-                            <p
-                                :style="leyendo ? 'font-size: 16px;' : 'font-size: 12px;'"
-                                style="color: #64748b; font-weight: 500; line-height: 1.4; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: all 0.3s ease;">
+                            <p class="fund-description" :style="leyendo ? 'font-size: 16px;' : 'font-size: 12px;'">
                                 Beneficiarios/as:
                                 {{ $proyecto->beneficiarios ?? ($proyecto->descripcion ?? 'Persona Jurídica') }}
                             </p>
                         </div>
                     </div>
 
-                    <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #f1f5f9;">
+                    <div class="fund-link-wrap">
                         <a href="{{ $proyecto->url_fuente }}" target="_blank" rel="noopener noreferrer"
-                            class="shimmer-btn"
-                            :style="leyendo ? 'font-size: 16px; padding: 14px 20px;' : 'font-size: 13px; padding: 10px 16px;'"
-                            style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; font-weight: 600; color: #1d4ed8; text-decoration: none; transition: all 0.3s ease;"
-                            onmouseover="this.style.backgroundColor='#eff6ff'; this.style.borderColor='#93c5fd';"
-                            onmouseout="this.style.backgroundColor='#f8fafc'; this.style.borderColor='#cbd5e1';">
+                            class="shimmer-btn fund-link"
+                            :style="leyendo ? 'font-size: 16px; padding: 14px 20px;' : 'font-size: 13px; padding: 10px 16px;'">
                             Ver enlace oficial del fondo
-                            <span style="font-weight: 700; font-size: 14px;">›</span>
+                            <span class="fund-link-arrow">›</span>
                         </a>
                     </div>
                 </div>
             @empty
-                <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #64748b; font-size: 14px;">
+                <div class="fund-empty-state">
                     No hay nuevas convocatorias de fondos disponibles en este momento.
                 </div>
             @endforelse

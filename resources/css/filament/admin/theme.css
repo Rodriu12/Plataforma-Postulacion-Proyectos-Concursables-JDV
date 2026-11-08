@@ -1,13 +1,203 @@
 @import '/vendor/filament/filament/resources/css/theme.css';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+:root {
+    color-scheme: light;
+}
+
 body {
     font-family: 'Inter', sans-serif !important;
     background-color: #f8fafc !important;
+    color: #0f172a !important;
 }
 
 .fi-main {
     background-color: #f8fafc !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+    }
+
+    html,
+    body,
+    .fi-main,
+    .fi-page,
+    .fi-body,
+    .fi-form,
+    .fi-auth-page,
+    .fi-content,
+    .fi-layout,
+    .fi-page-content,
+    .fi-page-content-main,
+    .fi-main-content,
+    .fi-dashboard {
+        background-color: #020817 !important;
+        color: #e2e8f0 !important;
+    }
+
+    .fi-header,
+    .fi-header h1,
+    .fi-header h2,
+    .fi-header p,
+    .fi-section-title,
+    .fi-card,
+    .fi-panel,
+    .fi-form,
+    .fi-page-header,
+    .fi-page-header-title,
+    .fi-page-header-subtitle,
+    .fi-infolist-item,
+    .fi-table td,
+    .fi-table th,
+    .fi-table thead th,
+    .fi-table tbody td,
+    .fi-dropdown-panel,
+    .fi-dropdown-panel *,
+    .fi-auth-page *,
+    .fi-auth-page h1,
+    .fi-auth-page h2,
+    .fi-auth-page p,
+    .fi-auth-page label,
+    .fi-auth-page a,
+    .fi-auth-page .fi-form-label,
+    .fi-auth-page .fi-input,
+    .fi-auth-page .fi-input-wrapper,
+    .fi-auth-page .fi-icon,
+    .fi-widget,
+    .fi-widgets {
+        color: #e2e8f0 !important;
+    }
+
+    .fi-card,
+    .fi-panel,
+    .fi-section,
+    .fi-auth-page .fi-card,
+    .fi-auth-page .fi-section,
+    .fi-auth-page .fi-panel,
+    .fi-auth-page .fi-form,
+    .fi-auth-page .fi-field,
+    .fi-auth-page .fi-input,
+    .fi-auth-page .fi-input-wrapper,
+    .fi-dropdown-panel,
+    .fi-table,
+    .fi-table tr,
+    .fi-table td,
+    .fi-table th,
+    .fi-widget,
+    .fi-widgets,
+    [class*='bg-white'],
+    [class*='bg-slate-50'],
+    [class*='bg-slate-100'],
+    [class*='bg-gray-50'],
+    [class*='bg-gray-100'],
+    [class*='bg-white/'] {
+        background-color: #0f172a !important;
+        border-color: rgba(148, 163, 184, 0.25) !important;
+    }
+
+    .fi-card *,
+    .fi-panel *,
+    .fi-widget *,
+    .fi-section *,
+    [class*='text-slate-900'],
+    [class*='text-slate-800'],
+    [class*='text-gray-900'],
+    [class*='text-gray-800'],
+    [class*='text-slate-700'],
+    [class*='text-gray-700'],
+    [class*='text-slate-600'],
+    [class*='text-gray-600'] {
+        color: #e2e8f0 !important;
+    }
+
+    .fi-input,
+    .fi-input-wrapper,
+    .fi-input[type='email'],
+    .fi-input[type='password'],
+    .fi-input[type='text'],
+    .fi-input textarea,
+    .fi-input select,
+    .fi-select {
+        background-color: #0f172a !important;
+        color: #e2e8f0 !important;
+        border-color: rgba(148, 163, 184, 0.35) !important;
+    }
+
+    .fi-input::placeholder,
+    .fi-input-wrapper input::placeholder,
+    .fi-input[type='email']::placeholder,
+    .fi-input[type='password']::placeholder,
+    .fi-input textarea::placeholder,
+    .fi-select::placeholder {
+        color: #94a3b8 !important;
+    }
+
+    .fi-sidebar,
+    aside.fi-sidebar,
+    .fi-sidebar-header,
+    .fi-topbar,
+    .fi-topbar .fi-topbar-item-btn,
+    .fi-topbar .fi-icon-btn,
+    .fi-topbar .fi-sidebar-trigger,
+    .fi-topbar .fi-user-menu-trigger,
+    .fi-dropdown-panel,
+    .fi-dropdown-panel .fi-dropdown-list-item,
+    .fi-dropdown-panel .fi-dropdown-list-item-label,
+    .fi-dropdown-panel .fi-dropdown-list-item .fi-icon {
+        background-color: #020b1a !important;
+        color: #e2e8f0 !important;
+    }
+
+    .fi-sidebar .fi-sidebar-item-label,
+    .fi-sidebar .fi-sidebar-item-icon,
+    .fi-sidebar .fi-sidebar-section-title,
+    .fi-sidebar .fi-sidebar-item-text,
+    aside.fi-sidebar .fi-sidebar-item-label,
+    aside.fi-sidebar .fi-sidebar-item-icon,
+    aside.fi-sidebar .fi-sidebar-item-text,
+    .fi-topbar .fi-topbar-item-btn,
+    .fi-topbar .fi-icon-btn,
+    .fi-topbar .fi-sidebar-trigger,
+    .fi-topbar .fi-user-menu-trigger,
+    .fi-dropdown-panel .fi-dropdown-list-item,
+    .fi-dropdown-panel .fi-dropdown-list-item-label,
+    .fi-dropdown-panel .fi-dropdown-list-item .fi-icon {
+        color: #e2e8f0 !important;
+    }
+
+    .fi-sidebar-item.fi-active > .fi-sidebar-item-btn,
+    .fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button,
+    aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button,
+    .fi-button-primary,
+    .fi-accent,
+    button[type='submit'],
+    .fi-btn-primary {
+        background-color: #2563eb !important;
+        color: #ffffff !important;
+        border-color: rgba(96, 165, 250, 0.5) !important;
+    }
+
+    .fi-sidebar .fi-sidebar-item-btn:hover,
+    .fi-sidebar .fi-sidebar-item-button:hover,
+    aside.fi-sidebar .fi-sidebar-item-btn:hover,
+    aside.fi-sidebar .fi-sidebar-item-button:hover,
+    .fi-dropdown-panel .fi-dropdown-list-item:hover,
+    .fi-topbar .fi-topbar-item-btn:hover {
+        background-color: rgba(148, 163, 184, 0.12) !important;
+    }
+}
+
+html.dark body,
+html.dark,
+body.dark,
+html.dark .fi-main,
+html.dark .fi-page,
+body.dark .fi-main,
+body.dark .fi-page {
+    background-color: #020817 !important;
+    color: #e2e8f0 !important;
 }
 
 ::-webkit-scrollbar {
@@ -28,18 +218,131 @@ body {
 .fi-sidebar,
 aside.fi-sidebar,
 .fi-sidebar-header {
-    background: #0f172a !important; /* Azul oscuro elegante acorde a la topbar */
+    background: #0f172a !important;
     border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: none !important;
 }
 
-/* Logo de la marca / Brand Name en Sidebar y Topbar */
 .fi-logo,
 .fi-sidebar-header-brand,
 .fi-sidebar-brand,
 .fi-sidebar-header a,
 .fi-topbar .fi-logo {
     color: #ffffff !important;
+}
+
+.fi-auth-page .fi-brand,
+.fi-auth-page .fi-logo,
+.fi-auth-page .fi-brand-name,
+.fi-auth-page .fi-brand-name span,
+.fi-auth-page .fi-sidebar-header-brand,
+.fi-auth-page .fi-branding,
+.fi-auth-page a,
+.fi-auth-page h1,
+.fi-auth-page h2,
+.fi-auth-page p,
+.fi-auth-page label,
+.fi-auth-page .fi-input,
+.fi-auth-page .fi-input-wrapper,
+.fi-auth-page .fi-form-label {
+    color: #0f172a !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .fi-auth-page .fi-brand,
+    .fi-auth-page .fi-logo,
+    .fi-auth-page .fi-brand-name,
+    .fi-auth-page .fi-brand-name span,
+    .fi-auth-page .fi-sidebar-header-brand,
+    .fi-auth-page .fi-branding,
+    .fi-auth-page a,
+    .fi-auth-page h1,
+    .fi-auth-page h2,
+    .fi-auth-page p,
+    .fi-auth-page label,
+    .fi-auth-page .fi-input,
+    .fi-auth-page .fi-input-wrapper,
+    .fi-auth-page .fi-form-label {
+        color: #e2e8f0 !important;
+    }
+
+    .proyectos-novedades-widget .novedades-title,
+    .proyectos-novedades-widget .fund-title,
+    .proyectos-novedades-widget .fund-name,
+    .proyectos-novedades-widget .fund-description,
+    .proyectos-novedades-widget .fund-empty-state {
+        color: #e2e8f0 !important;
+    }
+
+    .proyectos-novedades-widget .fund-card,
+    .proyectos-novedades-widget .fund-link-wrap,
+    .proyectos-novedades-widget .fi-section,
+    .proyectos-novedades-widget .fi-section-content,
+    .proyectos-novedades-widget .fi-section-header {
+        background-color: #0f172a !important;
+        border-color: rgba(148, 163, 184, 0.25) !important;
+    }
+
+    .proyectos-novedades-widget .novedades-icon {
+        background-color: rgba(59, 130, 246, 0.12) !important;
+        color: #bfdbfe !important;
+    }
+
+    .proyectos-novedades-widget .fund-badge {
+        background-color: rgba(96, 165, 250, 0.12) !important;
+        border-color: rgba(147, 197, 253, 0.35) !important;
+        color: #dbeafe !important;
+    }
+
+    .proyectos-novedades-widget .pulse-dot {
+        background-color: #60a5fa !important;
+    }
+
+    .proyectos-novedades-widget .fund-link {
+        background-color: #0b1220 !important;
+        border-color: rgba(148, 163, 184, 0.28) !important;
+        color: #dbeafe !important;
+    }
+
+    .proyectos-novedades-widget .fund-link:hover {
+        background-color: rgba(59, 130, 246, 0.12) !important;
+        border-color: rgba(96, 165, 250, 0.45) !important;
+        color: #ffffff !important;
+    }
+}
+
+html.dark .proyectos-novedades-widget .novedades-title,
+html.dark .proyectos-novedades-widget .fund-title,
+html.dark .proyectos-novedades-widget .fund-name,
+html.dark .proyectos-novedades-widget .fund-description,
+html.dark .proyectos-novedades-widget .fund-empty-state,
+body.dark .proyectos-novedades-widget .novedades-title,
+body.dark .proyectos-novedades-widget .fund-title,
+body.dark .proyectos-novedades-widget .fund-name,
+body.dark .proyectos-novedades-widget .fund-description,
+body.dark .proyectos-novedades-widget .fund-empty-state {
+    color: #e2e8f0 !important;
+}
+
+html.dark .proyectos-novedades-widget .fund-card,
+html.dark .proyectos-novedades-widget .fund-link,
+body.dark .proyectos-novedades-widget .fund-card,
+body.dark .proyectos-novedades-widget .fund-link {
+    background-color: #0f172a !important;
+    border-color: rgba(148, 163, 184, 0.25) !important;
+}
+
+html.dark .proyectos-novedades-widget .novedades-icon,
+body.dark .proyectos-novedades-widget .novedades-icon {
+    background-color: rgba(59, 130, 246, 0.12) !important;
+    color: #bfdbfe !important;
+}
+
+html.dark .proyectos-novedades-widget .fund-badge,
+body.dark .proyectos-novedades-widget .fund-badge {
+    background-color: rgba(96, 165, 250, 0.12) !important;
+    border-color: rgba(147, 197, 253, 0.35) !important;
+    color: #dbeafe !important;
 }
 
 .fi-sidebar .fi-sidebar-item-label,
@@ -50,23 +353,22 @@ aside.fi-sidebar .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-icon,
 aside.fi-sidebar .fi-sidebar-section-title,
 aside.fi-sidebar .fi-sidebar-item-text {
-    color: #cbd5e1 !important; /* Gris claro muy legible sobre fondo oscuro */
+    color: #cbd5e1 !important;
     font-weight: 500 !important;
 }
 
-/* Botones de navegación del sidebar (item-btn e item-button) */
+
 .fi-sidebar .fi-sidebar-item-btn,
 .fi-sidebar .fi-sidebar-item-button,
 aside.fi-sidebar .fi-sidebar-item-btn,
 aside.fi-sidebar .fi-sidebar-item-button {
     border-radius: 0.65rem !important;
-    border: 1px solid transparent !important; /* Mismo grosor que el activo para que no salte ni se descuadre */
+    border: 1px solid transparent !important;
     transition: all 0.15s ease !important;
     padding: 0.65rem 0.85rem !important;
     box-sizing: border-box !important;
 }
 
-/* Hover: Mismo padding, mismo borde y alineación */
 .fi-sidebar .fi-sidebar-item:hover > .fi-sidebar-item-btn,
 .fi-sidebar .fi-sidebar-item-btn:hover,
 .fi-sidebar .fi-sidebar-item-button:hover,
@@ -89,11 +391,10 @@ aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-icon {
     color: #ffffff !important;
 }
 
-/* Elemento activo del menú: Mismo grosor de 1px, fondo azul Vecindar */
 .fi-sidebar-item.fi-active > .fi-sidebar-item-btn,
 .fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button {
-    background: #2563eb !important; /* Azul de Vecindar */
+    background: #2563eb !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-radius: 0.65rem !important;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
@@ -134,7 +435,7 @@ aside.fi-sidebar .fi-sidebar-nav {
     color: #e2e8f0 !important;
 }
 
-/* Elementos dentro del topbar (botones, iconos, trigger de usuario) */
+
 .fi-topbar .fi-topbar-item-btn,
 .fi-topbar .fi-icon-btn,
 .fi-topbar .fi-sidebar-trigger,
@@ -162,10 +463,6 @@ aside.fi-sidebar .fi-sidebar-nav {
     border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* ========================================================
-   MENÚ DESPLEGABLE DE ACCESIBILIDAD Y USUARIO
-   Colores nítidos, alto contraste y legible como en la portada
-   ======================================================== */
 .accesibilidad-dropdown-panel,
 .fi-dropdown-panel {
     background-color: #ffffff !important;
@@ -174,7 +471,6 @@ aside.fi-sidebar .fi-sidebar-nav {
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Forzar que todos los botones y textos internos del panel de accesibilidad sean oscuros y legibles */
 .accesibilidad-dropdown-panel button,
 .accesibilidad-dropdown-panel span,
 .accesibilidad-dropdown-panel p {
@@ -193,10 +489,9 @@ aside.fi-sidebar .fi-sidebar-nav {
     color: #0f172a !important;
 }
 
-/* Textos e iconos de los ítems del menú desplegable de usuario */
 .fi-dropdown-panel .fi-dropdown-list-item,
 .fi-dropdown-list-item {
-    color: #1e293b !important; /* Slate 800 oscuro y de alto contraste */
+    color: #1e293b !important;
     font-weight: 500 !important;
 }
 
@@ -211,10 +506,9 @@ aside.fi-sidebar .fi-sidebar-nav {
 .fi-dropdown-panel .fi-dropdown-list-item > svg,
 .fi-dropdown-list-item .fi-icon,
 .fi-dropdown-list-item > svg {
-    color: #3b82f6 !important; /* Azul visible y vibrante para iconos */
+    color: #3b82f6 !important;
 }
 
-/* Hover en los ítems */
 .fi-dropdown-panel .fi-dropdown-list-item:hover,
 .fi-dropdown-list-item:hover {
     background-color: #f1f5f9 !important;
@@ -232,7 +526,6 @@ aside.fi-sidebar .fi-sidebar-nav {
     color: #1d4ed8 !important;
 }
 
-/* Selector de temas (claro/oscuro/sistema) dentro del menú */
 .fi-theme-switcher,
 .fi-theme-switcher-btn {
     color: #475569 !important;
