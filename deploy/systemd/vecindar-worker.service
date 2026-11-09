@@ -1,0 +1,16 @@
+[Unit]
+Description=Laravel queue worker for Vecindar
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/ruta/de/tu/proyecto
+ExecStart=/usr/bin/php /ruta/de/tu/proyecto/artisan queue:work database --sleep=3 --tries=3 --timeout=60 --max-time=3600
+Restart=always
+RestartSec=10
+StartLimitBurst=5
+StartLimitIntervalSec=60
+
+[Install]
+WantedBy=multi-user.target

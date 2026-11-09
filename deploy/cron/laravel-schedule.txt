@@ -1,0 +1,1 @@
+* * * * * cd /ruta/de/tu/proyecto && php artisan schedule:run >> /dev/null 2>&1
