@@ -2,17 +2,17 @@
 
 use App\Models\User;
 
-it('returns the home page successfully', function () {
+it('devuelve la página de inicio correctamente', function () {
     $this->withServerVariables(['HTTP_HOST' => 'localhost'])
         ->get('/')
         ->assertOk();
 });
 
-it('redirects registration to the Filament login page', function () {
+it('redirige el registro a la página de login de Filament', function () {
     $this->get('/register')->assertRedirect('/admin/login');
 });
 
-it('logs out an authenticated user and invalidates the session', function () {
+it('cierra la sesión de un usuario autenticado e invalida la sesión', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user)
@@ -24,7 +24,7 @@ it('logs out an authenticated user and invalidates the session', function () {
     $this->assertGuest();
 });
 
-it('lets an approved resident download their certificate', function () {
+it('permite a un residente aprobado descargar su certificado', function () {
     $user = User::factory()->create(['rut' => '12.345.678-9']);
     $resident = $user->vecino;
     $resident->update(['estado' => 'aprobado']);
@@ -34,7 +34,7 @@ it('lets an approved resident download their certificate', function () {
         ->assertDownload('Certificado-Residencia-12.345.678-9.pdf');
 });
 
-it('denies another resident access to the certificate', function () {
+it('deniega el acceso a otro residente al certificado', function () {
     $owner = User::factory()->create(['rut' => '12.345.678-9']);
     $resident = $owner->vecino;
     $resident->update(['estado' => 'aprobado']);
@@ -45,10 +45,20 @@ it('denies another resident access to the certificate', function () {
         ->assertForbidden();
 });
 
-it('denies certificate downloads while the resident is pending', function () {
+it('deniega la descarga del certificado mientras el residente está pendiente', function () {
     $user = User::factory()->create(['rut' => '12.345.678-9']);
 
     $this->actingAs($user)
         ->get(route('vecino.certificado', $user->vecino))
         ->assertForbidden();
+});
+
+it('redirige a los invitados fuera del panel de administración', function () {
+    $this->get('/admin')
+        ->assertRedirect('/admin/login');
+});
+
+it('muestra la página de login del administrador para visitantes no autenticados', function () {
+    $this->get('/admin/login')
+        ->assertOk();
 });
