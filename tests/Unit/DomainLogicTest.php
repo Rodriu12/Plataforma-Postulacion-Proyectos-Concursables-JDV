@@ -36,3 +36,23 @@ it('only lets directive members update projects in their organization', function
     expect($policy->update($user, $ownProject))->toBeTrue()
         ->and($policy->update($user, $otherProject))->toBeFalse();
 });
+
+it('blocks panel access when a user is inactive', function () {
+    $user = new User([
+        'role' => 'vecino',
+        'organizacion_id' => null,
+        'is_active' => false,
+    ]);
+
+    expect($user->canAccessPanel(new \Filament\Panel))->toBeFalse();
+});
+
+it('allows the central admin to access the panel without an organization', function () {
+    $user = new User([
+        'role' => User::ROLE_ADMIN_CENTRAL,
+        'organizacion_id' => null,
+        'is_active' => true,
+    ]);
+
+    expect($user->canAccessPanel(new \Filament\Panel))->toBeTrue();
+});

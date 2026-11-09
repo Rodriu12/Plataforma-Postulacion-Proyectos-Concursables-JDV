@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Emergencias\Schemas;
 
 use App\Models\Emergencia;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -33,8 +34,15 @@ class EmergenciaForm
                     ->searchable()
                     ->preload()
                     ->default(fn () => auth()->user()?->vecino?->id)
+                    ->visible(fn () => static::esDirectiva())
                     ->disabled(fn () => ! static::esDirectiva())
                     ->dehydrated()
+                    ->required(),
+
+                Hidden::make('vecino_id')
+                    ->default(fn () => auth()->user()?->vecino?->id)
+                    ->dehydrated()
+                    ->visible(fn () => ! static::esDirectiva())
                     ->required(),
 
                 Select::make('organizacion_id')
@@ -98,8 +106,15 @@ class EmergenciaForm
                         'resuelta' => 'Resuelta',
                     ])
                     ->default('pendiente')
+                    ->visible(fn () => static::esDirectiva())
                     ->disabled(fn () => ! static::esDirectiva())
                     ->dehydrated()
+                    ->required(),
+
+                Hidden::make('estado')
+                    ->default('pendiente')
+                    ->dehydrated()
+                    ->visible(fn () => ! static::esDirectiva())
                     ->required(),
             ]);
     }
