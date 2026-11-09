@@ -27,6 +27,8 @@ class Reunion extends Model
     {
         return [
             'fecha_hora' => 'datetime',
+            'recordatorio_dia_enviado_at' => 'datetime',
+            'recordatorio_hora_enviado_at' => 'datetime',
         ];
     }
 

@@ -1,0 +1,16 @@
+[Unit]
+Description=Laravel queue worker for Vecindar
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/actions-runner/_work/Plataforma-Postulacion-Proyectos-Concursables-JDV/Plataforma-Postulacion-Proyectos-Concursables-JDV
+ExecStart=/usr/bin/php /actions-runner/_work/Plataforma-Postulacion-Proyectos-Concursables-JDV/Plataforma-Postulacion-Proyectos-Concursables-JDV/artisan queue:work database --sleep=3 --tries=3 --timeout=60 --max-time=3600
+Restart=always
+RestartSec=10
+StartLimitBurst=5
+StartLimitIntervalSec=60
+
+[Install]
+WantedBy=multi-user.target

@@ -5,8 +5,12 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 use Symfony\Component\Process\Process;
 
+use App\Jobs\EnviarNovedadesProyectosJob;
+use App\Jobs\EnviarRecordatoriosReunionesJob;
+
 Schedule::command('app:sincronizar-fondos-gob')->dailyAt('00:00');
-Schedule::command('app:enviar-novedades-proyectos')->dailyAt('10:00');
+Schedule::job(new EnviarNovedadesProyectosJob)->dailyAt('10:00')->withoutOverlapping();
+Schedule::job(new EnviarRecordatoriosReunionesJob)->everyMinute()->withoutOverlapping();
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
