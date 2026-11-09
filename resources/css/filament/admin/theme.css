@@ -1,13 +1,238 @@
 @import '/vendor/filament/filament/resources/css/theme.css';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+:root {
+    color-scheme: light;
+}
+
+.fi-theme-switcher,
+.fi-theme-switcher-btn,
+.fi-theme-switcher-item,
+.fi-theme-switcher [role='menu'],
+.fi-theme-switcher [role='menuitem'] {
+    display: none !important;
+}
+
 body {
     font-family: 'Inter', sans-serif !important;
-    background-color: #f8fafc !important;
+    background-color: #f4f7fb !important;
+    color: #10233c !important;
 }
 
 .fi-main {
-    background-color: #f8fafc !important;
+    background-color: #f4f7fb !important;
+}
+
+html,
+body,
+#app,
+.fi-main,
+.fi-body,
+.fi-page,
+.fi-page-content,
+.fi-page-content-main,
+.fi-content,
+.fi-dashboard,
+.fi-layout,
+.fi-wrapper,
+.fi-sidebar,
+.fi-topbar,
+.fi-card,
+.fi-panel,
+.fi-section,
+.fi-widget,
+.fi-widgets,
+.fi-dropdown-panel {
+    background-color: #f4f7fb !important;
+    color: #10233c !important;
+}
+
+html.dark,
+html.dark body,
+html.dark .fi-main,
+html.dark .fi-page,
+html.dark .fi-body,
+html.dark .fi-form,
+html.dark .fi-auth-page,
+html.dark .fi-content,
+html.dark .fi-layout,
+html.dark .fi-page-content,
+html.dark .fi-page-content-main,
+html.dark .fi-main-content,
+html.dark .fi-dashboard,
+html.dark #app,
+html.dark .fi-card,
+html.dark .fi-panel,
+html.dark .fi-section,
+html.dark .fi-widget,
+html.dark .fi-widgets,
+html.dark .fi-dropdown-panel,
+body.dark,
+body.dark .fi-main,
+body.dark .fi-page,
+body.dark .fi-body,
+body.dark .fi-form,
+body.dark .fi-auth-page,
+body.dark .fi-content,
+body.dark .fi-layout,
+body.dark .fi-page-content,
+body.dark .fi-page-content-main,
+body.dark .fi-main-content,
+body.dark .fi-dashboard,
+body.dark #app,
+body.dark .fi-card,
+body.dark .fi-panel,
+body.dark .fi-section,
+body.dark .fi-widget,
+body.dark .fi-widgets,
+body.dark .fi-dropdown-panel {
+    background-color: #f4f7fb !important;
+    color: #10233c !important;
+}
+
+html.dark .fi-header,
+html.dark .fi-header h1,
+html.dark .fi-header h2,
+html.dark .fi-header p,
+html.dark .fi-section-title,
+html.dark .fi-card,
+html.dark .fi-panel,
+html.dark .fi-form,
+html.dark .fi-page-header,
+html.dark .fi-page-header-title,
+html.dark .fi-page-header-subtitle,
+html.dark .fi-infolist-item,
+html.dark .fi-table td,
+html.dark .fi-table th,
+html.dark .fi-table thead th,
+html.dark .fi-table tbody td,
+html.dark .fi-dropdown-panel,
+html.dark .fi-dropdown-panel *,
+html.dark .fi-auth-page *,
+html.dark .fi-auth-page h1,
+html.dark .fi-auth-page h2,
+html.dark .fi-auth-page p,
+html.dark .fi-auth-page label,
+html.dark .fi-auth-page a,
+html.dark .fi-auth-page .fi-form-label,
+html.dark .fi-auth-page .fi-input,
+html.dark .fi-auth-page .fi-input-wrapper,
+html.dark .fi-auth-page .fi-icon,
+html.dark .fi-widget,
+html.dark .fi-widgets,
+body.dark .fi-header,
+body.dark .fi-header h1,
+body.dark .fi-header h2,
+body.dark .fi-header p,
+body.dark .fi-section-title,
+body.dark .fi-card,
+body.dark .fi-panel,
+body.dark .fi-form,
+body.dark .fi-page-header,
+body.dark .fi-page-header-title,
+body.dark .fi-page-header-subtitle,
+body.dark .fi-infolist-item,
+body.dark .fi-table td,
+body.dark .fi-table th,
+body.dark .fi-table thead th,
+body.dark .fi-table tbody td,
+body.dark .fi-dropdown-panel,
+body.dark .fi-dropdown-panel *,
+body.dark .fi-auth-page *,
+body.dark .fi-auth-page h1,
+body.dark .fi-auth-page h2,
+body.dark .fi-auth-page p,
+body.dark .fi-auth-page label,
+body.dark .fi-auth-page a,
+body.dark .fi-auth-page .fi-form-label,
+body.dark .fi-auth-page .fi-input,
+body.dark .fi-auth-page .fi-input-wrapper,
+body.dark .fi-auth-page .fi-icon,
+body.dark .fi-widget,
+body.dark .fi-widgets {
+    color: #10233c !important;
+}
+
+html.dark .fi-card,
+html.dark .fi-panel,
+html.dark .fi-section,
+html.dark .fi-auth-page .fi-card,
+html.dark .fi-auth-page .fi-section,
+html.dark .fi-auth-page .fi-panel,
+html.dark .fi-auth-page .fi-form,
+html.dark .fi-auth-page .fi-field,
+html.dark .fi-auth-page .fi-input,
+html.dark .fi-auth-page .fi-input-wrapper,
+html.dark .fi-dropdown-panel,
+html.dark .fi-table,
+html.dark .fi-table tr,
+html.dark .fi-table td,
+html.dark .fi-table th,
+html.dark .fi-widget,
+html.dark .fi-widgets,
+html.dark [class*='bg-white'],
+html.dark [class*='bg-slate-50'],
+html.dark [class*='bg-slate-100'],
+html.dark [class*='bg-gray-50'],
+html.dark [class*='bg-gray-100'],
+html.dark [class*='bg-white/'],
+body.dark .fi-card,
+body.dark .fi-panel,
+body.dark .fi-section,
+body.dark .fi-auth-page .fi-card,
+body.dark .fi-auth-page .fi-section,
+body.dark .fi-auth-page .fi-panel,
+body.dark .fi-auth-page .fi-form,
+body.dark .fi-auth-page .fi-field,
+body.dark .fi-auth-page .fi-input,
+body.dark .fi-auth-page .fi-input-wrapper,
+body.dark .fi-dropdown-panel,
+body.dark .fi-table,
+body.dark .fi-table tr,
+body.dark .fi-table td,
+body.dark .fi-table th,
+body.dark .fi-widget,
+body.dark .fi-widgets,
+body.dark [class*='bg-white'],
+body.dark [class*='bg-slate-50'],
+body.dark [class*='bg-slate-100'],
+body.dark [class*='bg-gray-50'],
+body.dark [class*='bg-gray-100'],
+body.dark [class*='bg-white/'] {
+    background-color: #f4f7fb !important;
+    border-color: rgba(148, 163, 184, 0.25) !important;
+}
+
+html.dark .fi-input,
+html.dark .fi-input-wrapper,
+html.dark .fi-input[type='email'],
+html.dark .fi-input[type='password'],
+html.dark .fi-input[type='text'],
+html.dark .fi-input textarea,
+html.dark .fi-input select,
+html.dark .fi-select,
+body.dark .fi-input,
+body.dark .fi-input-wrapper,
+body.dark .fi-input[type='email'],
+body.dark .fi-input[type='password'],
+body.dark .fi-input[type='text'],
+body.dark .fi-input textarea,
+body.dark .fi-input select,
+body.dark .fi-select {
+    background-color: #f4f7fb !important;
+    color: #10233c !important;
+    border-color: rgba(148, 163, 184, 0.35) !important;
+}
+
+html.dark body,
+html.dark,
+body.dark,
+html.dark .fi-main,
+html.dark .fi-page,
+body.dark .fi-main,
+body.dark .fi-page {
+    background-color: #f4f7fb !important;
+    color: #10233c !important;
 }
 
 ::-webkit-scrollbar {
@@ -28,18 +253,427 @@ body {
 .fi-sidebar,
 aside.fi-sidebar,
 .fi-sidebar-header {
-    background: #0f172a !important; /* Azul oscuro elegante acorde a la topbar */
-    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: linear-gradient(180deg, #dff5d6 0%, #cfeec9 100%) !important;
+    border-right: 1px solid rgba(34, 197, 94, 0.18) !important;
     box-shadow: none !important;
 }
 
-/* Logo de la marca / Brand Name en Sidebar y Topbar */
 .fi-logo,
 .fi-sidebar-header-brand,
 .fi-sidebar-brand,
 .fi-sidebar-header a,
-.fi-topbar .fi-logo {
+.fi-topbar .fi-logo,
+.vecindar-brand-name {
+    color: #111827 !important;
+}
+
+.fi-brand img,
+.fi-brand svg,
+.fi-branding img,
+.fi-branding svg,
+.fi-logo img,
+.fi-logo svg,
+.fi-sidebar-header-brand img,
+.fi-sidebar-header-brand svg,
+.fi-sidebar-brand img,
+.fi-sidebar-brand svg,
+.fi-topbar .fi-logo img,
+.fi-topbar .fi-logo svg {
+    display: none !important;
+}
+
+.fi-auth-page .fi-brand,
+.fi-auth-page .fi-logo,
+.fi-auth-page .fi-brand-name,
+.fi-auth-page .fi-brand-name span,
+.fi-auth-page .fi-sidebar-header-brand,
+.fi-auth-page .fi-branding,
+.fi-auth-page a,
+.fi-auth-page h1,
+.fi-auth-page h2,
+.fi-auth-page p,
+.fi-auth-page label,
+.fi-auth-page .fi-input,
+.fi-auth-page .fi-input-wrapper,
+.fi-auth-page .fi-form-label {
+    color: #0f172a !important;
+}
+
+.fi-auth-page {
+    background: #f4f7fb !important;
+    min-height: 100vh !important;
+}
+
+.fi-auth-page .fi-card,
+.fi-auth-page .fi-panel,
+.fi-auth-page .fi-section,
+.fi-auth-page .fi-form,
+.fi-auth-page .fi-form>div,
+.fi-auth-page [class*='fi-card'],
+.fi-auth-page [class*='fi-panel'],
+.fi-auth-page .fi-fo {
+    background: #f8fafc !important;
+    border: 1px solid rgba(148, 163, 184, 0.28) !important;
+    border-radius: 1.1rem !important;
+    box-shadow: 0 18px 40px rgba(2, 8, 23, 0.22) !important;
+    color: #0f172a !important;
+}
+
+.fi-auth-page .fi-input,
+.fi-auth-page .fi-input-wrapper,
+.fi-auth-page .fi-input[type='email'],
+.fi-auth-page .fi-input[type='password'],
+.fi-auth-page .fi-input[type='text'],
+.fi-auth-page textarea,
+.fi-auth-page select,
+.fi-auth-page .fi-select {
+    background-color: #edf4fb !important;
+    color: #0f172a !important;
+    border-color: rgba(148, 163, 184, 0.32) !important;
+}
+
+.fi-auth-page .fi-input::placeholder,
+.fi-auth-page .fi-input-wrapper input::placeholder,
+.fi-auth-page textarea::placeholder {
+    color: #475569 !important;
+}
+
+.fi-auth-page .fi-btn-primary,
+.fi-auth-page button[type='submit'],
+.fi-auth-page .fi-button {
+    background: linear-gradient(135deg, #8ab5e9 0%, #7aa9e7 100%) !important;
+    border-color: #89b0e3 !important;
     color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+.fi-auth-page .fi-link,
+.fi-auth-page a,
+.fi-auth-page .fi-form-label a {
+    color: #2563eb !important;
+}
+
+html,
+body,
+#app,
+.fi-main,
+.fi-body,
+.fi-page,
+.fi-page-content,
+.fi-page-content-main,
+.fi-content,
+.fi-dashboard,
+.fi-layout,
+.fi-wrapper,
+.fi-sidebar,
+.fi-topbar,
+.fi-card,
+.fi-panel,
+.fi-section,
+.fi-widget,
+.fi-widgets,
+.fi-dropdown-panel {
+    background-color: #f4f7fb !important;
+    color: #10233c !important;
+}
+
+.fi-page-header,
+.fi-page-header-title,
+.fi-page-header-subtitle,
+.fi-section-title,
+.fi-header,
+.fi-header h1,
+.fi-header h2,
+.fi-header p,
+h1,
+h2,
+h3,
+h4,
+p,
+label,
+span,
+li,
+td,
+th {
+    color: #10233c !important;
+}
+
+.access-button,
+.access-button * {
+    background-color: #f0f7f5 !important;
+    border-color: #cfe3dd !important;
+    color: #28645e !important;
+}
+
+.proyectos-novedades-widget .fi-section {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 1px solid rgba(148, 163, 184, 0.22) !important;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08) !important;
+    border-radius: 1.1rem !important;
+}
+
+.proyectos-novedades-widget .novedades-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #17324f !important;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.proyectos-novedades-widget .novedades-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.65rem;
+    background: rgba(59, 130, 246, 0.08);
+    color: #1d4ed8 !important;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.proyectos-novedades-widget .proyectos-novedades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.1rem;
+    margin-top: 1rem;
+}
+
+.proyectos-novedades-widget .fund-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08) !important;
+    padding: 1.15rem !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+}
+
+.proyectos-novedades-widget .fund-badge-wrap {
+    margin-bottom: 0.8rem;
+}
+
+.proyectos-novedades-widget .fund-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #166534 !important;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.proyectos-novedades-widget .pulse-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: #22c55e !important;
+    display: inline-block;
+}
+
+.proyectos-novedades-widget .fund-content {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.proyectos-novedades-widget .fund-title {
+    color: #10233c !important;
+    margin: 0;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.proyectos-novedades-widget .fund-name {
+    color: #1d4ed8 !important;
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.proyectos-novedades-widget .fund-description {
+    color: #475569 !important;
+    margin: 0;
+    line-height: 1.45;
+    font-weight: 500;
+}
+
+.proyectos-novedades-widget .fund-link-wrap {
+    margin-top: 1.1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.proyectos-novedades-widget .fund-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: rgba(37, 99, 235, 0.06) !important;
+    border: 1px solid rgba(37, 99, 235, 0.2) !important;
+    border-radius: 0.7rem;
+    color: #1d4ed8 !important;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.proyectos-novedades-widget .fund-link:hover {
+    background: rgba(37, 99, 235, 0.1) !important;
+    border-color: rgba(37, 99, 235, 0.35) !important;
+    color: #1e3a8a !important;
+    transform: translateY(-1px);
+}
+
+.proyectos-novedades-widget .fund-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2.2rem 1rem;
+    color: #475569 !important;
+    border: 1px dashed rgba(148, 163, 184, 0.2);
+    border-radius: 1rem;
+    background: #f8fafc;
+}
+
+html.dark .fi-auth-page {
+    background: #f4f7fb !important;
+}
+
+html.dark .fi-auth-page .fi-card,
+html.dark .fi-auth-page .fi-panel,
+html.dark .fi-auth-page .fi-section,
+html.dark .fi-auth-page .fi-form,
+html.dark .fi-auth-page .fi-form > div,
+html.dark .fi-auth-page [class*='fi-card'],
+html.dark .fi-auth-page [class*='fi-panel'],
+html.dark .fi-auth-page .fi-fo {
+    background: #f8fafc !important;
+    border-color: rgba(148, 163, 184, 0.28) !important;
+    color: #0f172a !important;
+}
+
+html.dark .fi-auth-page .fi-brand,
+html.dark .fi-auth-page .fi-logo,
+html.dark .fi-auth-page .fi-brand-name,
+html.dark .fi-auth-page .fi-brand-name span,
+html.dark .fi-auth-page .fi-sidebar-header-brand,
+html.dark .fi-auth-page .fi-branding,
+html.dark .fi-auth-page a,
+html.dark .fi-auth-page h1,
+html.dark .fi-auth-page h2,
+html.dark .fi-auth-page p,
+html.dark .fi-auth-page label,
+html.dark .fi-auth-page .fi-form-label,
+html.dark .fi-auth-page .fi-input,
+html.dark .fi-auth-page .fi-input-wrapper {
+    color: #0f172a !important;
+}
+
+html.dark .fi-auth-page .fi-input,
+html.dark .fi-auth-page .fi-input-wrapper,
+html.dark .fi-auth-page .fi-input[type='email'],
+html.dark .fi-auth-page .fi-input[type='password'],
+html.dark .fi-auth-page .fi-input[type='text'],
+html.dark .fi-auth-page textarea,
+html.dark .fi-auth-page select,
+html.dark .fi-auth-page .fi-select {
+    background-color: #edf4fb !important;
+    color: #0f172a !important;
+    border-color: rgba(148, 163, 184, 0.32) !important;
+}
+
+html.dark .fi-auth-page .fi-btn-primary,
+html.dark .fi-auth-page button[type='submit'] {
+    background: linear-gradient(135deg, #8ab5e9 0%, #7aa9e7 100%) !important;
+    border-color: #89b0e3 !important;
+    color: #ffffff !important;
+}
+
+html.dark .proyectos-novedades-widget .novedades-title,
+html.dark .proyectos-novedades-widget .fund-title,
+html.dark .proyectos-novedades-widget .fund-name,
+html.dark .proyectos-novedades-widget .fund-description,
+html.dark .proyectos-novedades-widget .fund-empty-state {
+    color: #10233c !important;
+}
+
+html.dark .proyectos-novedades-widget .fund-card,
+html.dark .proyectos-novedades-widget .fund-link-wrap,
+html.dark .proyectos-novedades-widget .fi-section,
+html.dark .proyectos-novedades-widget .fi-section-content,
+html.dark .proyectos-novedades-widget .fi-section-header {
+    background-color: #ffffff !important;
+    border-color: rgba(148, 163, 184, 0.25) !important;
+}
+
+html.dark .proyectos-novedades-widget .novedades-icon {
+    background-color: rgba(59, 130, 246, 0.08) !important;
+    color: #1d4ed8 !important;
+}
+
+html.dark .proyectos-novedades-widget .fund-badge {
+    background-color: rgba(34, 197, 94, 0.1) !important;
+    border-color: rgba(34, 197, 94, 0.2) !important;
+    color: #166534 !important;
+}
+
+html.dark .proyectos-novedades-widget .pulse-dot {
+    background-color: #60a5fa !important;
+}
+
+html.dark .proyectos-novedades-widget .fund-link {
+    background-color: #0b1220 !important;
+    border-color: rgba(148, 163, 184, 0.28) !important;
+    color: #dbeafe !important;
+}
+
+html.dark .proyectos-novedades-widget .fund-link:hover {
+    background-color: rgba(59, 130, 246, 0.12) !important;
+    border-color: rgba(96, 165, 250, 0.45) !important;
+    color: #ffffff !important;
+}
+
+html.dark .proyectos-novedades-widget .novedades-title,
+html.dark .proyectos-novedades-widget .fund-title,
+html.dark .proyectos-novedades-widget .fund-name,
+html.dark .proyectos-novedades-widget .fund-description,
+html.dark .proyectos-novedades-widget .fund-empty-state,
+body.dark .proyectos-novedades-widget .novedades-title,
+body.dark .proyectos-novedades-widget .fund-title,
+body.dark .proyectos-novedades-widget .fund-name,
+body.dark .proyectos-novedades-widget .fund-description,
+body.dark .proyectos-novedades-widget .fund-empty-state {
+    color: #e2e8f0 !important;
+}
+
+html.dark .proyectos-novedades-widget .fund-card,
+html.dark .proyectos-novedades-widget .fund-link,
+body.dark .proyectos-novedades-widget .fund-card,
+body.dark .proyectos-novedades-widget .fund-link {
+    background-color: #0f172a !important;
+    border-color: rgba(148, 163, 184, 0.25) !important;
+}
+
+html.dark .proyectos-novedades-widget .novedades-icon,
+body.dark .proyectos-novedades-widget .novedades-icon {
+    background-color: rgba(59, 130, 246, 0.12) !important;
+    color: #bfdbfe !important;
+}
+
+html.dark .proyectos-novedades-widget .fund-badge,
+body.dark .proyectos-novedades-widget .fund-badge {
+    background-color: rgba(96, 165, 250, 0.12) !important;
+    border-color: rgba(147, 197, 253, 0.35) !important;
+    color: #dbeafe !important;
 }
 
 .fi-sidebar .fi-sidebar-item-label,
@@ -50,30 +684,29 @@ aside.fi-sidebar .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-icon,
 aside.fi-sidebar .fi-sidebar-section-title,
 aside.fi-sidebar .fi-sidebar-item-text {
-    color: #cbd5e1 !important; /* Gris claro muy legible sobre fondo oscuro */
+    color: #111827 !important;
     font-weight: 500 !important;
 }
 
-/* Botones de navegación del sidebar (item-btn e item-button) */
+
 .fi-sidebar .fi-sidebar-item-btn,
 .fi-sidebar .fi-sidebar-item-button,
 aside.fi-sidebar .fi-sidebar-item-btn,
 aside.fi-sidebar .fi-sidebar-item-button {
     border-radius: 0.65rem !important;
-    border: 1px solid transparent !important; /* Mismo grosor que el activo para que no salte ni se descuadre */
+    border: 1px solid transparent !important;
     transition: all 0.15s ease !important;
     padding: 0.65rem 0.85rem !important;
     box-sizing: border-box !important;
 }
 
-/* Hover: Mismo padding, mismo borde y alineación */
 .fi-sidebar .fi-sidebar-item:hover > .fi-sidebar-item-btn,
 .fi-sidebar .fi-sidebar-item-btn:hover,
 .fi-sidebar .fi-sidebar-item-button:hover,
 aside.fi-sidebar .fi-sidebar-item-btn:hover,
 aside.fi-sidebar .fi-sidebar-item-button:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border-color: rgba(255, 255, 255, 0.05) !important;
+    background: rgba(22, 101, 52, 0.08) !important;
+    border-color: rgba(22, 101, 52, 0.12) !important;
 }
 
 .fi-sidebar .fi-sidebar-item:hover .fi-sidebar-item-label,
@@ -86,17 +719,16 @@ aside.fi-sidebar .fi-sidebar-item-btn:hover .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-btn:hover .fi-sidebar-item-icon,
 aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-button:hover .fi-sidebar-item-icon {
-    color: #ffffff !important;
+    color: #111827 !important;
 }
 
-/* Elemento activo del menú: Mismo grosor de 1px, fondo azul Vecindar */
 .fi-sidebar-item.fi-active > .fi-sidebar-item-btn,
 .fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button {
-    background: #2563eb !important; /* Azul de Vecindar */
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    background: linear-gradient(180deg, #7cbf7d 0%, #62b36b 100%) !important;
+    border: 1px solid rgba(22, 101, 52, 0.12) !important;
     border-radius: 0.65rem !important;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.18) !important;
     padding: 0.65rem 0.85rem !important;
 }
 
@@ -106,7 +738,7 @@ aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button {
 .fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-label,
 aside.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon {
-    color: #ffffff !important;
+    color: #111827 !important;
     font-weight: 600 !important;
 }
 
@@ -128,44 +760,45 @@ aside.fi-sidebar .fi-sidebar-nav {
 }
 
 .fi-topbar {
-    background: #0f172a !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
-    color: #e2e8f0 !important;
+    background: linear-gradient(180deg, #dff5d6 0%, #cfeec9 100%) !important;
+    border-bottom: 1px solid rgba(34, 197, 94, 0.18) !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+    color: #111827 !important;
 }
 
-/* Elementos dentro del topbar (botones, iconos, trigger de usuario) */
+
 .fi-topbar .fi-topbar-item-btn,
 .fi-topbar .fi-icon-btn,
 .fi-topbar .fi-sidebar-trigger,
 .fi-topbar .fi-user-menu-trigger,
 .fi-topbar [data-accesibilidad-omitir] > button {
-    color: #cbd5e1 !important;
+    color: #111827 !important;
+    background: #f7f7f7 !important;
+    border: 1px solid rgba(17, 24, 39, 0.18) !important;
 }
 
 .fi-topbar .fi-topbar-item-btn:hover,
 .fi-topbar .fi-icon-btn:hover,
 .fi-topbar .fi-sidebar-trigger:hover,
 .fi-topbar .fi-user-menu-trigger:hover {
-    color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.08) !important;
+    color: #111827 !important;
+    background: #eef5ee !important;
+    border-color: rgba(17, 24, 39, 0.24) !important;
 }
 
 .fi-topbar .fi-topbar-database-notifications-btn,
 .fi-topbar .fi-topbar-database-notifications-btn:hover {
-    color: #cbd5e1 !important;
+    color: #111827 !important;
+    background: #f7f7f7 !important;
+    border: 1px solid rgba(17, 24, 39, 0.18) !important;
 }
 
 .fi-topbar .fi-topbar-database-notifications-btn .fi-icon-btn-badge-ctn .fi-badge {
-    background: #2563eb !important;
-    color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
+    background: #d8e7d6 !important;
+    color: #111827 !important;
+    border-color: rgba(17, 24, 39, 0.15) !important;
 }
 
-/* ========================================================
-   MENÚ DESPLEGABLE DE ACCESIBILIDAD Y USUARIO
-   Colores nítidos, alto contraste y legible como en la portada
-   ======================================================== */
 .accesibilidad-dropdown-panel,
 .fi-dropdown-panel {
     background-color: #ffffff !important;
@@ -174,7 +807,6 @@ aside.fi-sidebar .fi-sidebar-nav {
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Forzar que todos los botones y textos internos del panel de accesibilidad sean oscuros y legibles */
 .accesibilidad-dropdown-panel button,
 .accesibilidad-dropdown-panel span,
 .accesibilidad-dropdown-panel p {
@@ -193,10 +825,9 @@ aside.fi-sidebar .fi-sidebar-nav {
     color: #0f172a !important;
 }
 
-/* Textos e iconos de los ítems del menú desplegable de usuario */
 .fi-dropdown-panel .fi-dropdown-list-item,
 .fi-dropdown-list-item {
-    color: #1e293b !important; /* Slate 800 oscuro y de alto contraste */
+    color: #1e293b !important;
     font-weight: 500 !important;
 }
 
@@ -211,10 +842,9 @@ aside.fi-sidebar .fi-sidebar-nav {
 .fi-dropdown-panel .fi-dropdown-list-item > svg,
 .fi-dropdown-list-item .fi-icon,
 .fi-dropdown-list-item > svg {
-    color: #3b82f6 !important; /* Azul visible y vibrante para iconos */
+    color: #3b82f6 !important;
 }
 
-/* Hover en los ítems */
 .fi-dropdown-panel .fi-dropdown-list-item:hover,
 .fi-dropdown-list-item:hover {
     background-color: #f1f5f9 !important;
@@ -232,15 +862,303 @@ aside.fi-sidebar .fi-sidebar-nav {
     color: #1d4ed8 !important;
 }
 
-/* Selector de temas (claro/oscuro/sistema) dentro del menú */
 .fi-theme-switcher,
-.fi-theme-switcher-btn {
-    color: #475569 !important;
+.fi-theme-switcher-btn,
+.fi-theme-switcher-item,
+.fi-theme-switcher [role='menu'],
+.fi-theme-switcher [role='menuitem'],
+.fi-theme-switcher button,
+.fi-theme-switcher .fi-dropdown-list-item,
+.fi-theme-switcher .fi-dropdown-list-item-label {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    color: transparent !important;
 }
 
-.fi-theme-switcher-btn:hover {
-    background-color: #f1f5f9 !important;
+html.dark,
+html.dark body,
+html.dark .fi-main,
+html.dark .fi-page,
+html.dark .fi-body,
+html.dark .fi-form,
+html.dark .fi-auth-page,
+html.dark .fi-content,
+html.dark .fi-layout,
+html.dark .fi-page-content,
+html.dark .fi-page-content-main,
+html.dark .fi-main-content,
+html.dark .fi-dashboard,
+html.dark #app,
+html.dark .fi-card,
+html.dark .fi-panel,
+html.dark .fi-section,
+html.dark .fi-widget,
+html.dark .fi-widgets,
+html.dark .fi-dropdown-panel,
+body.dark,
+body.dark .fi-main,
+body.dark .fi-page,
+body.dark .fi-body,
+body.dark .fi-form,
+body.dark .fi-auth-page,
+body.dark .fi-content,
+body.dark .fi-layout,
+body.dark .fi-page-content,
+body.dark .fi-page-content-main,
+body.dark .fi-main-content,
+body.dark .fi-dashboard,
+body.dark #app,
+body.dark .fi-card,
+body.dark .fi-panel,
+body.dark .fi-section,
+body.dark .fi-widget,
+body.dark .fi-widgets,
+body.dark .fi-dropdown-panel {
+    background-color: #f4f7fb !important;
+    color: #10233c !important;
+}
+
+html.dark .fi-header,
+html.dark .fi-header h1,
+html.dark .fi-header h2,
+html.dark .fi-header p,
+html.dark .fi-section-title,
+html.dark .fi-card,
+html.dark .fi-panel,
+html.dark .fi-form,
+html.dark .fi-page-header,
+html.dark .fi-page-header-title,
+html.dark .fi-page-header-subtitle,
+html.dark .fi-infolist-item,
+html.dark .fi-table td,
+html.dark .fi-table th,
+html.dark .fi-table thead th,
+html.dark .fi-table tbody td,
+html.dark .fi-dropdown-panel,
+html.dark .fi-dropdown-panel *,
+html.dark .fi-auth-page *,
+html.dark .fi-auth-page h1,
+html.dark .fi-auth-page h2,
+html.dark .fi-auth-page p,
+html.dark .fi-auth-page label,
+html.dark .fi-auth-page a,
+html.dark .fi-auth-page .fi-form-label,
+html.dark .fi-auth-page .fi-input,
+html.dark .fi-auth-page .fi-input-wrapper,
+html.dark .fi-auth-page .fi-icon,
+html.dark .fi-widget,
+html.dark .fi-widgets,
+body.dark .fi-header,
+body.dark .fi-header h1,
+body.dark .fi-header h2,
+body.dark .fi-header p,
+body.dark .fi-section-title,
+body.dark .fi-card,
+body.dark .fi-panel,
+body.dark .fi-form,
+body.dark .fi-page-header,
+body.dark .fi-page-header-title,
+body.dark .fi-page-header-subtitle,
+body.dark .fi-infolist-item,
+body.dark .fi-table td,
+body.dark .fi-table th,
+body.dark .fi-table thead th,
+body.dark .fi-table tbody td,
+body.dark .fi-dropdown-panel,
+body.dark .fi-dropdown-panel *,
+body.dark .fi-auth-page *,
+body.dark .fi-auth-page h1,
+body.dark .fi-auth-page h2,
+body.dark .fi-auth-page p,
+body.dark .fi-auth-page label,
+body.dark .fi-auth-page a,
+body.dark .fi-auth-page .fi-form-label,
+body.dark .fi-auth-page .fi-input,
+body.dark .fi-auth-page .fi-input-wrapper,
+body.dark .fi-auth-page .fi-icon,
+body.dark .fi-widget,
+body.dark .fi-widgets {
+    color: #10233c !important;
+}
+
+html.dark .fi-card,
+html.dark .fi-panel,
+html.dark .fi-section,
+html.dark .fi-auth-page .fi-card,
+html.dark .fi-auth-page .fi-section,
+html.dark .fi-auth-page .fi-panel,
+html.dark .fi-auth-page .fi-form,
+html.dark .fi-auth-page .fi-field,
+html.dark .fi-auth-page .fi-input,
+html.dark .fi-auth-page .fi-input-wrapper,
+html.dark .fi-dropdown-panel,
+html.dark .fi-table,
+html.dark .fi-table tr,
+html.dark .fi-table td,
+html.dark .fi-table th,
+html.dark .fi-widget,
+html.dark .fi-widgets,
+body.dark .fi-card,
+body.dark .fi-panel,
+body.dark .fi-section,
+body.dark .fi-auth-page .fi-card,
+body.dark .fi-auth-page .fi-section,
+body.dark .fi-auth-page .fi-panel,
+body.dark .fi-auth-page .fi-form,
+body.dark .fi-auth-page .fi-field,
+body.dark .fi-auth-page .fi-input,
+body.dark .fi-auth-page .fi-input-wrapper,
+body.dark .fi-dropdown-panel,
+body.dark .fi-table,
+body.dark .fi-table tr,
+body.dark .fi-table td,
+body.dark .fi-table th,
+body.dark .fi-widget,
+body.dark .fi-widgets {
+    background-color: #f4f7fb !important;
+    border-color: rgba(148, 163, 184, 0.25) !important;
+}
+
+/* Cuando el botón de tema activa el modo oscuro, solo los controles y la búsqueda pasan a claro; los fondos y widgets siguen oscuros. */
+html.dark .fi-topbar .fi-global-search,
+html.dark .fi-topbar .fi-global-search > div,
+html.dark .fi-topbar .fi-global-search .fi-input,
+html.dark .fi-topbar .fi-global-search .fi-input-wrapper,
+html.dark .fi-topbar .fi-global-search input,
+html.dark .fi-topbar .fi-global-search .fi-input::placeholder,
+html.dark .fi-topbar .fi-global-search input::placeholder,
+body.dark .fi-topbar .fi-global-search,
+body.dark .fi-topbar .fi-global-search > div,
+body.dark .fi-topbar .fi-global-search .fi-input,
+body.dark .fi-topbar .fi-global-search .fi-input-wrapper,
+body.dark .fi-topbar .fi-global-search input,
+body.dark .fi-topbar .fi-global-search .fi-input::placeholder,
+body.dark .fi-topbar .fi-global-search input::placeholder {
+    background-color: #f8fafc !important;
     color: #0f172a !important;
+    border-color: rgba(148, 163, 184, 0.45) !important;
+}
+
+html.dark .fi-topbar .fi-global-search .fi-input::placeholder,
+html.dark .fi-topbar .fi-global-search input::placeholder,
+body.dark .fi-topbar .fi-global-search .fi-input::placeholder,
+body.dark .fi-topbar .fi-global-search input::placeholder {
+    color: #64748b !important;
+}
+
+html.dark .fi-topbar .fi-topbar-item-btn,
+html.dark .fi-topbar .fi-icon-btn,
+html.dark .fi-topbar .fi-sidebar-trigger,
+html.dark .fi-topbar .fi-user-menu-trigger,
+html.dark .fi-topbar [data-accesibilidad-omitir] > button,
+html.dark button.fi-btn,
+html.dark button.fi-button,
+html.dark .fi-btn,
+html.dark .fi-button,
+html.dark button[type='submit'],
+html.dark .fi-page-header-actions button,
+html.dark .fi-page-header-actions .fi-button,
+html.dark .fi-actions button,
+html.dark .fi-actions .fi-button,
+body.dark .fi-topbar .fi-topbar-item-btn,
+body.dark .fi-topbar .fi-icon-btn,
+body.dark .fi-topbar .fi-sidebar-trigger,
+body.dark .fi-topbar .fi-user-menu-trigger,
+body.dark .fi-topbar [data-accesibilidad-omitir] > button,
+body.dark button.fi-btn,
+body.dark button.fi-button,
+body.dark .fi-btn,
+body.dark .fi-button,
+body.dark button[type='submit'],
+body.dark .fi-page-header-actions button,
+body.dark .fi-page-header-actions .fi-button,
+body.dark .fi-actions button,
+body.dark .fi-actions .fi-button {
+    background-color: #f8fafc !important;
+    border: 1px solid rgba(148, 163, 184, 0.45) !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+}
+
+html.dark .fi-topbar .fi-topbar-item-btn:hover,
+html.dark .fi-topbar .fi-icon-btn:hover,
+html.dark .fi-topbar .fi-sidebar-trigger:hover,
+html.dark .fi-topbar .fi-user-menu-trigger:hover,
+html.dark .fi-topbar [data-accesibilidad-omitir] > button:hover,
+html.dark button.fi-btn:hover,
+html.dark button.fi-button:hover,
+html.dark .fi-btn:hover,
+html.dark .fi-button:hover,
+html.dark button[type='submit']:hover,
+html.dark .fi-page-header-actions button:hover,
+html.dark .fi-page-header-actions .fi-button:hover,
+html.dark .fi-actions button:hover,
+html.dark .fi-actions .fi-button:hover,
+body.dark .fi-topbar .fi-topbar-item-btn:hover,
+body.dark .fi-topbar .fi-icon-btn:hover,
+body.dark .fi-topbar .fi-sidebar-trigger:hover,
+body.dark .fi-topbar .fi-user-menu-trigger:hover,
+body.dark .fi-topbar [data-accesibilidad-omitir] > button:hover,
+body.dark button.fi-btn:hover,
+body.dark button.fi-button:hover,
+body.dark .fi-btn:hover,
+body.dark .fi-button:hover,
+body.dark button[type='submit']:hover,
+body.dark .fi-page-header-actions button:hover,
+body.dark .fi-page-header-actions .fi-button:hover,
+body.dark .fi-actions button:hover,
+body.dark .fi-actions .fi-button:hover {
+    background-color: #f1f5f9 !important;
+    border-color: rgba(148, 163, 184, 0.7) !important;
+    color: #0f172a !important;
+}
+
+body,
+#app,
+.fi-main,
+.fi-page,
+.fi-body,
+.fi-content,
+.fi-layout,
+.fi-dashboard,
+.fi-header,
+.fi-section,
+.fi-panel,
+.fi-card,
+.fi-widget,
+.fi-table,
+.fi-table td,
+.fi-table th,
+.fi-table thead th,
+.fi-table tbody td,
+.fi-dropdown-panel,
+.fi-dropdown-panel *,
+.fi-form,
+.fi-page-header,
+.fi-page-header-title,
+.fi-page-header-subtitle,
+.fi-section-title,
+.fi-infolist-item,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+span,
+label,
+p,
+li,
+button,
+a {
+    color: #111827 !important;
 }
 
 @media (max-width: 1023px) {
@@ -290,4 +1208,97 @@ aside.fi-sidebar .fi-sidebar-nav {
         width: 1.2rem !important;
         height: 1.2rem !important;
     }
+}
+
+html.dark,
+html.dark body,
+html.dark .fi-main,
+html.dark .fi-page,
+html.dark .fi-body,
+html.dark .fi-form,
+html.dark .fi-auth-page,
+html.dark .fi-content,
+html.dark .fi-layout,
+html.dark .fi-page-content,
+html.dark .fi-page-content-main,
+html.dark .fi-main-content,
+html.dark .fi-dashboard,
+html.dark #app,
+html.dark .fi-card,
+html.dark .fi-panel,
+html.dark .fi-section,
+html.dark .fi-widget,
+html.dark .fi-widgets,
+html.dark .fi-dropdown-panel,
+body.dark,
+body.dark .fi-main,
+body.dark .fi-page,
+body.dark .fi-body,
+body.dark .fi-form,
+body.dark .fi-auth-page,
+body.dark .fi-content,
+body.dark .fi-layout,
+body.dark .fi-page-content,
+body.dark .fi-page-content-main,
+body.dark .fi-main-content,
+body.dark .fi-dashboard,
+body.dark #app,
+body.dark .fi-card,
+body.dark .fi-panel,
+body.dark .fi-section,
+body.dark .fi-widget,
+body.dark .fi-widgets,
+body.dark .fi-dropdown-panel {
+    background-color: #f4f7fb !important;
+    color: #10233c !important;
+}
+
+html.dark .fi-sidebar,
+html.dark aside.fi-sidebar,
+html.dark .fi-sidebar-header,
+body.dark .fi-sidebar,
+body.dark aside.fi-sidebar,
+body.dark .fi-sidebar-header {
+    background: linear-gradient(180deg, #eef4ff 0%, #eaf2fb 100%) !important;
+    border-right: 1px solid rgba(148, 163, 184, 0.28) !important;
+}
+
+html.dark .fi-topbar,
+body.dark .fi-topbar {
+    background: linear-gradient(180deg, #f7faff 0%, #edf4ff 100%) !important;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.28) !important;
+    color: #10233c !important;
+}
+
+html.dark .fi-sidebar .fi-sidebar-item-label,
+html.dark .fi-sidebar .fi-sidebar-item-icon,
+html.dark .fi-sidebar .fi-sidebar-section-title,
+html.dark .fi-sidebar .fi-sidebar-item-text,
+body.dark .fi-sidebar .fi-sidebar-item-label,
+body.dark .fi-sidebar .fi-sidebar-item-icon,
+body.dark .fi-sidebar .fi-sidebar-section-title,
+body.dark .fi-sidebar .fi-sidebar-item-text {
+    color: #17324f !important;
+}
+
+html.dark .fi-topbar .fi-topbar-item-btn,
+html.dark .fi-topbar .fi-icon-btn,
+html.dark .fi-topbar .fi-sidebar-trigger,
+html.dark .fi-topbar .fi-user-menu-trigger,
+html.dark .fi-topbar [data-accesibilidad-omitir] > button,
+body.dark .fi-topbar .fi-topbar-item-btn,
+body.dark .fi-topbar .fi-icon-btn,
+body.dark .fi-topbar .fi-sidebar-trigger,
+body.dark .fi-topbar .fi-user-menu-trigger,
+body.dark .fi-topbar [data-accesibilidad-omitir] > button {
+    color: #334155 !important;
+}
+
+html.dark .proyectos-novedades-widget .fi-section,
+html.dark .proyectos-novedades-widget .fund-card,
+body.dark .proyectos-novedades-widget .fi-section,
+body.dark .proyectos-novedades-widget .fund-card {
+    background: #f4f7fb !important;
+    border-color: rgba(148, 163, 184, 0.25) !important;
+    color: #10233c !important;
 }
