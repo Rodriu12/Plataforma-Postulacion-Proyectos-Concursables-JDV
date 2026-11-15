@@ -34,7 +34,54 @@ Plataforma-Postulacion-Proyectos-Concursables-JDV/
 
 ```
 
-## Instrucciones de uso
+## Instalación y ejecución
+
+### Ejecutar con Docker
+
+Se requiere Docker Desktop con Docker Compose habilitado. Desde la raíz del proyecto:
+
+1. Copiar el archivo de entorno de ejemplo si todavía no tienes uno:
+
+```powershell
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+```
+
+2. Construir la imagen:
+
+```powershell
+docker compose build
+```
+
+Si `APP_KEY` no tiene valor en `.env`, genera una clave:
+
+```powershell
+docker compose run --rm --no-deps app php artisan key:generate --show
+```
+
+Copia la clave generada en la línea `APP_KEY` de `.env`.
+
+3. Iniciar la aplicación y MariaDB:
+
+```powershell
+docker compose up -d
+```
+
+4. Crear las tablas y el usuario administrador:
+
+```powershell
+docker compose exec app php artisan migrate --force
+docker compose exec app php artisan make:filament-user
+```
+
+La página pública queda en <http://localhost:8000> y el panel administrativo en <http://localhost:8000/admin>.
+Compose espera a que MariaDB esté saludable antes de iniciar la aplicación, y verifica la ruta `/up` del contenedor web.
+La base de datos y los archivos subidos persisten en volúmenes de Docker al detener los contenedores.
+Para detener los servicios usa `docker compose down`. **No uses `docker compose down -v` salvo que quieras eliminar también esos datos.**
+Laravel y las traducciones integradas de Filament se configuran en español (`es`) de forma predeterminada. Las etiquetas escritas directamente por la aplicación deben traducirse en sus vistas o recursos por separado.
+
+La configuración predeterminada es para revisión local; cambia las contraseñas predeterminadas antes de usarla en un entorno compartido o público. Puedes definir `DOCKER_DB_DATABASE`, `DOCKER_DB_USERNAME`, `DOCKER_DB_PASSWORD` y `DOCKER_DB_ROOT_PASSWORD` en `.env` para personalizar MariaDB sin reutilizar las variables locales de XAMPP. Las migraciones se ejecutan manualmente y los datos de la base XAMPP no se copian automáticamente.
+
+### Instrucciones de uso local
 
 1. Instalar las dependencias de PHP:
 ```bash
