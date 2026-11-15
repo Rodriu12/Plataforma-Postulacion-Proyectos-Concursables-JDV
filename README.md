@@ -46,6 +46,8 @@ Se requiere Docker Desktop con Docker Compose habilitado. Desde la raíz del pro
 if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
 
+Antes de iniciar Docker, define `BOOTSTRAP_ADMIN_PASSWORD` en `.env`. Este archivo está ignorado por Git; no copies esa contraseña a archivos versionados. El administrador se crea al iniciar la aplicación, después de que MariaDB esté disponible y las migraciones hayan terminado; no se crea durante la construcción de la imagen.
+
 2. Construir la imagen:
 
 ```powershell
@@ -55,22 +57,21 @@ docker compose build
 Si `APP_KEY` no tiene valor en `.env`, genera una clave:
 
 ```powershell
-docker compose run --rm --no-deps app php artisan key:generate --show
+docker compose run --rm --no-deps --entrypoint php app artisan key:generate --show
 ```
 
 Copia la clave generada en la línea `APP_KEY` de `.env`.
 
-3. Iniciar la aplicación y MariaDB:
+3. Iniciar los servicios:
 
 ```powershell
 docker compose up -d
 ```
 
-4. Crear las tablas y el usuario administrador:
+4. Ver el resultado final del arranque y la cuenta:
 
 ```powershell
-docker compose exec app php artisan migrate --force
-docker compose exec app php artisan make:filament-user
+docker compose logs --tail=50 app
 ```
 
 La página pública queda en <http://localhost:8000> y el panel administrativo en <http://localhost:8000/admin>.
@@ -79,7 +80,7 @@ La base de datos y los archivos subidos persisten en volúmenes de Docker al det
 Para detener los servicios usa `docker compose down`. **No uses `docker compose down -v` salvo que quieras eliminar también esos datos.**
 Laravel y las traducciones integradas de Filament se configuran en español (`es`) de forma predeterminada. Las etiquetas escritas directamente por la aplicación deben traducirse en sus vistas o recursos por separado.
 
-La configuración predeterminada es para revisión local; cambia las contraseñas predeterminadas antes de usarla en un entorno compartido o público. Puedes definir `DOCKER_DB_DATABASE`, `DOCKER_DB_USERNAME`, `DOCKER_DB_PASSWORD` y `DOCKER_DB_ROOT_PASSWORD` en `.env` para personalizar MariaDB sin reutilizar las variables locales de XAMPP. Las migraciones se ejecutan manualmente y los datos de la base XAMPP no se copian automáticamente.
+La configuración predeterminada es para revisión local; cambia las contraseñas predeterminadas antes de usarla en un entorno compartido o público. Puedes definir `DOCKER_DB_DATABASE`, `DOCKER_DB_USERNAME`, `DOCKER_DB_PASSWORD` y `DOCKER_DB_ROOT_PASSWORD` en `.env` para personalizar MariaDB sin reutilizar las variables locales de XAMPP. Las migraciones se aplican al iniciar el contenedor. Los datos de la base XAMPP no se copian automáticamente. Si la cuenta inicial ya existe, se conserva sin alterar su contraseña o rol.
 
 ### Instrucciones de uso local
 

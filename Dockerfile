@@ -13,6 +13,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY deploy/docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY deploy/docker/entrypoint.sh /usr/local/bin/vecindar-entrypoint
+RUN chmod +x /usr/local/bin/vecindar-entrypoint
 
 FROM php-base AS app-build
 
@@ -62,4 +64,5 @@ RUN mkdir -p \
 
 EXPOSE 80
 
+ENTRYPOINT ["/usr/local/bin/vecindar-entrypoint"]
 CMD ["apache2-foreground"]

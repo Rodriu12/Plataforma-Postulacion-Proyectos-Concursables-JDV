@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'bootstrap_admin' => [
+        'email' => env('BOOTSTRAP_ADMIN_EMAIL', 'adminvecindar@gmail.com'),
+        'password' => env('BOOTSTRAP_ADMIN_PASSWORD'),
+    ],
+
 ];

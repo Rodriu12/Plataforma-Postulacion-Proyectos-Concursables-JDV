@@ -133,7 +133,7 @@ class UserForm
                         'voluntario' => 'Voluntario/a',
                     ], static::esAdminCentral() ? ['admin_central' => 'Administrador/a Central'] : []))
                     ->required()
-                    ->default('vecino'),
+                        ->default(fn () => static::esAdminCentral() ? User::ROLE_ADMIN_CENTRAL : 'vecino'),
                 Toggle::make('is_active')
                     ->label('Cuenta Activa')
                     ->default(true)
