@@ -14,6 +14,8 @@ services:
       APP_LOCALE: es
       APP_FALLBACK_LOCALE: es
       APP_FAKER_LOCALE: es_CL
+      BOOTSTRAP_ADMIN_EMAIL: ${BOOTSTRAP_ADMIN_EMAIL:-adminvecindar@gmail.com}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD:-}
       LOG_CHANNEL: stack
       LOG_STACK: single
       DB_CONNECTION: mysql
