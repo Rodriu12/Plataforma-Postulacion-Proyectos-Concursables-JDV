@@ -259,7 +259,7 @@
                 <button @click="toggle()" type="button" aria-label="Opciones de accesibilidad de lectura"
                     :class="agrandar ? 'bg-blue-600 text-white shadow-md border border-blue-700' :
                         'glass-pill text-slate-700 hover:bg-white/90 hover:text-blue-700 hover:shadow-sm'"
-                    class="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="flex shrink-0 items-center gap-1.5 px-2 sm:gap-2 sm:px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     :title="agrandar ? 'Volver a la vista normal' : 'Activar accesibilidad de lectura'">
 
                     <svg class="w-4 h-4" :class="agrandar ? 'text-white' : 'text-blue-600'" fill="none"
@@ -270,7 +270,9 @@
                             d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                             stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span x-text="agrandar ? 'Volver a la vista normal' : 'Accesibilidad de lectura'"></span>
+                    <span class="sm:hidden" x-text="agrandar ? 'Normal' : 'Lectura'"></span>
+                    <span class="hidden sm:inline"
+                        x-text="agrandar ? 'Volver a la vista normal' : 'Accesibilidad de lectura'"></span>
                 </button>
 
                 <a class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-blue-700 bg-blue-50/90 hover:bg-blue-600 hover:text-white border border-blue-200/80 shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
@@ -503,8 +505,8 @@
 
     <footer class="relative z-20 border-t border-white/60 bg-white/60 backdrop-blur-md py-6 mt-12">
         <div
-            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-medium">
-            <p class="text-center md:text-left text-slate-600">
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-4 text-center text-xs text-slate-500 font-medium">
+            <p class="text-center text-slate-600">
                 © 2026 Vecindar - Fundación Bío Bío Cultural, Yumbel. Desarrollando soluciones para la comunidad.
             </p>
         </div>

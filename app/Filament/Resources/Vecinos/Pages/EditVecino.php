@@ -23,4 +23,10 @@ class EditVecino extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    protected function afterSave(): void
+    {
+        $this->getRecord()->refresh();
+        $this->refreshFormData(['comprobante_validado', 'comprobante_motivo']);
+    }
 }
