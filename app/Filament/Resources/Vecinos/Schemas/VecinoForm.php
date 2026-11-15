@@ -7,6 +7,7 @@ use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\ViewField;
 
 class VecinoForm
 {
@@ -100,6 +101,12 @@ class VecinoForm
                     ->helperText('Solo se aceptan archivos PDF. El documento será revisado mediante OCR para validar que corresponda al vecino y a la dirección registrada.')
                     ->openable()
                     ->downloadable()
+                    ->extraAttributes(['data-comprobante-upload' => true])
+                    ->columnSpanFull(),
+
+                ViewField::make('comprobante_preview')
+                    ->label('')
+                    ->view('filament.resources.vecinos.components.comprobante-preview')
                     ->columnSpanFull(),
 
                 TextInput::make('comprobante_validado')

@@ -1,4 +1,4 @@
-<x-filament-panels::page>
+<x-filament-panels::page class="dashboard-palette">
     <style>
         @keyframes actualizar-rotate {
             0% { transform: rotate(0deg); }
@@ -11,19 +11,19 @@
             gap: 8px;
             padding: 8px 16px;
             border-radius: 9999px;
-            border: 1px solid #bfdbfe;
+            border: 1px solid #dcece5;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            background: #eff6ff;
-            color: #1d4ed8;
+            background: #dcece5;
+            color: #203448;
             transition: background 0.15s, box-shadow 0.15s;
             box-shadow: none;
         }
 
         .boton-actualizar-fondos:hover {
-            background: #dbeafe;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+            background: #e9efeb;
+            box-shadow: none;
         }
 
         .boton-actualizar-fondos svg {
@@ -54,7 +54,7 @@
     </div>
 
     @if (session('status'))
-        <div style="margin-bottom: 16px; padding: 10px 14px; border-radius: 10px; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 13px; font-weight: 600;">
+        <div class="dashboard-status" style="margin-bottom: 16px; padding: 10px 14px; border-radius: 10px; background: #dcece5; color: #203448; border: 1px solid #d7e4dc; font-size: 13px; font-weight: 600;">
             {{ session('status') }}
         </div>
     @endif
