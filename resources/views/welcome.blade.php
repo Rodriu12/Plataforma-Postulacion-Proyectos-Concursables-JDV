@@ -132,6 +132,24 @@
         .delay-600 {
             animation-delay: 600ms;
         }
+
+        #web-status[data-state="down"] {
+            background: #fee2e2;
+            border-color: #fca5a5;
+            color: #991b1b;
+        }
+
+        #web-status[data-state="down"] #web-status-indicator {
+            width: 1rem;
+            height: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            line-height: 1;
+        }
     </style>
 </head>
 
@@ -368,9 +386,14 @@
                         <span
                             class="text-xs font-mono text-slate-300 font-medium tracking-tight">{{ request()->getHost() }}</span>
                         <div
+                            id="web-status"
+                            data-state="online"
+                            data-health-url="{{ url('/up') }}"
+                            role="status"
+                            aria-live="polite"
                             class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-900/80 border border-blue-500/40 text-[11px] font-semibold text-blue-200">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                            <span>En Línea</span>
+                            <span id="web-status-indicator" class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                            <span id="web-status-label">En Línea</span>
                         </div>
                     </div>
                     <div class="p-6 space-y-5">
@@ -511,6 +534,61 @@
             </p>
         </div>
     </footer>
+    <script>
+        (() => {
+            const status = document.getElementById('web-status');
+            const indicator = document.getElementById('web-status-indicator');
+            const label = document.getElementById('web-status-label');
+
+            if (!status || !indicator || !label) {
+                return;
+            }
+
+            const failureThreshold = 2;
+            const interval = 15000;
+            let consecutiveFailures = 0;
+            let isDown = false;
+
+            const setDownState = (down) => {
+                if (isDown === down) {
+                    return;
+                }
+
+                isDown = down;
+                status.dataset.state = down ? 'down' : 'online';
+                indicator.textContent = down ? '!' : '';
+                label.textContent = down ? 'Web en mantenimiento' : 'En Línea';
+            };
+
+            const checkAvailability = async () => {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 5000);
+
+                try {
+                    const response = await fetch(status.dataset.healthUrl, {
+                        cache: 'no-store',
+                        credentials: 'same-origin',
+                        signal: controller.signal,
+                    });
+
+                    if (response.status >= 500) {
+                        consecutiveFailures += 1;
+                    } else {
+                        consecutiveFailures = 0;
+                    }
+                } catch {
+                    consecutiveFailures += 1;
+                } finally {
+                    clearTimeout(timeout);
+                }
+
+                setDownState(consecutiveFailures >= failureThreshold);
+            };
+
+            checkAvailability();
+            setInterval(checkAvailability, interval);
+        })();
+    </script>
 </body>
 
 </html>

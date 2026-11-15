@@ -1302,3 +1302,265 @@ body.dark .proyectos-novedades-widget .fund-card {
     border-color: rgba(148, 163, 184, 0.25) !important;
     color: #10233c !important;
 }
+
+:root {
+    --dashboard-background: #f5f6f3;
+    --dashboard-menu: #e9efeb;
+    --dashboard-card: #f5f6f3;
+    --dashboard-green: #397d76;
+    --dashboard-green-soft: #dcece5;
+    --dashboard-text: #203448;
+    background: var(--dashboard-background) !important;
+    color: var(--dashboard-text) !important;
+}
+
+.fi-main,
+.fi-body,
+.fi-page,
+.fi-page-main,
+.fi-page-content,
+.fi-page-content-main,
+.fi-content,
+.fi-dashboard {
+    background: var(--dashboard-background) !important;
+    color: var(--dashboard-text) !important;
+}
+
+.fi-page-header {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.fi-header,
+.fi-page-header-main-ctn {
+    background: var(--dashboard-background) !important;
+}
+
+.fi-section,
+.fi-card,
+.fi-panel,
+.fi-widget,
+.fi-dropdown-panel,
+.fi-ta-ctn,
+.fi-ta-content,
+.fi-ta-table,
+.fi-ta-outer,
+.fi-auth-page .fi-section,
+.fi-auth-page .fi-card,
+.proyectos-novedades-widget .fund-card,
+.fi-main > .fi-page {
+    background: var(--dashboard-card) !important;
+    border-color: #e1e6e2 !important;
+    box-shadow: none !important;
+}
+
+.fi-sidebar,
+.fi-sidebar-header,
+.fi-topbar {
+    background: var(--dashboard-menu) !important;
+    border-color: #d7e4dc !important;
+    box-shadow: none !important;
+}
+
+.fi-sidebar .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item-icon,
+.fi-sidebar .fi-sidebar-section-title,
+.fi-sidebar .fi-sidebar-item-text,
+.fi-topbar,
+.fi-topbar button,
+.fi-topbar a,
+.fi-page-header-heading,
+.fi-section-header-heading,
+.fi-fo-field-wrp-label,
+.fi-ta-header-cell,
+.fi-ta-cell,
+.fi-ta-text,
+.fi-in-entry,
+.fi-breadcrumbs-item-label,
+.fi-modal-heading {
+    color: var(--dashboard-text) !important;
+}
+
+.fi-sidebar .fi-sidebar-item:hover > .fi-sidebar-item-btn,
+.fi-sidebar .fi-sidebar-item-btn:hover,
+.fi-sidebar .fi-sidebar-item-button:hover {
+    background: var(--dashboard-green-soft) !important;
+    border-color: #c9ded4 !important;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn,
+.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-button {
+    background: var(--dashboard-green-soft) !important;
+    border-color: #c9ded4 !important;
+    box-shadow: none !important;
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-label,
+.fi-sidebar-item.fi-active .fi-sidebar-item-icon,
+.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item-active .fi-sidebar-item-icon,
+.proyectos-novedades-widget .novedades-title,
+.proyectos-novedades-widget .fund-name,
+.proyectos-novedades-widget .fund-link,
+.boton-actualizar-fondos {
+    color: var(--dashboard-green) !important;
+}
+
+.proyectos-novedades-widget .fund-badge,
+.boton-actualizar-fondos,
+.proyectos-novedades-widget .fund-link,
+.dashboard-status {
+    background: var(--dashboard-green-soft) !important;
+    border-color: #c9ded4 !important;
+}
+
+.proyectos-novedades-widget .fund-badge,
+.proyectos-novedades-widget .fund-title,
+.proyectos-novedades-widget .fund-description,
+.proyectos-novedades-widget .fund-empty-state,
+.dashboard-status {
+    color: var(--dashboard-text) !important;
+}
+
+.proyectos-novedades-widget .fund-link:hover,
+.boton-actualizar-fondos:hover {
+    background: var(--dashboard-menu) !important;
+    border-color: #c9ded4 !important;
+    box-shadow: none !important;
+}
+
+.proyectos-novedades-widget .pulse-dot {
+    background: var(--dashboard-green) !important;
+    animation: none !important;
+}
+
+.proyectos-novedades-widget [style*="color: #1e40af"],
+#contenido-lectura [style*="color: #1e40af"] {
+    color: var(--dashboard-green) !important;
+}
+
+.proyectos-novedades-widget [style*="background-color: #dbeafe"],
+#contenido-lectura [style*="background-color: #dbeafe"] {
+    background: var(--dashboard-green-soft) !important;
+    color: var(--dashboard-green) !important;
+}
+
+.fi-input,
+.fi-select-input,
+.fi-fo-textarea,
+.fi-input-wrp,
+.fi-select-input-wrp {
+    background-color: var(--dashboard-card) !important;
+    border-color: #d7ddd8 !important;
+    color: var(--dashboard-text) !important;
+}
+
+.fi-input::placeholder,
+.fi-fo-textarea::placeholder {
+    color: #596a73 !important;
+    opacity: 1;
+}
+
+.fi-ta-table tbody tr,
+.fi-ta-table tbody td {
+    background: var(--dashboard-card) !important;
+}
+
+.fi-ta-table tbody tr:hover td {
+    background: #f5f8f6 !important;
+}
+
+.fi-ta-selection-indicator {
+    background: var(--dashboard-green-soft) !important;
+    border-color: #c9ded4 !important;
+    color: var(--dashboard-text) !important;
+}
+
+.fi-btn-color-primary,
+.fi-btn-primary {
+    background: var(--dashboard-green) !important;
+    border-color: var(--dashboard-green) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+.fi-btn-color-primary:hover,
+.fi-btn-primary:hover {
+    background: #306a64 !important;
+    border-color: #306a64 !important;
+}
+
+.fi-btn,
+.fi-button,
+.fi-icon-btn {
+    box-shadow: none !important;
+}
+
+.fi-section,
+.fi-card,
+.fi-panel,
+.fi-ta-ctn,
+.fi-input-wrp,
+.fi-btn,
+.fi-button {
+    border-radius: 0.625rem !important;
+}
+
+:is(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 3px solid var(--dashboard-green) !important;
+    outline-offset: 2px !important;
+}
+
+.fi-page,
+.fi-header,
+.fi-page-header-main-ctn,
+.fi-page-main,
+.fi-page-content,
+.fi-section,
+.fi-section-header,
+.fi-section-content,
+.fi-card,
+.fi-panel,
+.fi-widget,
+.fi-dropdown-panel,
+.fi-ta-ctn,
+.fi-ta-main,
+.fi-ta-header-ctn,
+.fi-ta-header,
+.fi-ta-header-toolbar,
+.fi-ta-content-ctn,
+.fi-ta-content,
+.fi-ta-table,
+.fi-ta-table thead,
+.fi-ta-table thead tr,
+.fi-ta-table thead th,
+.fi-ta-table tbody tr,
+.fi-ta-table tbody td,
+.fi-ta-empty-state,
+.fi-ta-empty-state-content,
+.fi-ta-footer-ctn,
+.fi-ta-footer,
+.fi-ta-pagination,
+.fi-ta-pagination nav,
+.proyectos-novedades-widget .fund-card,
+.proyectos-novedades-widget .fi-section {
+    background-color: var(--dashboard-background) !important;
+}
+
+.fi-ta-table tbody tr:hover td {
+    background-color: var(--dashboard-menu) !important;
+}
+
+.fi-ta-ctn {
+    border: 1px solid #e1e6e2 !important;
+    border-radius: 1.1rem !important;
+    box-shadow: none !important;
+}
+
+.fi-input-wrp,
+.fi-input,
+.fi-select-input,
+.fi-fo-textarea,
+.fi-ta-search-field input {
+    background-color: var(--dashboard-background) !important;
+}

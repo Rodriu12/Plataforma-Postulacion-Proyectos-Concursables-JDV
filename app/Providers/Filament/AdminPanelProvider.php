@@ -43,7 +43,7 @@ class AdminPanelProvider extends PanelProvider
             ->darkMode(false)
             ->themeSwitcher(false)
             ->colors([
-                'primary' => '#2563eb',
+                'primary' => '#397d76',
                 'gray' => Color::Slate,
             ])
             ->font('Inter')
